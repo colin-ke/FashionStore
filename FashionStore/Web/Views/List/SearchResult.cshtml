@@ -1,0 +1,179 @@
+﻿@using Web.Models;
+@using Domain;
+@model List<SearchedCatagories>
+<link href="/Content/SearchResult.css" rel="stylesheet" />
+<link href="/Content/ProductsList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "SearchResult";
+    int selectedCataId = ViewBag.cataId;
+    string key = ViewBag.key;
+    List<Products> pdts = new List<Products>();
+    SearchedCatagories current = null;
+    foreach (var cata in Model)
+    {
+        if (cata.IsBelong(selectedCataId))
+        {
+            if (cata.Catagories.ID == selectedCataId)
+            {
+                pdts = cata.Products;
+                current = cata;
+            }
+            else
+            {
+                foreach (var sub in cata.SubCatagories)
+                {
+                    if (sub.Catagories.ID == selectedCataId)
+                    {
+                        pdts = sub.Products;
+                        current = sub;
+                    }
+                }
+            }
+        }
+    }
+    if (null == current)
+    {
+        foreach (var cata in Model)
+        {
+            pdts = pdts.Concat<Products>(cata.Products).ToList<Products>();
+        }
+    }
+    string str;
+}
+<div class="category_wrap productslist_wrap clearfix">
+    <div class="breadcrumb">
+        在 <a href="?key=@key&cata=-1">全部商品</a>
+        @if (null != current)
+        {
+            List<FiltCatagories> hierarchy = new List<FiltCatagories>();
+            FiltCatagories tem = current.Catagories;
+            hierarchy.Add(tem);
+            while (tem.ParentID != null)
+            {
+                tem = tem.ParentFiltCata;
+                hierarchy.Add(tem);
+            }
+            hierarchy.Reverse();
+            foreach (var cata in hierarchy)
+            {
+                if (cata.ID == current.Catagories.ID)
+                { 
+            <span>&gt;</span><span class="current">@cata.Name</span>
+                }
+                else
+                {
+            <span>&gt;</span><a href="?key=@key&cata=@cata.ID">@cata.Name</a>
+                }
+            }
+
+        }
+        <span>中搜索
+            <span class="keyword" id="keyword">衬衫</span>找到<em>@{int count = Model.Select<SearchedCatagories, int>(x => x.Count).Sum();}@count</em>件商品
+        </span>
+    </div>
+
+    @*分类列表*@
+    <div class="category_siderbar">
+        <div class="category_panel">
+            <h2>分类</h2>
+
+            <div class="category_panel_content" id="category_panel_content">
+                @foreach (var sCata in Model)
+                {
+                    if (sCata.IsBelong(selectedCataId))
+                    {
+                    <h3 class="active current"><a href="javascript:;" title="@sCata.Catagories.Name" ><span class="icon none imageElement" title="进入分类"></span><span>@{str = string.Format("{0}({1})", @sCata.Catagories.Name, @sCata.Count); }@str</span></a></h3>
+                    <div class="category_panel_subcontent max" name="C1">
+                        <ul id="category_subcontent_list">
+                            @foreach (var sub in sCata.SubCatagories)
+                            {
+                                <li><a href="?key=@key&cata=@sub.Catagories.ID" title="@sub.Catagories.Name"><span>@{str = string.Format("{0}({1})", sub.Catagories.Name, sub.Count);}@str</span></a></li>
+                            }
+                        </ul>
+                    </div>    
+                    }
+                    else
+                    {
+                    <h3><a href="?key=@key&cata=@sCata.Catagories.ID" title="@sCata.Catagories.Name"><span class="icon imageElement" title="进入分类"></span><span>@{str = string.Format("{0}({1})", @sCata.Catagories.Name, @sCata.Count); }@str</span></a></h3>
+                    }
+                }
+            </div>
+
+
+
+            <div class="corner left_top imageElement"></div>
+            <div class="corner right_top imageElement"></div>
+            <div class="corner left_bottom imageElement"></div>
+            <div class="corner right_bottom imageElement"></div>
+        </div>
+        <!--分类名称（公用）-->
+
+        <div id="browsing_history" name="VH" class="browsing_history">
+            <h2>您的浏览历史</h2>
+            <div class="browsing_history_content">
+                <ul>
+                    <li class="first clearfix">
+                        <div class="pic">
+                            <a href="http://product.dangdang.com/product.aspx?product_id=410050160" target="_blank" title="当当优品 全棉磨毛格子时尚休闲男士长袖衬衫100%长绒棉成衣水洗">
+                                <img src="http://img30.ddimg.cn/80/28/410050160-1_x.jpg"></a>
+                        </div>
+                        <div class="detail">
+                            <a href="http://product.dangdang.com/product.aspx?product_id=410050160" target="_blank" title="当当优品 全棉磨毛格子时尚休闲男士长袖衬衫100%长绒棉成衣水洗">当当优品 全棉磨毛格子时尚休</a><p class="price"><span class="price_d">¥<em>199.00</em></span></p>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="pic">
+                            <a href="http://product.dangdang.com/product.aspx?product_id=1034752322" target="_blank" title="韩版时尚纯色打底圆领男士 长袖粗毛线毛衣 8032-B08">
+                                <img src="http://img32.ddimg.cn/65/36/1034752322-1_x.jpg"></a>
+                        </div>
+                        <div class="detail">
+                            <a href="http://product.dangdang.com/product.aspx?product_id=1034752322" target="_blank" title="韩版时尚纯色打底圆领男士 长袖粗毛线毛衣 8032-B08">韩版时尚纯色打底圆领男士 长</a><p class="price"><span class="price_d">¥<em>183.00</em></span></p>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="pic">
+                            <a href="http://product.dangdang.com/product.aspx?product_id=1010778922" target="_blank" title="DF笛凡 毛衣 男装冬装毛衣 欧美风假两件男士针织衫 货到付款">
+                                <img src="http://img32.ddimg.cn/10/9/1010778922-1_x.jpg"></a>
+                        </div>
+                        <div class="detail">
+                            <a href="http://product.dangdang.com/product.aspx?product_id=1010778922" target="_blank" title="DF笛凡 毛衣 男装冬装毛衣 欧美风假两件男士针织衫 货到付款">DF笛凡 毛衣 男装冬装毛衣 欧</a><p class="price"><span class="price_d">¥<em>78.00</em></span></p>
+                        </div>
+                    </li>
+                    <li class="browsing_history_btn clearfix"><a href="javascript:void(0);" id="clear_view_history" name="Clear_VH">清空历史</a></li>
+                </ul>
+            </div>
+            <div class="corner left_top imageElement"></div>
+            <div class="corner right_top imageElement"></div>
+        </div>
+        <!--您的浏览历史（公用）-->
+    </div>
+    <div style="margin-top: 11px">
+        @*商品列表*@
+        @{
+        
+            FiltCatagories paraCata;
+            if (null != current)
+            {
+                paraCata = current.Catagories;
+                paraCata.Products = current.Products;
+            }
+            else
+            {
+                paraCata = new FiltCatagories();
+                paraCata.Products = pdts;
+                paraCata.Name = "全部商品";
+            }
+            Html.RenderAction("PdtsList", new { cata = paraCata });
+        }
+    </div>
+
+
+
+
+    <div class="fixedbar">
+        <div class="backtop hidden" id="backtop">
+            <div class="window_suspend"><a href="javascript:scroll(0,0);"><span class="icon_top imageElement"></span>返回顶部</a></div>
+        </div>
+    </div>
+    <script language="javascript" type="text/javascript"> var _ozurltail = '#bs'</script>
+</div>

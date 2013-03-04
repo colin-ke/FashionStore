@@ -1,0 +1,119 @@
+﻿@model IQueryable<Domain.NavCatagories>
+@using System.Text;
+
+<script type="text/javascript">
+    var flag = false;
+    $(function () {
+        $("div.select_pop").hide();
+        $("span.select").click(function () {
+            if (!flag)
+                $("div.select_pop").show();
+            else
+                flag = false;
+        });
+        $("div.select_pop span").click(function () {
+            flag = true;
+            $("#cataName").empty().append($(this).text());
+            $("#cataId").attr("value", $(this).attr("id"));
+            $("div.select_pop").hide();
+        });
+        $("#btnSubmit").click(function () {
+            if ($("#keyWord").attr("value") == "") {
+                alert("请输入关键字");
+                return false;
+            }
+        });
+
+        $("li[name='navCatas']").hover(
+            function () {
+                var ul = $(this).children("ul").clone().attr("style", "");
+                $("li.on").removeClass("on");
+                $(this).addClass("on");
+                $("#subPanel").empty().append(ul);
+            }, function () { });
+
+    });
+    function hideCataList() {
+        $("#select_pop").hide();
+    }
+</script>
+<div class="layout">
+    <div class="logo">
+        <img src="/Content/images/Logo.png" />
+    </div>
+
+    @using (Html.BeginForm("SearchSubmit", "list"))
+    { 
+        <div class="search-panel">
+            <div class="search-panel-fields">
+                @*<input type="text" />*@
+                @Html.TextBox("keyWord")
+                <span class="select">
+                    <span id="cataName">全部分类</span>
+                    <span class="icon"></span>
+                    <div class="select_pop">
+                        <span id="-1">全部分类</span>
+                        @foreach (var cata in Model.Where<Domain.NavCatagories>(x => x.ParentID == null))
+                        {
+                            <span id='@cata.FiltCatagoryID'>@cata.Name</span>
+                        }
+                    </div>
+                </span>
+            </div>
+            <button id="btnSubmit" type="submit">搜索</button>
+            @Html.Hidden("cataId",-1);
+            @*<input type="submit" value="搜索" />*@
+        </div>
+    }
+
+
+</div>
+<div style="clear: both;"></div>
+<div class="nav_top">
+    <ul>
+        <li class="on" name="navCatas"><a href="/">首页</a></li>
+        @foreach (var cata in Model.Where<Domain.NavCatagories>(x => x.ParentID == null))
+        { 
+            <li name="navCatas">
+                @Html.ActionLink(cata.Name, "FiltList", "List", new { catagories = cata.FiltCatagoryID }, new { name = "" })
+
+                <ul style="display: none;">
+                    @foreach (var subCata in Model.Where<Domain.NavCatagories>(x => x.ParentID == cata.ID && x.IsSubnav))
+                    {
+                        StringBuilder attr = new StringBuilder();
+                        foreach (var attrContent in subCata.AttrContents)
+                        {
+                            attr.AppendFormat("{0}:{1}-", attrContent.AttrTitles.ID, attrContent.ID);
+                        }
+                        int filterCataId;
+                        if (subCata.FiltCatagoryID == null)
+                        {
+                            Domain.NavCatagories tem = subCata.ParentNavCata;
+                            while (tem.FiltCatagoryID == null)
+                            {
+                                tem = tem.ParentNavCata;
+                            }
+                            filterCataId = tem.FiltCatagoryID.Value;
+                        }
+                        else
+                        {
+                            filterCataId = subCata.FiltCatagoryID.Value;
+                        }
+                       
+                        <li>@Html.ActionLink(subCata.Name, "FiltList", "List", new { catagories = filterCataId, attr = attr.ToString() }, new { name = "" })</li>
+                    }
+                </ul>
+            </li>
+        }
+        @*<li><a href="#">女装</a></li>
+            <li><a href="#">男装</a></li>
+            <li><a href="#">鞋靴</a></li>
+            <li><a href="#">箱包</a></li>
+            <li><a href="#">家居</a></li>
+            <li><a href="#">内衣</a></li>*@
+    </ul>
+</div>
+<div class="sub">
+    <ul id="subPanel">
+    </ul>
+</div>

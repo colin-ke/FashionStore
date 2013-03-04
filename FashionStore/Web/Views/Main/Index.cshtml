@@ -1,0 +1,335 @@
+﻿<link href="/Content/ClassNav.css" rel="stylesheet" />
+<script src="/Scripts/MyJs/boot.js" type="text/javascript"></script>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@*<div class="subnav">
+    <ul>
+        <li><a href="">热销商品</a></li>
+        <li><a href="">促销商品</a></li>
+        <li><a href="">最新商品</a></li>
+    </ul>
+</div>*@
+
+<div class="wrap">
+    <div class="spacer"></div>
+    <div class="spot">
+        @{Html.RenderAction("AllFiltCata", "Main");}
+        @*广告图片自动轮换展示*@
+        <div class="slides" name="__DT">
+            <ul class="slide-pic">
+                <li class="cur"><a href="#">
+                    <img alt="ad" src="/Content/pic/ad/bigad1.jpg" /></a></li>
+                <li class=""><a href="#">
+                    <img alt="ad" src="/Content/pic/ad/bigad2.jpg" /></a></li>
+                <li class=""><a href="#">
+                    <img alt="ad" src="/Content/pic/ad/bigad3.jpg" /></a></li>
+                <li class=""><a href="#">
+                    <img alt="ad" src="/Content/pic/ad/bigad4.jpg" /></a></li>
+                <li class=""><a href="#">
+                    <img alt="ad" src="/Content/pic/ad/bigad5.jpg" /></a></li>
+
+            </ul>
+            <ul class="slide-li op slide-txt">
+                <li class="cur"><a href="#">Advertisment</a></li>
+                <li class=""><a href="#">Advertisment</a></li>
+                <li class=""><a href="#">Advertisment</a></li>
+                <li class=""><a href="#">Advertisment</a></li>
+                <li class=""><a href="#">Advertisment</a></li>
+            </ul>
+        </div>
+
+        <div class="todayspecial">
+            <h2>每日推荐</h2>
+            <div class="box">
+                <p class="pic">
+                    <a id="__RBA" title="CICI-SHOP秋装新款外套仿羊绒毛呢外套毛呢子大衣 翻领1127" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1001524505">
+                        <img alt="" src="/Content/pic/ad/todayspecial.jpg" />
+                    </a>
+                </p>
+                <p class="name">
+                    <a title="CICI-SHOP秋装新款外套仿羊绒毛呢外套毛呢子大衣 翻领1127" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1001524505">CICI-SHOP秋装新款外套仿羊绒毛呢外套毛呢子大</a>
+                </p>
+                <p class="price">
+                    <span class="price_d">惊爆价：¥
+                        <span>169</span>
+                    </span>
+                    <span class="price_text">原价：</span>
+                    <span class="price_m">¥
+                        <span>338</span>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+    @*热销精品和新品上架模块*@
+    @*<div class="exbox hotsalebox">
+        <div class="head">
+            <h3>热销精品
+            </h3>
+            <a class="more" href="#">更多>></a>
+        </div>
+        <ul class="shoplist">
+            <li class="last">
+                <a class="pic" href="#">
+                    <img alt="" width="270" height="190" src="/Content/pic/ad/hotsale1.jpg" />
+                </a>
+                <p class="name">
+                    <a href="#">【248元抢原价890元】lee标准立体剪裁男士水洗纯棉直筒牛仔裤 限量大促</a>
+                </p>
+                <p class="price">
+                    <span class="price_n">
+                        <span>￥</span>
+                        248
+                    </span>
+                    <span class="rice_r">原价：￥100.00
+                    </span>
+                </p>
+                <p class="btn_box">
+                    <a class="btn" href="#">去看看</a>
+                    <span class="data">
+                        <span>212</span>人已购买
+                    </span>
+                </p>
+            </li>
+        </ul>
+    </div>*@
+
+    <div id="__MD" class="clothing_prefer">
+        <h2>
+            <span id="noncePro___MDA" class="other noncePro now">新款上市</span>
+            <span id="noncePro___MDC" class="noncePro other">畅销单品</span>
+            <span id="noncePro___MDD" class="noncePro other">特价优惠</span>
+        </h2>
+        <div class="clothing_prefer_box">
+            <ul id="__MDB">
+                <li id="__MDB1">
+                    <p class="pic">
+                        <a title="TT.COLOR优雅连衣裙" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1357009601">
+                            <img src="/Content/pic/pdt/pdt_bag1.jpg">
+                        </a>
+                    </p>
+                    <p class="name">
+                        <a title="TT.COLOR优雅连衣裙" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1357009601">TT.COLOR优雅连衣裙</a>
+                    </p>
+                    <p class="price">
+                        <span class="price_d">¥
+                            <span>138</span>
+                        </span>
+                        <span class="price_m">¥
+                            <span>564</span>
+                        </span>
+                    </p>
+                </li>
+                <li id="__MDB2">
+                    <p class="pic">
+                        <a title="印刻真丝小方巾" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1357451402">
+                            <img src="http://img32.ddimg.cn/32/27/1357451402-1_l.jpg">
+                        </a>
+                    </p>
+                    <p class="name">
+                        <a title="印刻真丝小方巾" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1357451402">印刻真丝小方巾</a>
+                    </p>
+                    <p class="price">
+                        <span class="price_d">¥
+                            <span>68</span>
+                        </span>
+                        <span class="price_m">¥
+                            <span>158</span>
+                        </span>
+                    </p>
+                </li>
+                <li id="__MDB3">
+                    <p class="pic">
+                        <a title="唐狮圆领碎花连衣裙" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1018244822">
+                            <img src="http://img32.ddimg.cn/23/12/1018244822-1_l.jpg">
+                        </a>
+                    </p>
+                    <p class="name">
+                        <a title="唐狮圆领碎花连衣裙" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1018244822">唐狮圆领碎花连衣裙</a>
+                    </p>
+                    <p class="price">
+                        <span class="price_d">¥
+                            <span>69</span>
+                        </span>
+                        <span class="price_m">¥
+                            <span>179</span>
+                        </span>
+                    </p>
+                </li>
+                <li id="__MDB4">
+                    <p class="pic">
+                        <a title="OSA秋装韩版打底裤" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1140745402">
+                            <img src="http://img32.ddimg.cn/82/30/1140745402-1_l.jpg">
+                        </a>
+                    </p>
+                    <p class="name">
+                        <a title="OSA秋装韩版打底裤" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1140745402">OSA秋装韩版打底裤</a>
+                    </p>
+                    <p class="price">
+                        <span class="price_d">¥
+                            <span>78</span>
+                        </span>
+                        <span class="price_m">¥
+                            <span>198</span>
+                        </span>
+                    </p>
+                </li>
+                <li id="__MDB5">
+                    <p class="pic">
+                        <a title="韩版淑女长袖小西装" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1001974806">
+                            <img src="http://img36.ddimg.cn/63/6/1001974806-1_l.jpg">
+                        </a>
+                    </p>
+                    <p class="name">
+                        <a title="韩版淑女长袖小西装" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1001974806">韩版淑女长袖小西装</a>
+                    </p>
+                    <p class="price">
+                        <span class="price_d">¥
+                            <span>209</span>
+                        </span>
+                        <span class="price_m">¥
+                            <span>598</span>
+                        </span>
+                    </p>
+                </li>
+                <li id="__MDB6">
+                    <p class="pic">
+                        <a title="韩版修身时尚长袖t恤" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1403541102">
+                            <img src="http://img32.ddimg.cn/84/11/1403541102-1_l.jpg">
+                        </a>
+                    </p>
+                    <p class="name">
+                        <a title="韩版修身时尚长袖t恤" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1403541102">韩版修身时尚长袖t恤</a>
+                    </p>
+                    <p class="price">
+                        <span class="price_d">¥
+                            <span>79</span>
+                        </span>
+                        <span class="price_m">¥
+                            <span>490</span>
+                        </span>
+                    </p>
+                </li>
+                <li id="__MDB7">
+                    <p class="pic">
+                        <a title="柒牌 商务西服套装" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1033828611">
+                            <img src="http://img31.ddimg.cn/24/30/1033828611-1_l.jpg">
+                        </a>
+                    </p>
+                    <p class="name">
+                        <a title="柒牌 商务西服套装" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1033828611">柒牌 商务西服套装</a>
+                    </p>
+                    <p class="price">
+                        <span class="price_d">¥
+                            <span>239</span>
+                        </span>
+                        <span class="price_m">¥
+                            <span>799</span>
+                        </span>
+                    </p>
+                </li>
+                <li id="__MDB8">
+                    <p class="pic">
+                        <a title="真维斯男装连帽卫衣" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1023430011">
+                            <img src="http://img31.ddimg.cn/87/21/1023430011-1_l.jpg">
+                        </a>
+                    </p>
+                    <p class="name">
+                        <a title="真维斯男装连帽卫衣" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1023430011">真维斯男装连帽卫衣</a>
+                    </p>
+                    <p class="price">
+                        <span class="price_d">¥
+                            <span>79</span>
+                        </span>
+                        <span class="price_m">¥
+                            <span>160</span>
+                        </span>
+                    </p>
+                </li>
+                <li id="__MDB9">
+                    <p class="pic">
+                        <a title="摩名帝凡斯修身直筒裤" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1477697901">
+                            <img src="http://img31.ddimg.cn/42/4/1477697901-1_l.jpg" />
+                        </a>
+                    </p>
+                    <p class="name">
+                        <a title="摩名帝凡斯修身直筒裤" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1477697901">摩名帝凡斯修身直筒裤</a>
+                    </p>
+                    <p class="price">
+                        <span class="price_d">¥
+                            <span>169</span>
+                        </span>
+                        <span class="price_m">¥
+                            <span>539</span>
+                        </span>
+                    </p>
+                </li>
+                <li id="__MDB10">
+                    <p class="pic">
+                        <a title="爱帝 女士轻薄保暖打底衫" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1005398907">
+                            <img src="http://img37.ddimg.cn/51/16/1005398907-1_l.jpg">
+                        </a>
+                    </p>
+                    <p class="name">
+                        <a title="爱帝 女士轻薄保暖打底衫" target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1005398907">爱帝 女士轻薄保暖打底衫</a>
+                    </p>
+                    <p class="price">
+                        <span class="price_d">¥
+                            <span>49</span>
+                        </span>
+                        <span class="price_m">¥
+                            <span>139</span>
+                        </span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="spacer"></div>
+
+    </div>
+</div>
+@*广告图片自动轮换展示*@
+<script type="text/javascript">
+    var defaultOpts = { interval: 5000, fadeInTime: 300, fadeOutTime: 200 };
+    //Iterate over the current set of matched elements
+    var _titles = $("ul.slide-txt li");
+    var _titles_bg = $("ul.op li");
+    var _bodies = $("ul.slide-pic li");
+    var _count = _titles.length;
+    var _current = 0;
+    var _intervalID = null;
+    var stop = function () { window.clearInterval(_intervalID); };
+    var slide = function (opts) {
+        if (opts) {
+            _current = opts.current || 0;
+        } else {
+            _current = (_current >= (_count - 1)) ? 0 : (++_current);
+        };
+        _bodies.filter(":visible").fadeOut(defaultOpts.fadeOutTime, function () {
+            _bodies.eq(_current).fadeIn(defaultOpts.fadeInTime);
+            _bodies.removeClass("cur").eq(_current).addClass("cur");
+        });
+        _titles.removeClass("cur").eq(_current).addClass("cur");
+        _titles_bg.removeClass("cur").eq(_current).addClass("cur");
+    }; //endof slide
+    var go = function () {
+        stop();
+        _intervalID = window.setInterval(function () { slide(); }, defaultOpts.interval);
+    }; //endof go
+    var itemMouseOver = function (target, items) {
+        stop();
+        var i = $.inArray(target, items);
+        slide({ current: i });
+    }; //endof itemMouseOver
+    _titles.hover(function () { if ($(this).attr('class') != 'cur') { itemMouseOver(this, _titles); } else { stop(); } }, go);
+    //_titles_bg.hover(function() { itemMouseOver(this, _titles_bg); }, go);
+    _bodies.hover(stop, go);
+    //trigger the slidebox
+    go();
+</script>

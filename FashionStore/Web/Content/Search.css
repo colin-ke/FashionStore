@@ -1,0 +1,497 @@
+﻿h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+.category_wrap {
+    margin: 0 auto;
+    width: 960px;
+    color: #404040;
+    font: 12px/18px "宋体b8b\4f53",Arial;
+}
+
+    .category_wrap a {
+        text-decoration: none;
+        color: #1a66b3;
+    }
+
+
+.breadcrumb {
+    height: 18px;
+    overflow: hidden;
+    padding: 14px 0 4px;
+    width: 960px;
+    padding: 14px 0 4px;
+}
+
+    .breadcrumb .righttip {
+        float: right;
+        padding: 0;
+    }
+
+    .breadcrumb .keyword {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .breadcrumb span {
+        color: #404040;
+        padding: 0 8px;
+    }
+
+    .breadcrumb em {
+        color: #c30;
+        font-weight: bold;
+        padding: 0 8px;
+    }
+
+.clear {
+    clear: both;
+    line-height: 0px;
+    height: 0px;
+    font-size: 0px;
+    overflow: hidden;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+/*页面右栏*/
+.category_main {
+    float: right;
+    margin-top: 10px;
+    width: 760px;
+}
+
+.concordance_top {
+    height: 18px;
+    overflow: hidden;
+    padding: 7px 0 6px 9px;
+}
+
+/*筛选条件框*/
+.conditional_filter {
+    margin-bottom: 10px;
+    width: 758px;
+    line-height: 18px;
+    border: 1px solid #f4e2c0;
+}
+
+    .conditional_filter .checked {
+        color: #7c470f;
+        font-weight: bold;
+    }
+
+    .conditional_filter span, .conditional_filter a {
+        float: left;
+        display: inline;
+        padding: 3px 6px 0;
+        height: 18px;
+    }
+
+    .conditional_filter .top_panel {
+        position: relative;
+        height: 29px;
+        background: url(/Content/images/bg_condition_top.png) repeat-x 0 0;
+        overflow: hidden;
+    }
+
+        .conditional_filter .top_panel h2 {
+            padding: 6px 0 0 15px;
+            width: 653px;
+            height: 23px;
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        .conditional_filter .hidden, .conditional_filter .top_panel a.hidden {
+            display: none;
+        }
+
+        .conditional_filter .top_panel a.reset {
+            display: block;
+            float: none;
+            position: absolute;
+            right: 15px;
+            top: 6px;
+            padding: 0;
+        }
+
+    .conditional_filter .condition_panel {
+        overflow: hidden;
+        width: 758px;
+    }
+
+        .conditional_filter .condition_panel .list {
+            border-bottom: 1px solid #f4f4f4;
+            margin: 0 14px;
+            padding: 4px 1px 7px;
+            width: 728px;
+            overflow: hidden;
+            position: relative;
+        }
+
+            .conditional_filter .condition_panel .list .tip {
+                float: left;
+                display: inline;
+                width: 125px;
+                background: url(/content/images/bg_condition_sep.gif) no-repeat 122px 7px;
+            }
+
+                .conditional_filter .condition_panel .list .tip span {
+                    padding: 3px 0 0;
+                    width: 84px;
+                    text-align: right;
+                    overflow: hidden;
+                }
+
+                    .conditional_filter .condition_panel .list .tip span.checked {
+                        padding: 3px 6px 0;
+                        width: auto;
+                    }
+
+            .conditional_filter .condition_panel .list .conditions {
+                float: left;
+                display: inline;
+                width: 544px;
+                overflow: hidden;
+            }
+
+                .conditional_filter .condition_panel .list .conditions a, .conditional_filter .condition_panel .list .conditions span {
+                    margin-right: 19px;
+                    white-space: nowrap;
+                }
+
+            .conditional_filter .condition_panel .list .oper_panel {
+                float: right;
+                display: inline;
+                height: 21px;
+                overflow: hidden;
+                width: 36px;
+            }
+
+                .conditional_filter .condition_panel .list .oper_panel a {
+                    display: inline-block;
+                    float: none;
+                    padding: 3px 0 0;
+                    width: 36px;
+                    text-align: right;
+                    overflow: hidden;
+                }
+
+.category_wrap .imageElement {
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+}
+/*排序框*/
+.filterbar{background:url(/content/images/filterbar.png) repeat-x 0 -92px;border:1px solid #f99439;border-top-width:2px;border-bottom-color:#c3c3c3;height:38px;position:relative;width:758px;}
+.filterbar .border{background:url(/content/images/filterbar.png) no-repeat;height:41px;position:absolute;top:-2px;width:2px;}
+.filterbar .left{background-position:-60px -46px;left:-1px;}
+.filterbar .right{background-position:-65px -46px;right:-1px;}
+.filterbar .filter_panel{padding:7px 8px;height:23px;}
+.filterbar .btn_filter{float:left;}
+.filterbar .btn_filter .search_tip{float:left;height:18px;overflow:hidden;padding:3px 0 2px;padding:4px 0 1px\9;}
+.filterbar .btn_filter a{background:url(/content/images/filterbar.png) no-repeat right 0;float:left;height:23px;margin: 0 3px;padding-right:6px;}
+.filterbar .btn_filter a .text{background:url(/content/images/filterbar.png) no-repeat -93px -46px;color:#666;cursor:pointer;float:left;height:18px;overflow:hidden;padding:3px 0 2px 7px;padding:4px 0 1px 7px\9;}
+.filterbar .btn_filter a .arrow{cursor:pointer;float:left;height:23px;margin:0 0 0 3px;width:7px;}
+.filterbar .btn_filter a .down{background:url(/content/images/filterbar.png) no-repeat 0 -46px;}
+.filterbar .btn_filter a .up{background:url(/content/images/filterbar.png) no-repeat -10px -46px;}
+.filterbar .btn_filter a:hover{background:url(/content/images/filterbar.png) no-repeat right -23px;text-decoration:none;}
+.filterbar .btn_filter a:hover .text{background:url(/content/images/filterbar.png) no-repeat -93px -69px;color:#007130;}
+.filterbar .btn_filter a.active,.filterbar .btn_filter a.active:hover,.filterbar .btn_filter a.default{background:url(/content/images/filterbar.png) no-repeat right -23px;color:#404040;}
+.filterbar .btn_filter a.active .text,.filterbar .btn_filter a.active:hover .text{background:url(/content/images/filterbar.png) no-repeat -93px -69px;color:#404040;}
+.filterbar .btn_filter a:hover .down,.filterbar .btn_filter a.active .down{background:url(/content/images/filterbar.png) no-repeat 0 -69px;}
+.filterbar .btn_filter a:hover .up,.filterbar .btn_filter a.active .up{background:url(/content/images/filterbar.png) no-repeat -10px -69px;}
+.filterbar .page_Simplified{float:right;overflow:hidden;padding-top:3px;width:114px;}
+.filterbar .page_Simplified span{color:#404040;float:right;font-weight:bold;font-family:Arial;height:18px;padding:0 5px;}
+.filterbar .page_Simplified a{background:url(/content/images/filterbar.png) no-repeat;float:right;height:18px;line-height:54px;width:18px;}
+.filterbar .page_Simplified a.prevpage{background-position:-20px -46px;}
+.filterbar .page_Simplified a.nextpage{background-position:-40px -46px;}
+.filterbar .page_Simplified a.bof{background-position:-20px -65px;cursor:default;}
+.filterbar .page_Simplified a.eof{background-position:-40px -65px;cursor:default;}
+.filterbar .check_filter{float:right;height:23px;overflow:hidden;width:222px;}
+.filterbar .check_filter .checkitem{float:left;height:18px;padding:3px 0 2px;position:relative;padding:4px 0 1px\9;}
+.filterbar .check_filter .checkitem input{display:inline-block;height:18px;left:0;position:absolute;top:3px;}
+.filterbar .check_filter .checkitem label{display:inline-block;height:18px;margin:0 25px 0 20px;}
+
+/*商品列表*/
+.skcolor_ljg {
+    float: none;
+    margin: 0;
+    color: #c30;
+    font-weight: bold;
+}
+.resultlist{overflow:hidden;width:760px;}
+.resultlist .listitem{float:left;margin-right:32px;padding:20px 15px 17px;width:202px;*padding:20px 15px 16px;}
+.resultlist .none{margin-right:0;}
+.resultlist .listitem p{width:202px;}
+.resultlist .listitem .pic{border:1px solid #ddd;height:200px;position:relative;width:200px;}
+.resultlist .listitem .pic a{display:block;height:200px;overflow:hidden;text-align:center;width:200px;}
+.resultlist .listitem .price{cursor:default;height:18px;padding:9px 0 3px;overflow:hidden;padding:10px 0 2px\9;}
+.resultlist .listitem .price .price_m{background:url(../images/bg_price_del.png) repeat-x 0 9px;color:#9c9c9c;font-family:Arial;margin-left:10px;}
+.resultlist .listitem .price .price_d{color:#c30;font-family:Arial;font-size:18px;}
+.resultlist .listitem .price .price_d em{padding-left:4px;}
+.resultlist .listitem .price .minus{color:#c30;font-weight:bold;padding:0 5px;}
+.resultlist .listitem .title{height:36px;margin-bottom:2px;padding:2px 0;overflow:hidden;padding:3px 0 1px\0;*height:37px;*padding:2px 0 0;}
+.resultlist .listitem .title a{font-size:14px;*line-height:19px;}
+.resultlist .listitem .title .item_icon{height:14px;margin-right:5px;overflow:hidden;position:relative;top:2px;width:41px;}
+.resultlist .listitem .subtitle{color:#666;cursor:default;height:18px;overflow:hidden;padding:1px 0;padding:2px 0 0\9;}
+.resultlist .listitem .starlevel{height:18px;margin-top:1px;overflow:hidden;}
+.resultlist .listitem .starlevel .comment_star{position:relative;top:2px;}
+.resultlist .listitem .starlevel span{color:#666;}
+.resultlist  .horizontal_line{border-top:1px solid #ddd;float:left;height:0;width:760px;}
+
+.resultlist .listitem .pic .overlay,.resultlist .listitem .pic .overlay1{position:absolute;bottom:0;left:0;height:22px;width:200px;overflow:hidden;text-align:left;}
+.resultlist .listitem .pic .overlay{background-image:url(../images/overlay_bg.png);*filter:alpha(opacity=70);*background:#fff;}
+.resultlist .listitem .pic .overlay1 .p{display:block;margin:0 auto;width:150px;color:#d37c54;line-height:18px;*vertical-align:middle;vertical-align:text-bottom\0;}
+.resultlist .listitem .pic .overlay1 .p span,.resultlist .listitem .pic .overlay1 .p a{display:inline-block;color:#d37c54;font:12px/18px "\5b8b\4f53";}
+.resultlist .listitem .pic .overlay1 .p span{padding:3px 0 3px 3px;width:22px;height:14px;overflow:hidden;}
+.resultlist .listitem .pic .overlay1 .p a{padding:2px 1px 1px;width:120px;height:18px;overflow:hidden;}
+.resultlist .listitem .pic .overlay1 .p a:hover{color:#1a66b3;text-decoration:none;}
+.resultlist .listitem .pic .label{position:absolute;right:-6px;top:-6px;}
+.resultlist .listitem .pic .pic_tag{font-size:0;line-height:0;height:54px;width:54px;overflow:hidden;}
+
+/*分页*/
+.paginating {
+    cursor: default;
+    font-size: 12px;
+    height: 23px;
+    line-height: 23px;
+    overflow: hidden;
+    padding: 10px 0 12px;
+}
+
+.pageform {
+    display: inline;
+    float: right;
+    padding: 2px 0 0;
+    overflow: hidden;
+    width: 190px;
+}
+
+    .pageform a, .pageform a:hover {
+        background: url(/content/images/paginating.png) no-repeat 0 -100px;
+        color: #666;
+        display: inline;
+        float: right;
+        font: 12px/20px "宋体b8b\4f53";
+        height: 20px;
+        margin-left: 5px;
+        width: 38px;
+        padding-top: 1px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .pageform span {
+        color: #969696;
+        cursor: default;
+        display: inline;
+        float: right;
+        height: 20px;
+        line-height: 20px;
+        margin-left: 5px;
+        padding-top: 1px;
+    }
+
+    .pageform input {
+        border: 1px solid #ccc;
+        display: inline;
+        float: right;
+        height: 16px;
+        line-height: 16px;
+        margin-left: 5px;
+        width: 34px;
+    }
+
+.pagepanel {
+    display: inline;
+    float: right;
+    height: 23px;
+}
+
+    .pagepanel a, .pagepanel .pagebtn {
+        background: url(/content/images/paginating.png) no-repeat right 0;
+        color: #1a66b3;
+        padding-right: 7px;
+        text-decoration: none;
+    }
+
+        .pagepanel .pagebtn span {
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+    .pagepanel a, .pagepanel .pagebtn {
+        background: url(/content/images/paginating.png) no-repeat right 0;
+        color: #1a66b3;
+        padding-right: 7px;
+        text-decoration: none;
+    }
+
+    .pagepanel a, .pagepanel span {
+        color: #969696;
+        cursor: default;
+        float: right;
+        font-size: 12px;
+        height: 23px;
+        line-height: 23px;
+        margin-left: 5px;
+        text-align: center;
+    }
+
+        .pagepanel a span, .pagepanel .pagebtn span {
+            background: url(/content/images/paginating.png) no-repeat -57px -25px;
+            color: #1a66b3;
+            cursor: pointer;
+            display: inline-block;
+            float: none;
+            font-size: 14px;
+            font-family: Arial;
+            margin: 0;
+            padding-left: 7px;
+        }
+
+        .pagepanel a:hover, .pagepanel .current, .pagepanel .current:hover {
+            background: url(/content/images/paginating.png) no-repeat right -50px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+            .pagepanel .current, .pagepanel .current:hover, .pagepanel .current span, .pagepanel .current:hover span {
+                cursor: default;
+            }
+
+    .pagepanel .disabled, .pagepanel .disabled span, .pagepanel .disabled:hover, .pagepanel .disabled:hover span {
+        color: #878787;
+        cursor: default;
+        font-weight: bold;
+    }
+
+        .pagepanel .disabled, .pagepanel .disabled span, .pagepanel .disabled:hover, .pagepanel .disabled:hover span {
+            color: #878787;
+            cursor: default;
+            font-weight: bold;
+        }
+
+
+/*页面左栏*/
+.category_siderbar {
+    float: left;
+    margin-top: 10px;
+    overflow: hidden;
+    width: 190px;
+}
+
+.category_panel {
+    border: 1px solid #f7d1b5;
+    margin-bottom: 10px;
+    padding: 1px;
+    position: relative;
+    width: 186px;
+}
+
+    .category_panel h2 {
+        background: #f99133;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        height: 18px;
+        padding: 4px 0 4px 11px;
+    }
+
+.category_panel_content {
+    position: relative;
+    overflow: hidden;
+    width: 186px;
+}
+
+    .category_panel_content h3 {
+        background: url(/content/images/bg_category_panel.png) repeat-x 0 0;
+        border-bottom: 1px solid #ebebeb;
+        color: #1a66b3;
+        height: 23px;
+        overflow: hidden;
+    }
+
+        .category_panel_content h3 a {
+            display: block;
+            height: 18px;
+            position: relative;
+            padding: 3px 0 2px 25px;
+        }
+
+    .category_panel_content .none, .category_panel_content .active .none {
+        background-position: -5px -41px;
+        cursor: default;
+    }
+
+    .category_panel_content h3 a span {
+        cursor: pointer;
+        display: inline-block;
+        font-weight: bold;
+    }
+
+    .category_panel_content .current span, .category_panel_content .current a:hover, .category_panel_content .current a:hover span, .category_panel_content a.current:hover, .category_panel_content a.current:hover span {
+        color: #7c470f;
+        cursor: default;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .category_panel_content .max {
+        height: 187px;
+    }
+
+    .category_panel_content ul {
+        padding: 4px 0 3px 25px;
+        position: relative;
+    }
+
+    .category_panel_content li {
+        vertical-align: middle;
+        padding: 1px 0;
+    }
+
+    .category_panel_content .icon {
+        background: url(/content/images/bg_category_panel.png) no-repeat -5px -32px;
+        height: 9px;
+        left: 11px;
+        width: 9px;
+        position: absolute;
+        top: 7px;
+    }
+
+.category_panel .left_top {
+    background-position: 0 -23px;
+    height: 3px;
+    left: -1px;
+    top: -1px;
+    width: 3px;
+}
+
+.category_panel .right_top {
+    background-position: 0 -32px;
+    height: 3px;
+    right: -1px;
+    top: -1px;
+    width: 3px;
+}
+
+.category_panel .left_bottom {
+    background-position: 0 -41px;
+    height: 2px;
+    bottom: -1px;
+    left: -1px;
+    width: 2px;
+}
+
+.category_panel .right_bottom {
+    background-position: 0 -50px;
+    height: 2px;
+    bottom: -1px;
+    right: -1px;
+    width: 2px;
+}

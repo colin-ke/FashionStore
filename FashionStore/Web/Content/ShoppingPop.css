@@ -1,0 +1,46 @@
+﻿.pop_wrap{ width:371px; border:2px solid #fc883b;font:normal 12px \5B8B\4F53;color:#404040; overflow:hidden;position: absolute;left:200px;top:200px;}
+.pop_wrap h3{ height:27px; background:#fdf2e3; border-bottom:1px solid #fc883b; font:bold 12px/27px \5B8B\4F53; padding-left:19px; position:relative;}
+.pop_wrap h3 a{ display:inline-block; height:9px; width:9px; background:url(/content/images/sprite_pop.png) no-repeat 0 -72px; overflow:hidden; cursor:pointer; position:absolute; top:5px; right:5px;}
+.pop_cont{ padding:20px 0 5px 0; width:371px;background-color:white;}
+.pop_cont p{ font-weight:bold;line-height:22px; font-size:14px; text-align:center; line-height:24px\0; *padding-top:4px;}
+.pop_cont p img{padding-right:9px; vertical-align:top; *margin-top:-4px;}
+.pop_btn{ overflow:hidden;text-align:center; padding-bottom:15px; width:371px;}
+.pop_btn span{display:inline-block;background:url(/content/images/sprite_pop.png) no-repeat 0 0; height:23px; width:68px; line-height:24px; text-align:center; cursor:pointer;margin-right:14px;}
+.pop_btn a{ color:#1966b4;display:inline-block; text-decoration:none; line-height:24px; margin-left:6px; float:left;}
+.pop_btn a:hover,.pop_hot .pop_hot_name a:hover{ text-decoration:underline;}
+.pop_btn .pop_btn_orange{ height:26px; line-height:24px; width:101px; text-align:center; color:#fff; background-position:0 -46px;font-weight:bold;}
+.pop_cont p.txt_note{ padding:0; text-align:center; font-weight:normal; font-size:12px; line-height:18px; height:18px; overflow:hidden; margin-bottom:13px;}
+.pop_cont p.txt_note span{ font-weight:bold; font-family:Arial;}
+.pop_cont p.txt_note span.txt_note_red{ color:#cc3300;}
+.pop_btn .pop_btn_other{position:relative;background-position:0 -23px;_background-position:0 -22px; width:71px; color:#fff;}
+
+.pop_cont p.txt_none{ text-align:left; padding:0 0 0 87px;}
+:root .pop_cont p.txt_none{padding:0 0 0 92px\9;}
+
+
+.pop_hot{ margin:0 19px; overflow:hidden; border-top:1px solid #fedbc4; padding-bottom:12px; width:333px;}
+.pop_hot h3{ height:30px; background:none; line-height:30px; padding:0; border:none;}
+.pop_hot ul{ width:348px; overflow:hidden;}
+.pop_hot ul li{ float:left; width:72px; overflow:hidden; padding-right:15px;}
+.pop_hot .pop_hot_pic{ width:70px; height:70px; vertical-align:middle; overflow:hidden; text-align:center; border:1px solid #ddd;position: relative;}
+.pop_hot_pic img{border:none;vertical-align: top;position: absolute;top: 0;left: 0;}
+
+
+.pop_hot .pop_hot_name{ height:36px; overflow:hidden; margin:5px 0 3px;}
+.pop_hot .pop_hot_name a{ color:#1a66b2; text-decoration:none; line-height:18px;}
+.pop_hot .pop_hot_price{ color:#cc3300; font-family:Arial; text-align:center;}
+
+.pop_cont .pop_note{ width:274px; overflow:hidden; background:url(/content/images/pop_note.gif) no-repeat 17px 10px #fff8e7; margin:0 auto; padding:7px 15px 7px 48px; color:#878787; line-height:18px; margin-bottom:15px;}
+.pop_cont .pop_note ul{ padding-top:1px; width:283px; overflow:hidden;}
+.pop_cont .pop_note ul li{ padding-bottom:2px; height:19px; overflow:hidden;}
+.pop_cont .pop_note label{}
+.pop_cont .pop_note input{ vertical-align:middle; margin-right:10px; width:13px; height:13px; overflow:hidden;}
+.pop_cont .pop_note span{vertical-align:middle;}
+.pop_cont .pop_note .pop_note_btn{ cursor:pointer; margin:3px 0;background:url(/content/images/sprite_pop.png) no-repeat 0 -23px; width:71px; color:#fff; text-align:center; height:23px; line-height:23px;}
+
+.pop_cont02{padding:20px 0 25px 0;width:371px;}
+.pop_cont02 p{font-weight:bold;line-height:20px;font-size:12px;position:relative;}
+.pop_cont02 p img{position:absolute;left:30px;top:0;}
+.pop_cont02 p span{display:block;padding:2px 30px 0 62px;*padding-top:4px;}
+.pop_wrap a{color:#1a66b3;text-decoration:none;}
+.pop_wrap a:hover{color:#1a66b3;text-decoration:underline;}

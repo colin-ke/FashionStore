@@ -1,0 +1,1540 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FasionStoreModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="FasionStoreModelStoreContainer">
+          <EntitySet Name="AttrContents" EntityType="FasionStoreModel.Store.AttrContents" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AttrTitles" EntityType="FasionStoreModel.Store.AttrTitles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Brand" EntityType="FasionStoreModel.Store.Brand" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Cart" EntityType="FasionStoreModel.Store.Cart" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CartProducts" EntityType="FasionStoreModel.Store.CartProducts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CatagoryAttr" EntityType="FasionStoreModel.Store.CatagoryAttr" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CataProducts" EntityType="FasionStoreModel.Store.CataProducts" store:Type="Tables" store:Schema="dbo" store:Name="CataProducts">
+            <DefiningQuery>SELECT 
+      [CataProducts].[CataID] AS [CataID], 
+      [CataProducts].[ProductID] AS [ProductID]
+      FROM [dbo].[CataProducts] AS [CataProducts]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Colors" EntityType="FasionStoreModel.Store.Colors" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Customers" EntityType="FasionStoreModel.Store.Customers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FiltCatagories" EntityType="FasionStoreModel.Store.FiltCatagories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="NavCataAttrs" EntityType="FasionStoreModel.Store.NavCataAttrs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="NavCatagories" EntityType="FasionStoreModel.Store.NavCatagories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OrderProducts" EntityType="FasionStoreModel.Store.OrderProducts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Orders" EntityType="FasionStoreModel.Store.Orders" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OrderStatus" EntityType="FasionStoreModel.Store.OrderStatus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PaymentMethods" EntityType="FasionStoreModel.Store.PaymentMethods" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Pictures" EntityType="FasionStoreModel.Store.Pictures" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProductAttrs" EntityType="FasionStoreModel.Store.ProductAttrs" store:Type="Tables" store:Schema="dbo" store:Name="ProductAttrs">
+            <DefiningQuery>SELECT 
+      [ProductAttrs].[ProductID] AS [ProductID], 
+      [ProductAttrs].[AttrContentID] AS [AttrContentID]
+      FROM [dbo].[ProductAttrs] AS [ProductAttrs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Products" EntityType="FasionStoreModel.Store.Products" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Shipping" EntityType="FasionStoreModel.Store.Shipping" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ShippingMethods" EntityType="FasionStoreModel.Store.ShippingMethods" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Sizes" EntityType="FasionStoreModel.Store.Sizes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BrandCata" EntityType="FasionStoreModel.Store.BrandCata" store:Type="Views" store:Schema="dbo" store:Name="BrandCata">
+            <DefiningQuery>SELECT 
+      [BrandCata].[BrandId] AS [BrandId], 
+      [BrandCata].[CataID] AS [CataID]
+      FROM [dbo].[BrandCata] AS [BrandCata]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Addresses_Customers" Association="FasionStoreModel.Store.FK_Addresses_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Shipping" EntitySet="Shipping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttrContents_AttrTitles" Association="FasionStoreModel.Store.FK_AttrContents_AttrTitles">
+            <End Role="AttrTitles" EntitySet="AttrTitles" />
+            <End Role="AttrContents" EntitySet="AttrContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartProducts_CartProducts" Association="FasionStoreModel.Store.FK_CartProducts_CartProducts">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="CartProducts" EntitySet="CartProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartProducts_Products" Association="FasionStoreModel.Store.FK_CartProducts_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="CartProducts" EntitySet="CartProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CatagoryAttr_AttrTitles" Association="FasionStoreModel.Store.FK_CatagoryAttr_AttrTitles">
+            <End Role="AttrTitles" EntitySet="AttrTitles" />
+            <End Role="CatagoryAttr" EntitySet="CatagoryAttr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CatagoryAttr_FiltCatagories" Association="FasionStoreModel.Store.FK_CatagoryAttr_FiltCatagories">
+            <End Role="FiltCatagories" EntitySet="FiltCatagories" />
+            <End Role="CatagoryAttr" EntitySet="CatagoryAttr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CataProducts_FiltCatagories" Association="FasionStoreModel.Store.FK_CataProducts_FiltCatagories">
+            <End Role="FiltCatagories" EntitySet="FiltCatagories" />
+            <End Role="CataProducts" EntitySet="CataProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CataProducts_Products" Association="FasionStoreModel.Store.FK_CataProducts_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="CataProducts" EntitySet="CataProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Colors_Pictures" Association="FasionStoreModel.Store.FK_Colors_Pictures">
+            <End Role="Pictures" EntitySet="Pictures" />
+            <End Role="Colors" EntitySet="Colors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Colors_Products" Association="FasionStoreModel.Store.FK_Colors_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Colors" EntitySet="Colors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FiltCatagories_FiltCatagories" Association="FasionStoreModel.Store.FK_FiltCatagories_FiltCatagories">
+            <End Role="FiltCatagories" EntitySet="FiltCatagories" />
+            <End Role="FiltCatagories1" EntitySet="FiltCatagories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NavCataAttrs_AttrContents" Association="FasionStoreModel.Store.FK_NavCataAttrs_AttrContents">
+            <End Role="AttrContents" EntitySet="AttrContents" />
+            <End Role="NavCataAttrs" EntitySet="NavCataAttrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NavCataAttrs_NavCatagories" Association="FasionStoreModel.Store.FK_NavCataAttrs_NavCatagories">
+            <End Role="NavCatagories" EntitySet="NavCatagories" />
+            <End Role="NavCataAttrs" EntitySet="NavCataAttrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NavCatagories_FiltCatagories" Association="FasionStoreModel.Store.FK_NavCatagories_FiltCatagories">
+            <End Role="FiltCatagories" EntitySet="FiltCatagories" />
+            <End Role="NavCatagories" EntitySet="NavCatagories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NavCatagories_NavCatagories" Association="FasionStoreModel.Store.FK_NavCatagories_NavCatagories">
+            <End Role="NavCatagories" EntitySet="NavCatagories" />
+            <End Role="NavCatagories1" EntitySet="NavCatagories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProducts_Orders" Association="FasionStoreModel.Store.FK_OrderProducts_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderProducts" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProducts_Products" Association="FasionStoreModel.Store.FK_OrderProducts_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderProducts" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Orders" Association="FasionStoreModel.Store.FK_Orders_Orders">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_PaymentMethods" Association="FasionStoreModel.Store.FK_Orders_PaymentMethods">
+            <End Role="PaymentMethods" EntitySet="PaymentMethods" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Shipping" Association="FasionStoreModel.Store.FK_Orders_Shipping">
+            <End Role="Shipping" EntitySet="Shipping" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ShippingMethods" Association="FasionStoreModel.Store.FK_Orders_ShippingMethods">
+            <End Role="ShippingMethods" EntitySet="ShippingMethods" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pictures_Products" Association="FasionStoreModel.Store.FK_Pictures_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Pictures" EntitySet="Pictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductAttrs_AttrContents" Association="FasionStoreModel.Store.FK_ProductAttrs_AttrContents">
+            <End Role="AttrContents" EntitySet="AttrContents" />
+            <End Role="ProductAttrs" EntitySet="ProductAttrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductAttrs_Products" Association="FasionStoreModel.Store.FK_ProductAttrs_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductAttrs" EntitySet="ProductAttrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Brand" Association="FasionStoreModel.Store.FK_Products_Brand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sizes_Products" Association="FasionStoreModel.Store.FK_Sizes_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Sizes" EntitySet="Sizes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AttrContents">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="TitleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AttrTitles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomersID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CartProducts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CartID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CatagoryAttr">
+          <Key>
+            <PropertyRef Name="FiltCatagoryID" />
+            <PropertyRef Name="AttrTitleID" />
+          </Key>
+          <Property Name="FiltCatagoryID" Type="int" Nullable="false" />
+          <Property Name="AttrTitleID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“FasionStore.dbo.CataProducts”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="CataProducts">
+          <Key>
+            <PropertyRef Name="CataID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="CataID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Colors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="PicID" Type="int" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Gender" Type="bit" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FiltCatagories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ParentID" Type="int" />
+        </EntityType>
+        <EntityType Name="NavCataAttrs">
+          <Key>
+            <PropertyRef Name="NavCatagoryID" />
+            <PropertyRef Name="AttrContentID" />
+          </Key>
+          <Property Name="NavCatagoryID" Type="int" Nullable="false" />
+          <Property Name="AttrContentID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NavCatagories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="FiltCatagoryID" Type="int" />
+          <Property Name="IsSubnav" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderProducts">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Shipping" Type="int" Nullable="false" />
+          <Property Name="ShippingMethod" Type="int" Nullable="false" />
+          <Property Name="PaymentMethod" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="nvarchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PaymentMethods">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Pictures">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="PicName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsShow" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“FasionStore.dbo.ProductAttrs”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="ProductAttrs">
+          <Key>
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="AttrContentID" />
+          </Key>
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="AttrContentID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="SubTitle" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="BrandId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="NewPrice" Type="int" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Description" Type="ntext" />
+          <Property Name="IsNew" Type="bit" Nullable="false" />
+          <Property Name="IsHot" Type="bit" Nullable="false" />
+          <Property Name="IsDiscout" Type="bit" Nullable="false" />
+          <Property Name="SaleCount" Type="int" Nullable="false" />
+          <Property Name="VisitCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shipping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Province" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Zip" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ShippingMethods">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ExtraPay" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Sizes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“FasionStore.dbo.BrandCata”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="BrandCata">
+          <Key>
+            <PropertyRef Name="BrandId" />
+            <PropertyRef Name="CataID" />
+          </Key>
+          <Property Name="BrandId" Type="int" Nullable="false" />
+          <Property Name="CataID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Addresses_Customers">
+          <End Role="Customers" Type="FasionStoreModel.Store.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Shipping" Type="FasionStoreModel.Store.Shipping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Shipping">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttrContents_AttrTitles">
+          <End Role="AttrTitles" Type="FasionStoreModel.Store.AttrTitles" Multiplicity="1" />
+          <End Role="AttrContents" Type="FasionStoreModel.Store.AttrContents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttrTitles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttrContents">
+              <PropertyRef Name="TitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartProducts_CartProducts">
+          <End Role="Cart" Type="FasionStoreModel.Store.Cart" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CartProducts" Type="FasionStoreModel.Store.CartProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CartProducts">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartProducts_Products">
+          <End Role="Products" Type="FasionStoreModel.Store.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CartProducts" Type="FasionStoreModel.Store.CartProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CartProducts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CatagoryAttr_AttrTitles">
+          <End Role="AttrTitles" Type="FasionStoreModel.Store.AttrTitles" Multiplicity="1" />
+          <End Role="CatagoryAttr" Type="FasionStoreModel.Store.CatagoryAttr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttrTitles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CatagoryAttr">
+              <PropertyRef Name="AttrTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CatagoryAttr_FiltCatagories">
+          <End Role="FiltCatagories" Type="FasionStoreModel.Store.FiltCatagories" Multiplicity="1" />
+          <End Role="CatagoryAttr" Type="FasionStoreModel.Store.CatagoryAttr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FiltCatagories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CatagoryAttr">
+              <PropertyRef Name="FiltCatagoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CataProducts_FiltCatagories">
+          <End Role="FiltCatagories" Type="FasionStoreModel.Store.FiltCatagories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CataProducts" Type="FasionStoreModel.Store.CataProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FiltCatagories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CataProducts">
+              <PropertyRef Name="CataID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CataProducts_Products">
+          <End Role="Products" Type="FasionStoreModel.Store.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CataProducts" Type="FasionStoreModel.Store.CataProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CataProducts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Colors_Pictures">
+          <End Role="Pictures" Type="FasionStoreModel.Store.Pictures" Multiplicity="0..1" />
+          <End Role="Colors" Type="FasionStoreModel.Store.Colors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pictures">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Colors">
+              <PropertyRef Name="PicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Colors_Products">
+          <End Role="Products" Type="FasionStoreModel.Store.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Colors" Type="FasionStoreModel.Store.Colors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Colors">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FiltCatagories_FiltCatagories">
+          <End Role="FiltCatagories" Type="FasionStoreModel.Store.FiltCatagories" Multiplicity="0..1" />
+          <End Role="FiltCatagories1" Type="FasionStoreModel.Store.FiltCatagories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FiltCatagories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FiltCatagories1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NavCataAttrs_AttrContents">
+          <End Role="AttrContents" Type="FasionStoreModel.Store.AttrContents" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NavCataAttrs" Type="FasionStoreModel.Store.NavCataAttrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttrContents">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NavCataAttrs">
+              <PropertyRef Name="AttrContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NavCataAttrs_NavCatagories">
+          <End Role="NavCatagories" Type="FasionStoreModel.Store.NavCatagories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NavCataAttrs" Type="FasionStoreModel.Store.NavCataAttrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NavCatagories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NavCataAttrs">
+              <PropertyRef Name="NavCatagoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NavCatagories_FiltCatagories">
+          <End Role="FiltCatagories" Type="FasionStoreModel.Store.FiltCatagories" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NavCatagories" Type="FasionStoreModel.Store.NavCatagories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FiltCatagories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NavCatagories">
+              <PropertyRef Name="FiltCatagoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NavCatagories_NavCatagories">
+          <End Role="NavCatagories" Type="FasionStoreModel.Store.NavCatagories" Multiplicity="0..1" />
+          <End Role="NavCatagories1" Type="FasionStoreModel.Store.NavCatagories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NavCatagories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NavCatagories1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProducts_Orders">
+          <End Role="Orders" Type="FasionStoreModel.Store.Orders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderProducts" Type="FasionStoreModel.Store.OrderProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderProducts">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProducts_Products">
+          <End Role="Products" Type="FasionStoreModel.Store.Products" Multiplicity="1" />
+          <End Role="OrderProducts" Type="FasionStoreModel.Store.OrderProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderProducts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Orders">
+          <End Role="OrderStatus" Type="FasionStoreModel.Store.OrderStatus" Multiplicity="1" />
+          <End Role="Orders" Type="FasionStoreModel.Store.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_PaymentMethods">
+          <End Role="PaymentMethods" Type="FasionStoreModel.Store.PaymentMethods" Multiplicity="0..1" />
+          <End Role="Orders" Type="FasionStoreModel.Store.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethods">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PaymentMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Shipping">
+          <End Role="Shipping" Type="FasionStoreModel.Store.Shipping" Multiplicity="1" />
+          <End Role="Orders" Type="FasionStoreModel.Store.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipping">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Shipping" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ShippingMethods">
+          <End Role="ShippingMethods" Type="FasionStoreModel.Store.ShippingMethods" Multiplicity="1" />
+          <End Role="Orders" Type="FasionStoreModel.Store.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippingMethods">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ShippingMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pictures_Products">
+          <End Role="Products" Type="FasionStoreModel.Store.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pictures" Type="FasionStoreModel.Store.Pictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pictures">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductAttrs_AttrContents">
+          <End Role="AttrContents" Type="FasionStoreModel.Store.AttrContents" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProductAttrs" Type="FasionStoreModel.Store.ProductAttrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttrContents">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductAttrs">
+              <PropertyRef Name="AttrContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductAttrs_Products">
+          <End Role="Products" Type="FasionStoreModel.Store.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProductAttrs" Type="FasionStoreModel.Store.ProductAttrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductAttrs">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Brand">
+          <End Role="Brand" Type="FasionStoreModel.Store.Brand" Multiplicity="1" />
+          <End Role="Products" Type="FasionStoreModel.Store.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sizes_Products">
+          <End Role="Products" Type="FasionStoreModel.Store.Products" Multiplicity="1" />
+          <End Role="Sizes" Type="FasionStoreModel.Store.Sizes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sizes">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FasionStoreModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AttrContents" EntityType="FasionStoreModel.AttrContents" />
+          <EntitySet Name="AttrTitles" EntityType="FasionStoreModel.AttrTitles" />
+          <EntitySet Name="Cart" EntityType="FasionStoreModel.Cart" />
+          <EntitySet Name="CartProducts" EntityType="FasionStoreModel.CartProducts" />
+          <EntitySet Name="Colors" EntityType="FasionStoreModel.Colors" />
+          <EntitySet Name="Customers" EntityType="FasionStoreModel.Customers" />
+          <EntitySet Name="FiltCatagories" EntityType="FasionStoreModel.FiltCatagories" />
+          <EntitySet Name="NavCatagories" EntityType="FasionStoreModel.NavCatagories" />
+          <EntitySet Name="OrderProducts" EntityType="FasionStoreModel.OrderProducts" />
+          <EntitySet Name="Orders" EntityType="FasionStoreModel.Orders" />
+          <EntitySet Name="OrderStatus" EntityType="FasionStoreModel.OrderStatus" />
+          <EntitySet Name="PaymentMethods" EntityType="FasionStoreModel.PaymentMethods" />
+          <EntitySet Name="Pictures" EntityType="FasionStoreModel.Pictures" />
+          <EntitySet Name="Products" EntityType="FasionStoreModel.Products" />
+          <EntitySet Name="Shipping" EntityType="FasionStoreModel.Shipping" />
+          <EntitySet Name="ShippingMethods" EntityType="FasionStoreModel.ShippingMethods" />
+          <EntitySet Name="Sizes" EntityType="FasionStoreModel.Sizes" />
+          <AssociationSet Name="FK_AttrContents_AttrTitles" Association="FasionStoreModel.FK_AttrContents_AttrTitles">
+            <End Role="AttrTitles" EntitySet="AttrTitles" />
+            <End Role="AttrContents" EntitySet="AttrContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartProducts_CartProducts" Association="FasionStoreModel.FK_CartProducts_CartProducts">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="CartProducts" EntitySet="CartProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartProducts_Products" Association="FasionStoreModel.FK_CartProducts_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="CartProducts" EntitySet="CartProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Colors_Pictures" Association="FasionStoreModel.FK_Colors_Pictures">
+            <End Role="Pictures" EntitySet="Pictures" />
+            <End Role="Colors" EntitySet="Colors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Colors_Products" Association="FasionStoreModel.FK_Colors_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Colors" EntitySet="Colors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Addresses_Customers" Association="FasionStoreModel.FK_Addresses_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Shipping" EntitySet="Shipping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FiltCatagories_FiltCatagories" Association="FasionStoreModel.FK_FiltCatagories_FiltCatagories">
+            <End Role="FiltCatagories" EntitySet="FiltCatagories" />
+            <End Role="FiltCatagories1" EntitySet="FiltCatagories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NavCatagories_FiltCatagories" Association="FasionStoreModel.FK_NavCatagories_FiltCatagories">
+            <End Role="FiltCatagories" EntitySet="FiltCatagories" />
+            <End Role="NavCatagories" EntitySet="NavCatagories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NavCatagories_NavCatagories" Association="FasionStoreModel.FK_NavCatagories_NavCatagories">
+            <End Role="NavCatagories" EntitySet="NavCatagories" />
+            <End Role="NavCatagories1" EntitySet="NavCatagories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProducts_Orders" Association="FasionStoreModel.FK_OrderProducts_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderProducts" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProducts_Products" Association="FasionStoreModel.FK_OrderProducts_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderProducts" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Orders" Association="FasionStoreModel.FK_Orders_Orders">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_PaymentMethods" Association="FasionStoreModel.FK_Orders_PaymentMethods">
+            <End Role="PaymentMethods" EntitySet="PaymentMethods" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Shipping" Association="FasionStoreModel.FK_Orders_Shipping">
+            <End Role="Shipping" EntitySet="Shipping" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ShippingMethods" Association="FasionStoreModel.FK_Orders_ShippingMethods">
+            <End Role="ShippingMethods" EntitySet="ShippingMethods" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pictures_Products" Association="FasionStoreModel.FK_Pictures_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Pictures" EntitySet="Pictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sizes_Products" Association="FasionStoreModel.FK_Sizes_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Sizes" EntitySet="Sizes" />
+          </AssociationSet>
+          <AssociationSet Name="CatagoryAttr" Association="FasionStoreModel.CatagoryAttr">
+            <End Role="AttrTitles" EntitySet="AttrTitles" />
+            <End Role="FiltCatagories" EntitySet="FiltCatagories" />
+          </AssociationSet>
+          <AssociationSet Name="NavCataAttrs" Association="FasionStoreModel.NavCataAttrs">
+            <End Role="AttrContents" EntitySet="AttrContents" />
+            <End Role="NavCatagories" EntitySet="NavCatagories" />
+          </AssociationSet>
+          <AssociationSet Name="ProductAttrs" Association="FasionStoreModel.ProductAttrs">
+            <End Role="AttrContents" EntitySet="AttrContents" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="CataProducts" Association="FasionStoreModel.CataProducts">
+            <End Role="FiltCatagories" EntitySet="FiltCatagories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <EntitySet Name="Brand" EntityType="FasionStoreModel.Brand" />
+          <AssociationSet Name="FK_Products_Brand" Association="FasionStoreModel.FK_Products_Brand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <EntitySet Name="BrandCata" EntityType="FasionStoreModel.BrandCata" />
+        </EntityContainer>
+        <EntityType Name="AttrContents">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AttrTitles" Relationship="FasionStoreModel.FK_AttrContents_AttrTitles" FromRole="AttrContents" ToRole="AttrTitles" />
+          <NavigationProperty Name="NavCatagories" Relationship="FasionStoreModel.NavCataAttrs" FromRole="AttrContents" ToRole="NavCatagories" />
+          <NavigationProperty Name="Products" Relationship="FasionStoreModel.ProductAttrs" FromRole="AttrContents" ToRole="Products" />
+          <Property Type="String" Name="Content" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AttrTitles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="AttrContents" Relationship="FasionStoreModel.FK_AttrContents_AttrTitles" FromRole="AttrTitles" ToRole="AttrContents" />
+          <NavigationProperty Name="FiltCatagories" Relationship="FasionStoreModel.CatagoryAttr" FromRole="AttrTitles" ToRole="FiltCatagories" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomersID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CartProducts" Relationship="FasionStoreModel.FK_CartProducts_CartProducts" FromRole="Cart" ToRole="CartProducts" />
+        </EntityType>
+        <EntityType Name="CartProducts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CartID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cart" Relationship="FasionStoreModel.FK_CartProducts_CartProducts" FromRole="CartProducts" ToRole="Cart" />
+          <NavigationProperty Name="Products" Relationship="FasionStoreModel.FK_CartProducts_Products" FromRole="CartProducts" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Colors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="PicID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pictures" Relationship="FasionStoreModel.FK_Colors_Pictures" FromRole="Colors" ToRole="Pictures" />
+          <NavigationProperty Name="Products" Relationship="FasionStoreModel.FK_Colors_Products" FromRole="Colors" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Shipping" Relationship="FasionStoreModel.FK_Addresses_Customers" FromRole="Customers" ToRole="Shipping" />
+        </EntityType>
+        <EntityType Name="FiltCatagories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ParentID" Type="Int32" />
+          <NavigationProperty Name="SubFiltCatas" Relationship="FasionStoreModel.FK_FiltCatagories_FiltCatagories" FromRole="FiltCatagories" ToRole="FiltCatagories1" />
+          <NavigationProperty Name="ParentFiltCata" Relationship="FasionStoreModel.FK_FiltCatagories_FiltCatagories" FromRole="FiltCatagories1" ToRole="FiltCatagories" />
+          <NavigationProperty Name="AttrTitles" Relationship="FasionStoreModel.CatagoryAttr" FromRole="FiltCatagories" ToRole="AttrTitles" />
+          <NavigationProperty Name="Products" Relationship="FasionStoreModel.CataProducts" FromRole="FiltCatagories" ToRole="Products" />
+          <!--<NavigationProperty Name="Brands" />-->
+        </EntityType>
+        <EntityType Name="NavCatagories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="FiltCatagoryID" Type="Int32" />
+          <Property Name="IsSubnav" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FiltCatagories" Relationship="FasionStoreModel.FK_NavCatagories_FiltCatagories" FromRole="NavCatagories" ToRole="FiltCatagories" />
+          <NavigationProperty Name="SubNavCatas" Relationship="FasionStoreModel.FK_NavCatagories_NavCatagories" FromRole="NavCatagories" ToRole="NavCatagories1" />
+          <NavigationProperty Name="ParentNavCata" Relationship="FasionStoreModel.FK_NavCatagories_NavCatagories" FromRole="NavCatagories1" ToRole="NavCatagories" />
+          <NavigationProperty Name="AttrContents" Relationship="FasionStoreModel.NavCataAttrs" FromRole="NavCatagories" ToRole="AttrContents" />
+        </EntityType>
+        <EntityType Name="OrderProducts">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="FasionStoreModel.FK_OrderProducts_Orders" FromRole="OrderProducts" ToRole="Orders" />
+          <NavigationProperty Name="Products" Relationship="FasionStoreModel.FK_OrderProducts_Products" FromRole="OrderProducts" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Shipping" Type="Int32" Nullable="false" />
+          <Property Name="ShippingMethod" Type="Int32" Nullable="false" />
+          <Property Name="PaymentMethod" Type="Int32" />
+          <NavigationProperty Name="OrderProducts" Relationship="FasionStoreModel.FK_OrderProducts_Orders" FromRole="Orders" ToRole="OrderProducts" />
+          <NavigationProperty Name="OrderStatus" Relationship="FasionStoreModel.FK_Orders_Orders" FromRole="Orders" ToRole="OrderStatus" />
+          <NavigationProperty Name="PaymentMethods" Relationship="FasionStoreModel.FK_Orders_PaymentMethods" FromRole="Orders" ToRole="PaymentMethods" />
+          <NavigationProperty Name="Shipping1" Relationship="FasionStoreModel.FK_Orders_Shipping" FromRole="Orders" ToRole="Shipping" />
+          <NavigationProperty Name="ShippingMethods" Relationship="FasionStoreModel.FK_Orders_ShippingMethods" FromRole="Orders" ToRole="ShippingMethods" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Orders" Relationship="FasionStoreModel.FK_Orders_Orders" FromRole="OrderStatus" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="PaymentMethods">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Orders" Relationship="FasionStoreModel.FK_Orders_PaymentMethods" FromRole="PaymentMethods" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Pictures">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="PicName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Colors" Relationship="FasionStoreModel.FK_Colors_Pictures" FromRole="Pictures" ToRole="Colors" />
+          <NavigationProperty Name="Products" Relationship="FasionStoreModel.FK_Pictures_Products" FromRole="Pictures" ToRole="Products" />
+          <Property Type="Boolean" Name="IsShow" Nullable="false" />
+          
+        </EntityType>
+        <ComplexType Name="sddd">
+        </ComplexType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="NewPrice" Type="Int32" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IsNew" Type="Boolean" Nullable="false" />
+          <Property Name="IsHot" Type="Boolean" Nullable="false" />
+          <Property Name="IsDiscout" Type="Boolean" Nullable="false" />
+          <Property Name="SaleCount" Type="Int32" Nullable="false" />
+          <Property Name="VisitCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CartProducts" Relationship="FasionStoreModel.FK_CartProducts_Products" FromRole="Products" ToRole="CartProducts" />
+          <NavigationProperty Name="Colors" Relationship="FasionStoreModel.FK_Colors_Products" FromRole="Products" ToRole="Colors" />
+          <NavigationProperty Name="OrderProducts" Relationship="FasionStoreModel.FK_OrderProducts_Products" FromRole="Products" ToRole="OrderProducts" />
+          <NavigationProperty Name="Pictures" Relationship="FasionStoreModel.FK_Pictures_Products" FromRole="Products" ToRole="Pictures" />
+          <NavigationProperty Name="Sizes" Relationship="FasionStoreModel.FK_Sizes_Products" FromRole="Products" ToRole="Sizes" />
+          <NavigationProperty Name="AttrContents" Relationship="FasionStoreModel.ProductAttrs" FromRole="Products" ToRole="AttrContents" />
+          <NavigationProperty Name="FiltCatagories" Relationship="FasionStoreModel.CataProducts" FromRole="Products" ToRole="FiltCatagories" />
+          <Property Type="Int32" Name="BrandId" Nullable="false" />
+          <NavigationProperty Name="Brand" Relationship="FasionStoreModel.FK_Products_Brand" FromRole="Products" ToRole="Brand" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SubTitle" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Shipping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Province" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Zip" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Customers" Relationship="FasionStoreModel.FK_Addresses_Customers" FromRole="Shipping" ToRole="Customers" />
+          <NavigationProperty Name="Orders" Relationship="FasionStoreModel.FK_Orders_Shipping" FromRole="Shipping" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="ShippingMethods">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ExtraPay" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Orders" Relationship="FasionStoreModel.FK_Orders_ShippingMethods" FromRole="ShippingMethods" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Sizes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Products" Relationship="FasionStoreModel.FK_Sizes_Products" FromRole="Sizes" ToRole="Products" />
+        </EntityType>
+        <Association Name="FK_AttrContents_AttrTitles">
+          <End Role="AttrTitles" Type="FasionStoreModel.AttrTitles" Multiplicity="1" />
+          <End Role="AttrContents" Type="FasionStoreModel.AttrContents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttrTitles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttrContents">
+              <PropertyRef Name="TitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartProducts_CartProducts">
+          <End Role="Cart" Type="FasionStoreModel.Cart" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CartProducts" Type="FasionStoreModel.CartProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CartProducts">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartProducts_Products">
+          <End Role="Products" Type="FasionStoreModel.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CartProducts" Type="FasionStoreModel.CartProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CartProducts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Colors_Pictures">
+          <End Role="Pictures" Type="FasionStoreModel.Pictures" Multiplicity="0..1" />
+          <End Role="Colors" Type="FasionStoreModel.Colors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pictures">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Colors">
+              <PropertyRef Name="PicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Colors_Products">
+          <End Role="Products" Type="FasionStoreModel.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Colors" Type="FasionStoreModel.Colors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Colors">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Addresses_Customers">
+          <End Role="Customers" Type="FasionStoreModel.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Shipping" Type="FasionStoreModel.Shipping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Shipping">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FiltCatagories_FiltCatagories">
+          <End Role="FiltCatagories" Type="FasionStoreModel.FiltCatagories" Multiplicity="0..1" />
+          <End Role="FiltCatagories1" Type="FasionStoreModel.FiltCatagories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FiltCatagories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FiltCatagories1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NavCatagories_FiltCatagories">
+          <End Role="FiltCatagories" Type="FasionStoreModel.FiltCatagories" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NavCatagories" Type="FasionStoreModel.NavCatagories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FiltCatagories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NavCatagories">
+              <PropertyRef Name="FiltCatagoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NavCatagories_NavCatagories">
+          <End Role="NavCatagories" Type="FasionStoreModel.NavCatagories" Multiplicity="0..1" />
+          <End Role="NavCatagories1" Type="FasionStoreModel.NavCatagories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NavCatagories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NavCatagories1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProducts_Orders">
+          <End Role="Orders" Type="FasionStoreModel.Orders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderProducts" Type="FasionStoreModel.OrderProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderProducts">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProducts_Products">
+          <End Role="Products" Type="FasionStoreModel.Products" Multiplicity="1" />
+          <End Role="OrderProducts" Type="FasionStoreModel.OrderProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderProducts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Orders">
+          <End Role="OrderStatus" Type="FasionStoreModel.OrderStatus" Multiplicity="1" />
+          <End Role="Orders" Type="FasionStoreModel.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_PaymentMethods">
+          <End Role="PaymentMethods" Type="FasionStoreModel.PaymentMethods" Multiplicity="0..1" />
+          <End Role="Orders" Type="FasionStoreModel.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethods">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PaymentMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Shipping">
+          <End Role="Shipping" Type="FasionStoreModel.Shipping" Multiplicity="1" />
+          <End Role="Orders" Type="FasionStoreModel.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipping">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Shipping" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ShippingMethods">
+          <End Role="ShippingMethods" Type="FasionStoreModel.ShippingMethods" Multiplicity="1" />
+          <End Role="Orders" Type="FasionStoreModel.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippingMethods">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ShippingMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pictures_Products">
+          <End Role="Products" Type="FasionStoreModel.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pictures" Type="FasionStoreModel.Pictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pictures">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sizes_Products">
+          <End Role="Products" Type="FasionStoreModel.Products" Multiplicity="1" />
+          <End Role="Sizes" Type="FasionStoreModel.Sizes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sizes">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CatagoryAttr">
+          <End Role="AttrTitles" Type="FasionStoreModel.AttrTitles" Multiplicity="*" />
+          <End Role="FiltCatagories" Type="FasionStoreModel.FiltCatagories" Multiplicity="*" />
+        </Association>
+        <Association Name="NavCataAttrs">
+          <End Role="AttrContents" Type="FasionStoreModel.AttrContents" Multiplicity="*" />
+          <End Role="NavCatagories" Type="FasionStoreModel.NavCatagories" Multiplicity="*" />
+        </Association>
+        <Association Name="ProductAttrs">
+          <End Role="AttrContents" Type="FasionStoreModel.AttrContents" Multiplicity="*" />
+          <End Role="Products" Type="FasionStoreModel.Products" Multiplicity="*" />
+        </Association>
+        <Association Name="CataProducts">
+          <End Type="FasionStoreModel.FiltCatagories" Role="FiltCatagories" Multiplicity="*" />
+          <End Type="FasionStoreModel.Products" Role="Products" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="FasionStoreModel.FK_Products_Brand" FromRole="Brand" ToRole="Products" />
+        </EntityType>
+        <Association Name="FK_Products_Brand">
+          <End Type="FasionStoreModel.Brand" Role="Brand" Multiplicity="1" />
+          <End Type="FasionStoreModel.Products" Role="Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BrandCata">
+          <Key>
+            <PropertyRef Name="BrandId" />
+            <PropertyRef Name="CataID" />
+          </Key>
+          <Property Type="Int32" Name="BrandId" Nullable="false" />
+          <Property Type="Int32" Name="CataID" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FasionStoreModelStoreContainer" CdmEntityContainer="EFDBContext">
+          <EntitySetMapping Name="AttrContents">
+            <EntityTypeMapping TypeName="FasionStoreModel.AttrContents">
+              <MappingFragment StoreEntitySet="AttrContents">
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttrTitles">
+            <EntityTypeMapping TypeName="FasionStoreModel.AttrTitles">
+              <MappingFragment StoreEntitySet="AttrTitles">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cart">
+            <EntityTypeMapping TypeName="FasionStoreModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CustomersID" ColumnName="CustomersID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartProducts">
+            <EntityTypeMapping TypeName="FasionStoreModel.CartProducts">
+              <MappingFragment StoreEntitySet="CartProducts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colors">
+            <EntityTypeMapping TypeName="FasionStoreModel.Colors">
+              <MappingFragment StoreEntitySet="Colors">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PicID" ColumnName="PicID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="FasionStoreModel.Customers">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FiltCatagories">
+            <EntityTypeMapping TypeName="FasionStoreModel.FiltCatagories">
+              <MappingFragment StoreEntitySet="FiltCatagories">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NavCatagories">
+            <EntityTypeMapping TypeName="FasionStoreModel.NavCatagories">
+              <MappingFragment StoreEntitySet="NavCatagories">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="FiltCatagoryID" ColumnName="FiltCatagoryID" />
+                <ScalarProperty Name="IsSubnav" ColumnName="IsSubnav" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderProducts">
+            <EntityTypeMapping TypeName="FasionStoreModel.OrderProducts">
+              <MappingFragment StoreEntitySet="OrderProducts">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="FasionStoreModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Shipping" ColumnName="Shipping" />
+                <ScalarProperty Name="ShippingMethod" ColumnName="ShippingMethod" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="FasionStoreModel.OrderStatus">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentMethods">
+            <EntityTypeMapping TypeName="FasionStoreModel.PaymentMethods">
+              <MappingFragment StoreEntitySet="PaymentMethods">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          
+          <EntitySetMapping Name="Pictures">
+            <EntityTypeMapping TypeName="FasionStoreModel.Pictures">
+              <MappingFragment StoreEntitySet="Pictures">
+                <ScalarProperty Name="IsShow" ColumnName="IsShow" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="PicName" ColumnName="PicName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="FasionStoreModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+                <ScalarProperty Name="IsHot" ColumnName="IsHot" />
+                <ScalarProperty Name="IsDiscout" ColumnName="IsDiscout" />
+                <ScalarProperty Name="SaleCount" ColumnName="SaleCount" />
+                <ScalarProperty Name="VisitCount" ColumnName="VisitCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shipping">
+            <EntityTypeMapping TypeName="FasionStoreModel.Shipping">
+              <MappingFragment StoreEntitySet="Shipping">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippingMethods">
+            <EntityTypeMapping TypeName="FasionStoreModel.ShippingMethods">
+              <MappingFragment StoreEntitySet="ShippingMethods">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ExtraPay" ColumnName="ExtraPay" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sizes">
+            <EntityTypeMapping TypeName="FasionStoreModel.Sizes">
+              <MappingFragment StoreEntitySet="Sizes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CatagoryAttr" TypeName="FasionStoreModel.CatagoryAttr" StoreEntitySet="CatagoryAttr">
+            <EndProperty Name="AttrTitles">
+              <ScalarProperty Name="ID" ColumnName="AttrTitleID" />
+            </EndProperty>
+            <EndProperty Name="FiltCatagories">
+              <ScalarProperty Name="ID" ColumnName="FiltCatagoryID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="NavCataAttrs" TypeName="FasionStoreModel.NavCataAttrs" StoreEntitySet="NavCataAttrs">
+            <EndProperty Name="AttrContents">
+              <ScalarProperty Name="ID" ColumnName="AttrContentID" />
+            </EndProperty>
+            <EndProperty Name="NavCatagories">
+              <ScalarProperty Name="ID" ColumnName="NavCatagoryID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ProductAttrs" TypeName="FasionStoreModel.ProductAttrs" StoreEntitySet="ProductAttrs">
+            <EndProperty Name="AttrContents">
+              <ScalarProperty Name="ID" ColumnName="AttrContentID" />
+            </EndProperty>
+            <EndProperty Name="Products">
+              <ScalarProperty Name="ID" ColumnName="ProductID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="CataProducts" TypeName="FasionStoreModel.CataProducts" StoreEntitySet="CataProducts">
+            <EndProperty Name="Products">
+              <ScalarProperty Name="ID" ColumnName="ProductID" />
+            </EndProperty>
+            <EndProperty Name="FiltCatagories">
+              <ScalarProperty Name="ID" ColumnName="CataID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Brand">
+            <EntityTypeMapping TypeName="FasionStoreModel.Brand">
+              <MappingFragment StoreEntitySet="Brand">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BrandCata">
+            <EntityTypeMapping TypeName="FasionStoreModel.BrandCata">
+              <MappingFragment StoreEntitySet="BrandCata">
+                <ScalarProperty Name="CataID" ColumnName="CataID" />
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

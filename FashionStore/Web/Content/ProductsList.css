@@ -1,0 +1,874 @@
+﻿.nav_top ul
+{
+    width: 1200px;
+}
+
+.sub ul
+{
+    width: 1200px;
+}
+
+.productslist_wrap
+{
+    margin: 20px auto 0px auto;
+    width: 1200px;
+}
+
+    .productslist_wrap a
+    {
+        text-decoration: none;
+        color: #4F3A2B;
+    }
+
+        .productslist_wrap a:hover
+        {
+            text-decoration: underline;
+            color: #CC0000;
+        }
+
+/*页面左侧（商品分类，浏览历史）*/
+.list_aside
+{
+    float: left;
+    width: 220px;
+}
+
+.sort_box, .history_box
+{
+    border: 1px solid #DACACA;
+    margin-bottom: 10px;
+    padding: 1px;
+}
+
+    .sort_box h3
+    {
+        background: url("/content/images/icon_bg.png") repeat-x scroll left -53px transparent;
+        color: #FFFFFF;
+        display: block;
+        font-size: 14px;
+        height: 35px;
+        line-height: 35px;
+        padding-left: 10px;
+    }
+
+    .sort_box ul
+    {
+        margin: 0;
+        padding: 0;
+    }
+
+    .sort_box li
+    {
+        border-top: 1px solid #FFFFFF;
+        vertical-align: middle;
+    }
+
+        .sort_box li .link:after, .sort_box li:after
+        {
+            clear: both;
+            content: ".";
+            display: block;
+            height: 0;
+            visibility: hidden;
+        }
+
+        .sort_box li .m
+        {
+            background: url("/content/images/icon_bg.png") repeat-x scroll left -25px transparent;
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            height: 28px;
+            line-height: 28px;
+        }
+
+            .sort_box li .m .icon
+            {
+                background: url("/content/images/icon_bg.png") no-repeat scroll -126px -132px transparent;
+                display: inline-block;
+                height: 28px;
+                vertical-align: middle;
+                width: 26px;
+            }
+
+            .sort_box li .m .t
+            {
+                display: inline-block;
+            }
+
+    .sort_box .on .m .t
+    {
+        color: #CC0000;
+    }
+
+    .sort_box li .link
+    {
+        line-height: 18px;
+        padding: 12px 0 5px 10px;
+    }
+
+        .sort_box li .link span
+        {
+            display: block;
+            float: left;
+            height: 18px;
+            margin-bottom: 5px;
+            margin-right: 4px;
+            overflow: hidden;
+            padding: 0;
+            white-space: nowrap;
+            width: 98px;
+        }
+
+            .sort_box li .link span a
+            {
+                display: inline-block;
+                padding: 0 2px;
+            }
+
+        .sort_box li .link .now
+        {
+            background: none repeat scroll 0 0 #cc0000;
+            border-radius: 2px 2px 2px 2px;
+            color: #FFFFFF;
+        }
+
+
+
+    .history_box:after, .history_box li:after
+    {
+        clear: both;
+        content: ".";
+        display: block;
+        height: 0;
+        visibility: hidden;
+    }
+
+    .history_box h3
+    {
+        background: url("/content/images/icon_bg.png") repeat-x scroll left 0 transparent;
+        color: #FFFFFF;
+        font-size: 12px;
+        height: 25px;
+        line-height: 25px;
+        padding-left: 12px;
+    }
+
+    .history_box ul
+    {
+        padding: 0 9px;
+    }
+
+    .history_box li
+    {
+        border-bottom: 1px solid #F0E4E4;
+        line-height: 18px;
+        padding: 10px 0;
+        vertical-align: middle;
+    }
+
+        .history_box li .pic
+        {
+            border: 1px solid #FFFFFF;
+            float: left;
+            margin-right: 10px;
+        }
+
+        .history_box li a
+        {
+            color: #666666;
+        }
+
+        .history_box li .pic img
+        {
+            display: block;
+            width: 100px;
+            height: 100px;
+        }
+
+        .history_box li .name
+        {
+            height: 54px;
+            margin-bottom: 6px;
+            overflow: hidden;
+        }
+
+        .history_box li p
+        {
+            display: block;
+            float: left;
+            width: 84px;
+        }
+
+        .history_box li p
+        {
+            display: block;
+            float: left;
+            width: 84px;
+        }
+
+        .history_box li .price .price_n
+        {
+            color: #CC0000;
+            font-weight: bold;
+        }
+
+    .history_box .more
+    {
+        display: block;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 9px;
+        text-align: right;
+    }
+
+
+
+/*商品筛选框*/
+.list_right
+{
+    float: right;
+    width: 960px;
+}
+
+.filter_box
+{
+    margin: 0;
+    padding: 1px;
+    border: 1px solid #DACACA;
+    position: relative;
+    float: right;
+    width: 960px;
+}
+
+    .filter_box .head:after, .filter_box .list:after
+    {
+        clear: both;
+        content: ".";
+        display: block;
+        height: 0;
+        visibility: hidden;
+    }
+
+    .filter_box .head
+    {
+        background: none repeat scroll 0 0 #F0E4E4;
+        padding: 0 10px;
+    }
+
+        .filter_box .head h3, .filter_box .head .kind
+        {
+            display: block;
+            float: left;
+            font-size: 14px;
+            height: 35px;
+            line-height: 35px;
+        }
+
+        .filter_box .head h3
+        {
+            text-align: right;
+            white-space: nowrap;
+            width: 80px;
+        }
+
+        .filter_box .head ul
+        {
+            float: left;
+            padding: 6px 0;
+            width: 780px;
+        }
+
+            .filter_box .head ul li
+            {
+                float: left;
+                line-height: 20px;
+                padding: 2px 0;
+                white-space: nowrap;
+            }
+
+                .filter_box .head ul li .tt
+                {
+                    padding: 0 20px 0 10px;
+                }
+
+                .filter_box .head ul li .tt
+                {
+                    padding: 0 20px 0 10px;
+                }
+
+            .filter_box .head ul .block
+            {
+                background: none repeat scroll 0 0 #FFFFFF;
+                border: 1px solid #896E51;
+                cursor: pointer;
+                display: inline-block;
+                height: 16px;
+                line-height: 16px;
+                margin-right: 10px;
+                overflow: hidden;
+                padding-left: 5px;
+                vertical-align: top;
+            }
+
+                .filter_box .head ul .block .t
+                {
+                    display: inline-block;
+                    font-family: SimSun;
+                    vertical-align: top;
+                }
+
+                .filter_box .head ul .block .close
+                {
+                    background: url("/content/images/icon_bg.png") no-repeat scroll -39px -155px #896E51;
+                    display: inline-block;
+                    height: 16px;
+                    margin-left: 5px;
+                    vertical-align: top;
+                    width: 12px;
+                }
+
+        .filter_box .head .empty
+        {
+            cursor: pointer;
+            float: right;
+            line-height: 35px;
+            white-space: nowrap;
+        }
+
+    .filter_box .list
+    {
+        line-height: 18px;
+        padding: 0 3px 10px;
+        position: relative;
+    }
+
+        .filter_box .list dt
+        {
+            border-top: 1px solid #F0E4E4;
+            float: left;
+            padding: 10px 16px 0 0;
+            text-align: right;
+        }
+
+        .filter_box .list .brand_t
+        {
+            border-top: 0 none;
+            padding-top: 10px;
+        }
+
+        .filter_box .list dt b
+        {
+            display: inline-block;
+            padding-right: 10px;
+            width: 86px;
+        }
+
+        .filter_box .list .all
+        {
+            display: inline-block;
+        }
+
+        .filter_box .list a
+        {
+            display: inline-block;
+            padding: 0 2px;
+        }
+
+        .filter_box .list .brand_opt
+        {
+            border-top: 0 none;
+            padding-top: 10px;
+            position: relative;
+        }
+
+            .filter_box .list .brand_opt .button
+            {
+                background: url("/content/images/icon_bg.png") no-repeat scroll 0 -124px transparent;
+                bottom: 10px;
+                cursor: pointer;
+                height: 18px;
+                margin: 0;
+                position: absolute;
+                right: 0;
+                text-align: center;
+                width: 30px;
+            }
+
+            .filter_box .list .brand_opt span
+            {
+                display: block;
+                float: left;
+                height: 18px;
+                margin-bottom: 6px;
+                margin-right: 14px;
+                overflow: hidden;
+                white-space: nowrap;
+                width: 98px;
+            }
+
+        .filter_box .list .brand_height
+        {
+            min-height: 20px;
+            margin-bottom: 4px;
+            overflow: hidden;
+            padding-bottom: 0;
+        }
+
+        .filter_box .list dd
+        {
+            border-top: 1px solid #F0E4E4;
+            float: left;
+            padding: 10px 0 4px;
+            position: relative;
+            width: 806px;
+        }
+
+        .filter_box .list .on
+        {
+            background: none repeat scroll 0 0 #CC0000;
+            border-radius: 2px 2px 2px 2px;
+            color: #FFFFFF;
+        }
+
+        .filter_box .list .red
+        {
+            color: red;
+            font-weight: bold;
+        }
+
+        .filter_box .list .on
+        {
+            background: none repeat scroll 0 0 #CC0000;
+            border-radius: 2px 2px 2px 2px;
+            color: #FFFFFF;
+        }
+
+        .filter_box .list dd a
+        {
+            margin-right: 14px;
+        }
+
+        .filter_box .list .height
+        {
+            height: 18px;
+            margin-bottom: 4px;
+            overflow: hidden;
+            padding-bottom: 0;
+        }
+
+.filter_relative
+{
+    height: 18px;
+    position: relative;
+}
+
+    .filter_relative .switch_btn
+    {
+        border-top: 2px solid #4F3A2B;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        width: 960px;
+    }
+
+        .filter_relative .switch_btn span
+        {
+            background: url("/content/images/icon_bg.png") repeat scroll 0 -88px transparent;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: block;
+            height: 18px;
+            line-height: 18px;
+            margin: 0 auto;
+            padding-left: 10px;
+            text-align: center;
+            width: 130px;
+        }
+
+.toolbox
+{
+    background: url("/content/images/icon_bg.png") repeat-x scroll left -381px transparent;
+    border-bottom: 2px solid #4F3A2B;
+    color: #4F3A2B;
+    height: 40px;
+    line-height: 40px;
+    margin: 20px 0 0;
+}
+
+    .toolbox .t
+    {
+        color: #666666;
+        display: inline-block;
+        float: left;
+        font-weight: bold;
+        line-height: 40px;
+        padding: 0 10px 0 14px;
+    }
+
+    .toolbox ul
+    {
+        float: left;
+        padding-left: 1px;
+    }
+
+        .toolbox ul .on, .toolbox ul .on_top,.toolbox li:hover
+        {
+            background-color: #4F3A2B;
+            background-position: left -422px;
+            background-repeat: repeat-x;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+
+        .toolbox ul li
+        {
+            -moz-border-bottom-colors: none;
+            -moz-border-left-colors: none;
+            -moz-border-right-colors: none;
+            -moz-border-top-colors: none;
+            border-color: #D2C0B6;
+            border-image: none;
+            border-style: solid;
+            border-width: 0 1px;
+            cursor: pointer;
+            float: left;
+            font-size: 14px;
+            line-height: 40px;
+            margin-left: -1px;
+        }
+
+
+
+        .toolbox ul a
+        {
+            background-image: url("/content/images/icon_bg.png");
+            background-position: 54px -226px;
+            color: #4F3A2B;
+            display: block;
+            padding: 0 20px 0 12px;
+            width: 42px;
+        }
+
+        .toolbox ul .top a
+        {
+            background-position: 54px -194px;
+        }
+
+        .toolbox ul .on a, .toolbox ul a:hover, .toolbox ul .top:hover
+        {
+            background-position: 54px -291px;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+    .toolbox .page
+    {
+        float: right;
+        height: 40px;
+        overflow: hidden;
+        padding-right: 20px;
+    }
+
+        .toolbox .page span
+        {
+            color: #666666;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .toolbox .page .left, .toolbox .page .right, .toolbox .page .left_on, .toolbox .page .right_on
+        {
+            background: url("/content/images/icon_bg.png") repeat scroll -71px -157px #FFFFFF;
+            border: 1px solid #D5D5D5;
+            height: 14px;
+            margin: 0 4px;
+            width: 14px;
+        }
+
+        .toolbox .page b
+        {
+            color: #CC0000;
+        }
+
+        .toolbox .page .right
+        {
+            background-position: -82px -157px;
+        }
+
+.condition_box
+{
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: -moz-use-text-color #DACACA #DACACA;
+    border-image: none;
+    border-right: 1px solid #DACACA;
+    border-style: none solid solid;
+    border-width: 0 1px 1px;
+    height: 38px;
+}
+
+    .condition_box .t
+    {
+        color: #666666;
+        display: block;
+        float: left;
+        font-weight: bold;
+        line-height: 38px;
+        padding: 0 4px 0 13px;
+    }
+
+    .condition_box .label
+    {
+        display: inline-block;
+        float: left;
+        line-height: 18px;
+        margin-top: 10px;
+        padding-right: 10px;
+    }
+
+        .condition_box .label input
+        {
+            margin-right: 6px;
+            margin-top: -3px;
+            vertical-align: middle;
+        }
+
+    .condition_box .input_box
+    {
+        line-height: 20px;
+        padding-top: 8px;
+    }
+
+    .condition_box .text_i
+    {
+        border: 1px solid #D2C0B6;
+        height: 20px;
+        line-height: 20px;
+        margin-left: 4px;
+        vertical-align: top;
+        width: 48px;
+    }
+
+    .condition_box .input_box .button_yes
+    {
+        background: url("/content/images/icon_bg.png") no-repeat scroll left -156px transparent;
+        border: 0 none;
+        color: #4F3A2B;
+        cursor: pointer;
+        font-size: 12px;
+        height: 20px;
+        line-height: 18px;
+        margin-left: 6px;
+        margin-top: 1px;
+        padding: 2px 0 0;
+        vertical-align: top;
+        width: 38px;
+    }
+
+.shoplist:after
+{
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.shoplist
+{
+    width: 960px;
+}
+
+    .shoplist li
+    {
+        border-bottom: 1px solid #F0E4E4;
+        float: left;
+        height: 319px;
+        line-height: 18px;
+        position: relative;
+        width: 240px;
+    }
+
+        .shoplist li .inner
+        {
+            border: 4px solid #FFFFFF;
+            padding: 16px 16px 0;
+            position: absolute;
+        }
+
+            .shoplist li .inner:hover
+            {
+                background: none repeat scroll 0 0 #FFFFFF;
+                border-color: #F0E4E4;
+                height: 356px;
+            }
+
+        .shoplist li:hover
+        {
+            z-index: 11;
+        }
+
+        .shoplist li .pic
+        {
+            background: url("/content/images/loading.gif") no-repeat scroll center center transparent;
+            display: block;
+            height: 200px;
+            margin-bottom: 10px;
+            position: relative;
+            width: 200px;
+        }
+
+            .shoplist li .pic:hover, .shoplist li .pic:hover .sign
+            {
+                text-decoration: none;
+            }
+
+        .shoplist li .price
+        {
+            color: #878787;
+            padding-bottom: 8px;
+        }
+
+        .shoplist li .price_n
+        {
+            color: #CC0000;
+            font-size: 14px;
+            font-weight: bold;
+            padding-right: 10px;
+        }
+
+        .shoplist li .price_r
+        {
+            color: #878787;
+            padding-right: 10px;
+            text-decoration: line-through;
+        }
+
+        .shoplist li .price_s
+        {
+            color: #CC0000;
+        }
+
+        .shoplist li .name
+        {
+            display: block;
+            height: 36px;
+            overflow: hidden;
+            width: 200px;
+        }
+
+        .shoplist li .subtitle
+        {
+            color: #CC0000;
+            height: 18px;
+            overflow: hidden;
+            width: 200px;
+        }
+
+/*分页*/
+
+.paginating
+{
+    background: url("/content/images/icon_bg.png") repeat-x scroll left -381px transparent;
+    border-top: 2px solid #4F3A2B;
+    height: 40px;
+    margin-top: 20px;
+    padding: 0 10px;
+}
+
+    .paginating .paging
+    {
+        color: #666666;
+        float: right;
+        line-height: 20px;
+        padding-top: 10px;
+    }
+
+    .paginating li
+    {
+        float: left;
+        height: 20px;
+        padding-left: 5px;
+    }
+
+    .paginating .none
+    {
+        cursor: default;
+    }
+
+        .paginating .none a
+        {
+            color: #CCCCCC;
+            cursor: default;
+        }
+
+    .paginating .up a, .paginating .prev a, .paginating .next a, .paginating .down a
+    {
+        overflow: hidden;
+    }
+
+    .paginating a
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #DACACA;
+        border-radius: 3px 3px 3px 3px;
+        display: inline-block;
+        font-weight: bold;
+        height: 18px;
+        line-height: 18px;
+        padding: 0 6px;
+    }
+
+        .paginating a:hover, .paginating .current
+        {
+            background: none repeat scroll 0 0 #4F3A2B;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+    .paginating .page_input
+    {
+        padding-left: 16px;
+    }
+
+    .paginating span
+    {
+        font-weight: bold;
+    }
+
+    .paginating .page_input span
+    {
+        display: inline-block;
+        font-weight: normal;
+        vertical-align: top;
+    }
+
+    .paginating .number
+    {
+        border: 1px solid #DACACA;
+        border-radius: 3px 3px 3px 3px;
+        font-family: Arial;
+        font-size: 12px;
+        height: 18px;
+        line-height: 18px;
+        margin: 0 4px;
+        vertical-align: top;
+        width: 34px;
+    }
+
+    .paginating .button
+    {
+        background: url("/content/images/icon_bg.png") no-repeat scroll left -156px transparent;
+        border: 0 none;
+        color: #4F3A2B;
+        cursor: pointer;
+        font-size: 12px;
+        height: 20px;
+        margin-left: 6px;
+        padding: 0;
+        vertical-align: top;
+        width: 38px;
+    }

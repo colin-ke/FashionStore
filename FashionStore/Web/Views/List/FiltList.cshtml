@@ -1,0 +1,58 @@
+﻿@model Domain.FiltCatagories
+@using Domain
+@using Web.Models;
+@using Web.MyHtmlHelpers;
+
+<script src="/Scripts/jquery-1.7.1.min.js"></script>
+<link href="/Content/ProductsList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "FiltList";
+    
+    Domain.FiltCatagories parent = null;
+    if (@Model.ParentFiltCata == null)
+    {
+        parent = Model;
+    }
+    else
+    {
+        parent = Model.ParentFiltCata;
+    }
+}
+
+
+
+<div class="productslist_wrap">
+    <div class="list_aside" id="">
+        @*商品分类*@
+        <div name="fl" class="sort_box">
+            <h3>服装</h3>
+            <ul>
+                <li class="on">
+                    <span class="m">
+                        <span class="icon"></span>
+                        @Html.RouteLink(parent.Name, new { controller = "List", Action = "FiltList", catagories = @parent.ID }, new { @class = "t" })
+                        @*<a title="男士服装" class="t" href="#">男士服装</a>*@
+                    </span>
+                    <div class="link">
+                        @*<span>
+                            <a title="T恤" class="now" href="#">T恤</a>
+                        </span>*@
+                        @foreach (Domain.FiltCatagories subCata in @parent.SubFiltCatas)
+                        { 
+                            <span>
+                                @Html.RouteLink(@subCata.Name, new { controller = "List", Action = "FiltList", catagories = @subCata.ID }, new { @class = Model.ID == @subCata.ID ? "now" : "" })
+                            </span>
+                        }
+                    </div>
+                </li>
+                @*<li class=""><span class="m"><span class="icon"></span><a title="女士服装" class="t" href="#">女士服装</a></span></li>
+                <li><span class="m"><span class="icon"></span><a href="#">内衣袜品</a></span></li>
+                <li><span class="m"><span class="icon"></span><a href="#">服饰配件</a></span></li>*@
+            </ul>
+        </div>
+        @*浏览历史*@
+    </div>
+    @{Html.RenderAction("PdtsList", new { cata = Model });}
+</div>
+

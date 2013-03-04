@@ -1,0 +1,64 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Login</title>
+    <link href="/Content/Login.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="wrapper">
+        <div id="head_wrap">
+            <div id="header" class="clearfix">
+                <h1>
+                    <a rel="home" title="FASHION STORE" href="/">
+                        @*<img src="/content/images/logo.png" />*@FASHION STORE
+                    </a>
+                </h1>
+            </div>
+            <!-- #header -->
+        </div>
+        <div id="body_wrap" class="unlogin member_page">
+            <div id="content" class="clearfix">
+                <div class="section">
+                    <span class="sec_top_dark"></span>
+                    <div class="sec_content clearfix">
+                        <h2 class="text">登录虾米</h2>
+                        <div class="unlogin_form fl">
+                            <form action="/member/login" method="post">
+                                <input type="hidden" name="done" value="/radio/play/type/4/oid/2099600?">
+                                <input type="hidden" name="type" value="">
+                                <p>
+                                    <label class="f_label" for="email">你的 Email 地址：</label>
+                                    <input type="text" id="email" class="noime txt_input r3px" name="email" value="" spellcheck="false">
+                                </p>
+                                <p>
+                                    <label class="f_label" for="password">密 码：</label>
+                                    <input type="password" id="password" class="txt_input r3px" name="password" maxlength="32">
+                                </p>
+                                <p class="acts">
+                                    <label class="f_check" for="autologin">
+                                        <input name="autologin" type="checkbox" class="" id="autologin" value="1">
+                                        下次自动登录
+                                    </label>
+                                </p>
+                                <p class="acts">
+                                    <input class="text blue_btn blue_btn2 r3px f14" type="submit" value="登 录" name="submit">
+                                </p>
+                            </form>
+                        </div>
+                        <!-- .unlogin_form -->
+                    </div>
+                    <span class="sec_bot_dark"></span>
+                </div>
+            </div>
+            <!-- #content -->
+        </div>
+        <!-- #body_wrap -->
+    </div>
+
+</body>
+</html>

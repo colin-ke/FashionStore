@@ -1,0 +1,134 @@
+﻿@using Web.Models;
+@using Domain;
+@model SessionCart
+<link href="/Content/Cart.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript">
+    var pdtId, colorId, sizeId,old;
+    $(function () {
+        $(".add").click(function () {
+            var txt = $(this).prevAll(":text:first");
+            var num = txt.attr("value", parseInt(txt.attr("value"), 10) + 1).attr("value");
+            setId(this);
+            updateQuantity(num);
+        });
+
+        $(".cut").click(function () {
+            var txt = $(this).prevAll(":text:first");
+
+            var tem = parseInt(txt.attr("value"), 10);
+            if (tem <= 0 || isNaN(tem)) {
+                alert(tem);
+                return;
+            }
+            var num = txt.attr("value", tem - 1).attr("value");
+            setId(this);
+            updateQuantity(num);
+        });
+
+        $("a[name='delete']").click(function () {
+            setId(this);
+            $.post('@Url.Action("RemovePdt","Cart")', { pdtId: pdtId }, function (data) {
+                if (data == "") {
+                    alert("OMG!操作失败哟亲~~");
+                    return;
+                }
+                $("#pay_account").text(data);
+                $("ul[pid='" + pdtId + "']").remove();
+            });
+        });
+
+    });
+
+
+    function quantityChanged(txt) {
+        var num = parseInt($(txt).attr("value"), 10);
+        if (num <= 0 || isNaN(num)) {
+            txt.value = old;
+            return;
+        }
+        setId(txt);
+        updateQuantity(num);
+    }
+
+    function setId(component) {
+        var parentUl = $(component).parents('ul:first');
+        pdtId = parentUl.attr("pid");
+        colorId = parentUl.attr("cid");
+        sizeId = parentUl.attr("sid");
+    }
+
+
+    function updateQuantity(num) {
+        $.post('@Url.Action("SetCount","Cart")', { pdtId: pdtId, sizeId: sizeId, colorId: colorId, quantity: num }, function (data) {
+            if (data == "") {
+                alert("OMG!操作失败哟亲~~");
+                return;
+            }
+            $("#pay_account").text(data);
+        });
+    }
+
+    function ClearCart() {
+        $.post('@Url.Action("ClearCart","Cart")', {}, function () {
+            $(".shoppingcart_list").remove();
+            $("#pay_account").text("0");
+        });
+    }
+
+
+</script>
+<div class="shoppingcart_wrapper">
+    <div class="shoppingcart_nav">
+        <h1>我的购物车</h1>
+    </div>
+
+    <ul sid="ui_shoppingcart_title" class="shoppingcart_subject">
+        <li class="col_head_name">商品名称</li>
+        <li class="col_head_count">数量</li>
+        <li class="col_head_price">单价</li>
+        <li class="col_head_op">操作</li>
+    </ul>
+    <div id="collection_shop_0" class="shoppingcart_general">
+        @foreach (var item in Model.Items)
+        {
+            Products pdt = item.Products;
+            string picSrc = "/content/pic/pdt/" + pdt.ID + "/" + pdt.Pictures.Where<Pictures>(pic => pic.IsShow = true).First<Pictures>().PicName;
+            <ul class="shoppingcart_list" pid ="@pdt.ID" cid="@item.Color.ID" sid="@item.Size.ID">
+                <li class="col_pic"><a title="@item.Title" target="_blank" href="/product/@pdt.ID" name="productpic">
+                    <img style="width:54px" src="@picSrc" /></a></li>
+                <li class="col_name">
+                    <p><i></i><span class="name"><a title="@item.Title" href="/product/@pdt.ID" target="_blank" name="product">@item.Title</a></span></p>
+                </li>
+                <li class="col_count">
+                    <input type="text"  value="@item.Quantity" onkeypress="if((arguments[0] || window.event).keyCode==13) quantityChanged(this);" onfocus="old = this.value;" onblur="quantityChanged(this)">
+                    <a class="add" title="数量加一">+</a>
+                    <a class="cut" title="数量减一">-</a>
+                </li>
+                <li class="col_price"><span>@pdt.Price</span></li>
+                @*================todo=================*@
+                <li class="col_op">
+                    <a name="delete" href="javascript:void(0)">删除</a>
+                </li>
+            </ul>
+        }
+        <div style="clear: both; font-size: 0;"></div>
+    </div>
+
+    <div style="" sid="div_total" class="shoppingcart_total">
+        <p class="price">
+            总计(不含运费)：
+                   
+            <span>￥</span>
+            <span id="pay_account">@Model.ComputeTotalValue()</span>
+        </p>
+        <p class="clearfix" sid="balance">
+            <a title="结算" class="clearing" href="/cart/finish"></a>
+        </p>
+        <p class="shoppingcart_total_left">
+            <a class="qk" href="javascript:ClearCart();">清空购物车</a>
+        </p>
+    </div>
+</div>

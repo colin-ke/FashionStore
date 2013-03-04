@@ -1,0 +1,175 @@
+﻿@model Domain.FiltCatagories
+@using Domain;
+@using Web.Models;
+@using Web.MyHtmlHelpers;
+
+@{
+    PagingInfo pagingInfo = ViewBag.pagingInfo;
+    int page = pagingInfo.CurrentPage;
+    int perPage = pagingInfo.ItemsPerPage;
+    int pageCount = pagingInfo.TotalPages;
+    int cataId = Model.Name == "全部商品" ? -1 : Model.ID;
+    Domain.Abstract.IAttrs attrRep = (Domain.Abstract.IAttrs)ViewBag.attrRepository;
+    SelectedAttr attrs = (SelectedAttr)ViewBag.attrs;
+}
+
+
+<div class="list_right">
+    <div class="filter_box">
+        <div class="head">
+            <h3>筛选：</h3>
+            <ul>
+                <li><span class="tt">@Model.Name</span></li>
+                <li>
+                    @foreach (int value in attrs.AttrDic.Values)
+                    {
+                        AttrContents filtedContent = attrRep.AttrContents.First<AttrContents>(x => x.ID == value);
+                        <li>
+                            <span class="bn">+@filtedContent.AttrTitles.Title </span>
+                            <span class="block">
+                                <span class="t">
+                                    <a href="?attr=@attrs.ToStringRemoved(filtedContent.AttrTitles.ID)&cata=@cataId">@filtedContent.Content</a>
+                                </span>
+                            </span>
+                        </li>
+                    }
+                    @if (attrs.BrandId != null)
+                    { 
+                        <li>
+                            <span class="bn">+品牌</span>
+                            <span class="block">
+                                <span class="t">
+                                    <a href="?attr=@attrs.ToStringAttrOnly()&cata=@cataId">@attrs.BrandName</a>
+                                </span>
+                            </span>
+                        </li>
+                    }
+                </li>
+            </ul>
+            <a class="empty" href="?cata=@cataId">清空筛选条件</a>
+        </div>
+
+        <dl class="list">
+            <dt class="brand_t">
+                <b>品牌</b>
+                @{
+                    if (@attrs.BrandId == null)
+                    {
+                    <a href="?attr=@attrs.ToStringAttrOnly()&cata=@cataId" class="red">全部</a>
+                    }
+                    else
+                    { 
+                    <a href="?attr=@attrs.ToString()&cata=@cataId">全部</a>
+                    }
+                }
+            </dt>
+            <dd class="brand_opt brand_height allbrand">
+                @{
+                    IEnumerable<Brand> allBrands = Model.Products.Select<Products, Brand>(item => item.Brand).Distinct<Brand>();
+                }
+                @foreach (Brand b in allBrands)
+                { 
+                        
+                    <span>@{ 
+                    string cls = (attrs.BrandId != null && attrs.BrandId.Value == @b.ID) ? "red" : "";
+                        <a href="?attr=@attrs.ToStringAttrOnly()&brand=@b.ID&cata=@cataId" class="@cls">@b.Name</a>
+                    }</span>
+                    //<a class="red".../> means selected
+                }
+            </dd>
+
+            @foreach (Domain.AttrTitles title in Model.AttrTitles)
+            { 
+                <dt>
+                    <b>@title.Title</b>
+                    @{
+                        string brandId = attrs.BrandId == null ? "" : attrs.BrandId.Value.ToString();
+                        string cls = attrs.AttrDic.Keys.Contains<int>(title.ID) ? "" : "red";
+                        <a href="?attr=@attrs.ToStringRemoved(title.ID)&brand=@brandId&cata=@cataId" class="@cls">全部</a>
+                    }
+                </dt>
+                <dd class="height brandcate attshow">
+                    @foreach (Domain.AttrContents content in title.AttrContents)
+                    {
+                        cls = (attrs.AttrDic.Keys.Contains<int>(title.ID) && attrs.AttrDic[title.ID] == content.ID) ? "red" : "";
+                        <a href="?attr=@Url.Encode(attrs.ToStringAdded(content))&brand=@brandId&cata=@cataId" class="@cls">@content.Content</a>
+                    }
+                </dd>
+            }
+
+        </dl>
+    </div>
+
+    <div style="clear: both;" />
+    <div class="filter_relative">
+        <div class="switch_btn"></div>
+    </div>
+
+    <div name="px" class="toolbox">
+        <span class="t">排序:</span>
+        <ul>
+            <li class="on"><a title="销量由高到低" href="#">销 量</a></li>
+            <li class="top"><a title="价格由低到高" href="#">价 格</a></li>
+            <li><a title="上架时间由近到远" href="#">最 新</a></li>
+        </ul>
+
+        <div class="page"><span>共 @pagingInfo.TotalItems 个商品</span><span class="left"></span><span><b>@page</b>/@pageCount</span><span onclick="javascript:loadData('2');" class="right_on"></span></div>
+    </div>
+
+    <div name="px" class="condition_box">
+        <span class="t">筛选: </span>
+        <label class="label"><input type="checkbox" value="#">促 销</label>
+        <span class="t">价格: </span>
+        <div id="filter_price" class="input_box">¥
+            <input type="text" value="" class="text_i" id="start_price" />至 ¥
+            <input type="text" value="" class="text_i" id="end_price" />
+            <input type="button" value="确定" class="button_yes" />
+        </div>
+
+    </div>
+    <div class="shoplist" style="min-height: 300px;">
+        <ul class="">
+            @foreach (Products pdt in Model.Products)
+            {
+                string title = pdt.Title;
+                string picSrc = "/content/pic/pdt/" + pdt.ID + "/" + pdt.Pictures.Where<Pictures>(pic => pic.IsShow = true).First<Pictures>().PicName;
+                <li name="lb">
+                    <div class="inner">
+                        <a class="pic" title="@title" target="_blank" href="/product/@pdt.ID">
+                            <img alt="@title" src=@picSrc style="display: block;width:200px;"/>
+                        </a>
+
+                        @if (pdt.IsDiscout)
+                        {
+                            <p class="price">
+                                <span class="price_n">¥@pdt.NewPrice</span>
+                                <span class="price_r">¥@pdt.Price</span>
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="price">
+                                <span class="price_n">¥@pdt.Price</span>
+                            </p>
+                        }
+
+                        <p class="name"><a title="@title" target="_blank" href="/product/@pdt.ID">@title</a></p>
+                        <p class="subtitle">@pdt.SubTitle</p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div name="fy" class="paginating">
+        <ul class="paging">
+            @Html.PageLinks(pagingInfo, x => string.Format("/{0}?{1}", x, Request.QueryString))
+
+            <li class="page_input">
+                <span>共 @pageCount 页</span>
+            </li>
+
+        </ul>
+    </div>
+
+</div>

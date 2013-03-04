@@ -1,0 +1,259 @@
+﻿*
+{
+    margin: 0;
+    padding: 0;
+}
+
+ul, ol, li
+{
+    list-style: none outside none;
+}
+
+input
+{
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+img
+{
+    border: 0 none;
+}
+
+.nav_top ul
+{
+    width: 960px;
+}
+
+.sub ul
+{
+    width: 960px;
+}
+
+.clearfix
+{
+}
+
+    .clearfix:after
+    {
+        clear: both;
+        content: " ";
+        display: block;
+        font-size: 0;
+        height: 0;
+        visibility: hidden;
+    }
+
+.myhome_wrapper
+{
+    font: 12px "宋体",Arial,Helvetica,sans-serif;
+    margin: 20px auto;
+    width: 960px;
+}
+
+    .myhome_wrapper a
+    {
+        text-decoration: none;
+        color: #633f20;
+    }
+
+.mydnew_sidel
+{
+    float: left;
+    width: 170px;
+    border: 1px solid #DACADA;
+}
+
+    .mydnew_sidel h3
+    {
+        background: url("/content/images/bg_vertical.gif") repeat-x scroll 0 -510px transparent;
+        color: #6F522F;
+        font-size: 14px;
+        font-weight: bold;
+        height: 26px;
+        line-height: 27px;
+        overflow: hidden;
+        padding: 1px 0 0 9px;
+    }
+
+    .mydnew_sidel .box
+    {
+        padding: 5px 0 0;
+    }
+
+    .mydnew_sidel .my_content
+    {
+        background: none repeat scroll 0 0 transparent;
+    }
+
+    .mydnew_sidel li
+    {
+        padding-left: 13px;
+    }
+
+        .mydnew_sidel li a
+        {
+            display: inline-block;
+            line-height: 26px;
+            padding-left: 11px;
+            position: relative;
+            width: 144px;
+        }
+
+            .mydnew_sidel li a.current, .mydnew_sidel li a.current:hover
+            {
+                background: url("/content/images/bg_icon.gif") no-repeat scroll left 6px transparent;
+                color: #009C74;
+                font-weight: bold;
+            }
+
+            .mydnew_sidel li a:hover
+            {
+                background: url("/content/images/bg_icon.gif") no-repeat scroll left 6px transparent;
+                color: #009C74;
+            }
+
+.rightside
+{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #DACADA;
+    /*margin-top: 20px;*/
+    padding: 0;
+    width: 780px;
+    float: right;
+}
+
+    .rightside a
+    {
+        color: #1a66b3;
+    }
+
+.myddorder_list
+{
+}
+
+    .myddorder_list:after
+    {
+        clear: both;
+        content: ".";
+        display: block;
+        font-size: 0;
+        line-height: 0;
+        overflow: hidden;
+        width: 0;
+    }
+
+.clearfix:after, li:after, .mydnew_main .private:after
+{
+    clear: both;
+    content: "";
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+.clearfix:after, li:after, .mydnew_main .private:after
+{
+    clear: both;
+    content: "";
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+.myddorder_list .myddorder_title
+{
+    border-bottom: 1px solid #DDDDDD;
+    border-top: 1px solid #DDDDDD;
+    color: #633F20;
+    padding: 8px 0 5px;
+    /*font-weight:bold;*/
+}
+
+
+.myddorder_list li
+{
+    background: none repeat scroll 0 0 transparent;
+    border-bottom: 1PX solid #DDDDDD;
+    padding: 10px 0 7px;
+    display: inline;
+    float: left;
+    line-height: 14px;
+    overflow: hidden;
+    width: 780px;
+}
+
+    .myddorder_list li span, .myddorder_list li a
+    {
+        display: inline-block;
+        text-align: center;
+    }
+
+.myddorder_list2 li .list_name
+{
+    width: 98px;
+}
+
+.myddorder_list li .list_way
+{
+    width: 70px;
+}
+
+.myddorder_list2 li .list_total
+{
+    width: 103px;
+}
+
+.myddorder_list2 .myddorder_title .list_order
+{
+    width: 98px;
+}
+
+.myddorder_list li .list_status
+{
+    width: 58px;
+}
+
+.myddorder_list li .list_time
+{
+    font-family: Arial;
+    width: 104px;
+}
+
+.myddorder_list li .list_operation
+{
+    width: 191px;
+}
+
+.myddorder_list .myddorder_title .list_order
+{
+    text-align: center;
+}
+
+.myddorder_list2 li .list_order
+{
+    width: 88px;
+}
+
+.myddorder_list .myddorder_title span
+{
+    display: inline-block;
+    text-align: center;
+}
+
+.myddorder_list li .list_order
+{
+    font-family: Arial;
+    text-align: left;
+}
+
+.list_other
+{
+}
+
+    .list_other .list_order
+    {
+        padding-left: 10px;
+    }

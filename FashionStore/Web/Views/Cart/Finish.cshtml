@@ -1,0 +1,30 @@
+﻿@using Web.Models;
+
+<link href="/Content/Cart.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Finish";
+    string total = ViewBag.total;
+}
+
+<div class="shoppingcart_nav">
+    <h1 class="finish">
+        <a href="#">我的购物车</a>
+    </h1>
+</div>
+<div class="order_content">
+    <div class="border">
+        <div class="money_notice e-book">
+            <h4 class="money_notice_name">订单已提交，您需要支付<span class="red_bold">￥@total</span></h4>
+            <div class="success_tipspick02">为了保证及时处理您的订单，请您于下单后<span class="red">24小时内</span>完成付款</div>
+            <div class="button_auto">
+                <span id="span_notdangdang">网上支付成功后，我们将立即为您发货。</span>
+            </div>
+
+        </div>
+        <div class="other_notice">
+            <p class="t1"></p>
+        </div>
+    </div>
+
+</div>

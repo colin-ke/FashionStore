@@ -1,0 +1,209 @@
+﻿body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, form, input, textarea, button, fieldset, img, legend, ul, ol, li, dl, dt, dd, th, td, div, a {
+    border: 0;
+    font-size: 100%;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+}
+
+body {
+    color: #333;
+    font: 12px/1.2 "Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-align: left;
+}
+
+a:link {
+    -webkit-tap-highlight-color: #fe9600;
+}
+
+#wrapper {
+    background: url(/content/images/login_head_bg.jpg) repeat-x scroll 0 0 #f0f5f5;
+    border-bottom: 1px solid #d9dede;
+}
+
+#head_wrap {
+    height: 134px;
+    background: url(/content/images/login_top.jpg) no-repeat scroll 0 0 transparent;
+    max-width: 1258px;
+    min-width: 980px;
+    margin: 0 auto;
+}
+
+#header, #body_wrap, #foot_wrap {
+    width: 978px;
+    margin: 0 auto;
+    position: relative;
+}
+
+    #header h1 {
+        float: left;
+    }
+
+        #header h1 a {
+            background: url(/content/images/logo.png) no-repeat scroll 0 center transparent;
+            display: block;
+            height: 62px;
+            text-indent: -9999px;
+            width: 300px;
+            background-size: 300px;
+        }
+
+.unlogin {
+    top: -40px;
+}
+
+#content {
+    padding: 0 0 100px;
+}
+
+.section {
+    background: #fff;
+    position: relative;
+}
+
+    .section .sec_top_dark {
+        height: 4px;
+        width: 978px;
+        display: block;
+        background: url(/content/images/login_topdark.png) no-repeat scroll 0 0 transparent;
+        font-size: 0;
+    }
+
+.sec_content {
+    padding: 7px 10px;
+    border-left: 1px solid #e1e9ee;
+    border-right: 1px solid #e1e9ee;
+    height: 360px;
+}
+
+.section .sec_content h2 {
+    border-bottom: 1px solid #e9edf1;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 -10px 10px;
+    padding: 0 10px 7px;
+    font-size: 16px;
+    width: 100%;
+    font-weight: 400;
+}
+
+.text {
+    font-family: 'Hiragino Sans GB','Microsoft YaHei',sans-serif!important;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    -webkit-margin-before: 0.83em;
+    -webkit-margin-after: 0.83em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+.unlogin_form {
+    padding: 30px 0 0 30px;
+}
+
+    .unlogin_form p {
+        margin: 0 0 30px;
+    }
+
+p {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+.unlogin_form p .f_label {
+    float: left;
+    font-size: 14px;
+    line-height: 28px;
+    text-align: right;
+    width: 120px;
+}
+
+label {
+    cursor: default;
+}
+
+.fl {
+    float: left;
+}
+
+button, input, select, textarea {
+    font: 12px "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.unlogin_form p .txt_input {
+    width: 250px;
+}
+
+.member_page .txt_input {
+    padding: 6px 5px;
+    font-size: 13px;
+}
+
+.r3px {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.noime {
+    ime-mode: disabled;
+}
+
+.txt_input {
+    -moz-box-shadow: inset 0 1px 1px #dedede;
+    -o-box-shadow: inset 0 2px 2px #dedede;
+    -webkit-box-shadow: inset 0 1px 1px #dedede;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 2px 2px #dedede;
+    color: #777;
+    cursor: text;
+    font-size: 12px;
+    padding: 4px 5px;
+}
+
+.unlogin_form p.acts {
+    margin-left: 120px;
+}
+
+.unlogin_form p {
+    margin: 0 0 30px;
+}
+
+.blue_btn {
+    background: #4070d0;
+    background: -webkit-gradient(linear,0% 0,0% 100%,from(#649de0),to(#487dd5),color-stop(.5,#4070d0),color-stop(.501,#3467cc));
+    background: -moz-linear-gradient(top,#649de0,#487dd5 50%,#4070d0 50.1%,#3467cc);
+    background: linear-gradient(top,#649de0,#487dd5 50%,#4070d0 50.1%,#3467cc);
+    -webkit-box-shadow: 0 0 2px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 0 2px rgba(0,0,0,0.5);
+    -o-box-shadow: 0 0 2px rgba(0,0,0,0.5);
+    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+    border: 1px solid #3282d0;
+    padding: 3px 10px;
+    display: inline-block;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+}
+
+.section .sec_bot_dark {
+    height: 15px;
+    width: 978px;
+    display: block;
+    background: url(/content/images/login_botdark.png) no-repeat scroll 0 0 transparent;
+    font-size: 0;
+}
+
+
+.clearfix, .item {
+    zoom: 1;
+}

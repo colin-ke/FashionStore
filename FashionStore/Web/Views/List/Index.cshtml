@@ -1,0 +1,235 @@
+﻿<link href="../../Content/ProductsList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="productslist_wrap">
+
+    <div class="list_aside" id="">
+        @*商品分类*@
+        <div name="fl" class="sort_box">
+            <h3>服装</h3>
+            <ul>
+                <li class="on">
+                    <span class="m">
+                        <span class="icon"></span>
+                        <a title="男士服装" class="t" href="#">男士服装</a>
+                    </span>
+                    <div class="link">
+                        <span>
+                            <a title="T恤" class="now" href="#">T恤</a>
+                        </span>
+                        <span>
+                            <a href="#">外套</a>
+                        </span>
+                        <span>
+                            <a href="#">衬衫</a>
+                        </span>
+                    </div>
+                </li>
+                <li class=""><span class="m"><span class="icon"></span><a title="女士服装" class="t" href="#">女士服装</a></span></li>
+                <li><span class="m"><span class="icon"></span><a href="#">内衣袜品</a></span></li>
+                <li><span class="m"><span class="icon"></span><a href="#">服饰配件</a></span></li>
+            </ul>
+        </div>
+        @*浏览历史*@
+        <div class="history_box">
+
+            <h3>您的浏览历史</h3>
+            <ul>
+                <li><a href="http://product.dangdang.com/product.aspx?product_id=1001524505" class="pic" target="_blank" title="CICI-SHOP秋装新款外套仿羊绒毛呢外套毛呢子大衣 翻领1127">
+                    <img src="http://img35.ddimg.cn/14/32/1001524505-1_a.jpg" alt="CICI-SHOP秋装新款外套仿羊绒毛呢外套毛呢子大衣 翻领1127" height="100" width="100"></a>
+                    <p class="name"><a href="http://product.dangdang.com/product.aspx?product_id=1001524505" target="_blank" title="CICI-SHOP秋装新款外套仿羊绒毛呢外套毛呢子大衣 翻领1127">CICI-SHOP秋装新款外套仿羊绒毛呢外套毛呢子大衣 翻领1127</a></p>
+                    <p class="price"><span class="price_n">¥169.00</span></p>
+                </li>
+            </ul>
+            <a href="javascript:Clearcookie()" class="more" onclick="return confirm('您确定要清空您的浏览历史吗？');">清空历史</a>
+        </div>
+    </div>
+    <div class="list_right">
+        <div class="filter_box">
+            <div class="head">
+                <h3>商品筛选：</h3>
+                <ul>
+                    <li><span class="tt">T恤</span></li>
+                    <li><span class="bn">+ 种类</span><span class="block"><span class="t">长袖</span><a href="#"></span></a></span></li>
+                    <li><span class="bn">+ 品牌</span><span class="block"><span class="t">以纯</span><a href="#"></span></a></span></li>
+                </ul>
+                <a href="#" class="empty">清空筛选条件</a>
+            </div>
+            <dl class="list">
+                <dt class="brand_t"><b>全部品牌：</b><a href="#">全部</a></dt>
+                <dd class="brand_opt brand_height allbrand">
+                    <span>
+                        <a title="自由漫步" href="#">自由漫步                                        </a>
+                    </span>
+                    <span>
+                        <a title="PayDaily" href="#">PayDaily                                        </a>
+                    </span>
+                    <span class="button" style="" id="tjbtn">展开</span>
+                </dd>
+                <!--属性-->
+                <dt><b>种类：</b><a href="#">全部</a></dt>
+                <dd class="height brandcate attshow">
+                    <a href="#">不限</a>
+                    <a class="red" href="#">长袖</a>
+                    <a class="attbottom" href="#">短袖</a>
+                </dd>
+                <dt><b>风格：</b><a href="#">全部</a></dt>
+                <dd class="height brandcate attshow">
+                    <a style="display: none" class="red"></a><a href="#">不限</a>
+                    <a href="#">时尚</a>
+                    <a href="#">商务</a>
+                    <a href="#">休闲</a>
+                    <a href="#">设计潮牌</a>
+                    <a href="#">格子</a>
+                    <a href="#">条纹</a>
+                    <a href="#">印花</a>
+                    <a href="#">纯色</a>
+                    <a class="attbottom" href="#">拼接</a>
+                </dd>
+                <dt><b>版型：</b><a href="#">全部</a></dt>
+                <dd class="height brandcate attshow">
+                    <a style="display: none" class="red"></a><a href="#">不限</a>
+                    <a class="attbottom" href="#">修身</a>
+                </dd>
+                <dt><b>材质：</b><a href="#">全部</a></dt>
+                <dd class="height brandcate attshow">
+                    <a style="display: none" class="red"></a><a href="#">不限</a>
+                    <a href="#">纯棉</a>
+                    <a href="#">混纺</a>
+                    <a href="#">涤棉</a>
+                    <a href="#">蚕丝</a>
+                    <a href="#">涤纶</a>
+                    <a href="#">莫代尔</a>
+                    <a class="attbottom" href="#">亚麻</a>
+                </dd>
+                <dt class="brandatt" style="display: none"><b>领型：</b><a href="#">全部</a></dt>
+                <dd class="brandatt" style="display: none">
+                    <a style="display: none" class="red"></a><a href="#">不限</a>
+                    <a href="#">圆领</a>
+                    <a href="#">V领</a>
+                    <a href="#">立领</a>
+                    <a href="#">连帽</a>
+                    <a class="attbottom" href="#">门筒领</a>
+                </dd>
+            </dl>
+        </div>
+        <div style="clear: both;"></div>
+        <div class="filter_relative">
+            <div class="switch_btn">
+                <span id="catebtn" class="on">展开选项
+                </span>
+            </div>
+        </div>
+
+        <div name="px" class="toolbox">
+            <span class="t">排序:</span>
+            <ul>
+                <li class="on"><a title="销量由高到低" href="#">销 量</a></li>
+                <li class="top"><a title="价格由低到高" href="#">价 格</a></li>
+                <li><a title="好评由高到低" href="#">好 评</a></li>
+                <li><a title="上架时间由近到远" href="#">最 新</a></li>
+            </ul>
+            <div class="page"><span>共1925个商品</span><span class="left"></span><span><b>1</b>/42</span><span onclick="javascript:loadData('2');" class="right_on"></span></div>
+        </div>
+        <div name="px" class="condition_box">
+            <span class="t">筛选: </span>
+            <label class="label">
+                <input type="checkbox" value="#">促 销</label>
+            <span class="t">价格: </span>
+            <div id="filter_price" class="input_box">
+                ¥<input type="text" value="" class="text_i" id="start_price" />
+                至 ¥<input type="text" value="" class="text_i" id="end_price" />
+                <input type="button" value="确定" class="button_yes" />
+            </div>
+
+        </div>
+
+        <div class="shoplist">
+            <ul class="">
+                <li name="lb">
+                    <div class="inner">
+                        <a class="pic" title=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1024221921&amp;ref=category-5237-3425_3-24983-1">
+                            <img alt=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " src="http://img31.ddimg.cn/96/20/1024221921-1_b.jpg" data-original="http://img31.ddimg.cn/96/20/1024221921-1_b.jpg" style="display: block;">
+                        </a>
+                        <p class="price"><span class="price_n">¥245.00</span><span class="price_r">¥490.00</span>(<span class="price_s">50折</span>)</p>
+                        <p class="name"><a title=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1024221921&amp;ref=category-5237-3425_3-24983-1">【新品5折限量抢】lee&nbsp;专柜正品&nbsp;时尚迷彩男士长袖T恤8858-5C5F</a></p>
+                        <p class="subtitle">lee&nbsp;专柜正品&nbsp;男士长袖T恤8858-5C5</p>
+                    </div>
+                </li>
+                <li name="lb">
+                    <div class="inner">
+                        <a class="pic" title=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1024221921&amp;ref=category-5237-3425_3-24983-1">
+                            <img alt=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " src="http://img31.ddimg.cn/96/20/1024221921-1_b.jpg" data-original="http://img31.ddimg.cn/96/20/1024221921-1_b.jpg" style="display: block;">
+                        </a>
+                        <p class="price"><span class="price_n">¥245.00</span><span class="price_r">¥490.00</span>(<span class="price_s">50折</span>)</p>
+                        <p class="name"><a title=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1024221921&amp;ref=category-5237-3425_3-24983-1">【新品5折限量抢】lee&nbsp;专柜正品&nbsp;时尚迷彩男士长袖T恤8858-5C5F</a></p>
+                        <p class="subtitle">lee&nbsp;专柜正品&nbsp;男士长袖T恤8858-5C5</p>
+                    </div>
+                </li>
+                <li name="lb">
+                    <div class="inner">
+                        <a class="pic" title=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1024221921&amp;ref=category-5237-3425_3-24983-1">
+                            <img alt=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " src="http://img31.ddimg.cn/96/20/1024221921-1_b.jpg" data-original="http://img31.ddimg.cn/96/20/1024221921-1_b.jpg" style="display: block;">
+                        </a>
+                        <p class="price"><span class="price_n">¥245.00</span><span class="price_r">¥490.00</span>(<span class="price_s">50折</span>)</p>
+                        <p class="name"><a title=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1024221921&amp;ref=category-5237-3425_3-24983-1">【新品5折限量抢】lee&nbsp;专柜正品&nbsp;时尚迷彩男士长袖T恤8858-5C5F</a></p>
+                        <p class="subtitle">lee&nbsp;专柜正品&nbsp;男士长袖T恤8858-5C5</p>
+                    </div>
+                </li>
+                <li name="lb">
+                    <div class="inner">
+                        <a class="pic" title=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1024221921&amp;ref=category-5237-3425_3-24983-1">
+                            <img alt=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " src="http://img31.ddimg.cn/96/20/1024221921-1_b.jpg" data-original="http://img31.ddimg.cn/96/20/1024221921-1_b.jpg" style="display: block;">
+                        </a>
+                        <p class="price"><span class="price_n">¥245.00</span><span class="price_r">¥490.00</span>(<span class="price_s">50折</span>)</p>
+                        <p class="name"><a title=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1024221921&amp;ref=category-5237-3425_3-24983-1">【新品5折限量抢】lee&nbsp;专柜正品&nbsp;时尚迷彩男士长袖T恤8858-5C5F</a></p>
+                        <p class="subtitle">lee&nbsp;专柜正品&nbsp;男士长袖T恤8858-5C5</p>
+                    </div>
+                </li>
+                <li name="lb">
+                    <div class="inner">
+                        <a class="pic" title=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1024221921&amp;ref=category-5237-3425_3-24983-1">
+                            <img alt=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " src="http://img31.ddimg.cn/96/20/1024221921-1_b.jpg" data-original="http://img31.ddimg.cn/96/20/1024221921-1_b.jpg" style="display: block;">
+                        </a>
+                        <p class="price"><span class="price_n">¥245.00</span><span class="price_r">¥490.00</span>(<span class="price_s">50折</span>)</p>
+                        <p class="name"><a title=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1024221921&amp;ref=category-5237-3425_3-24983-1">【新品5折限量抢】lee&nbsp;专柜正品&nbsp;时尚迷彩男士长袖T恤8858-5C5F</a></p>
+                        <p class="subtitle">lee&nbsp;专柜正品&nbsp;男士长袖T恤8858-5C5</p>
+                    </div>
+                </li>
+                <li name="lb">
+                    <div class="inner">
+                        <a class="pic" title=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1024221921&amp;ref=category-5237-3425_3-24983-1">
+                            <img alt=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " src="http://img31.ddimg.cn/96/20/1024221921-1_b.jpg" data-original="http://img31.ddimg.cn/96/20/1024221921-1_b.jpg" style="display: block;">
+                        </a>
+                        <p class="price"><span class="price_n">¥245.00</span><span class="price_r">¥490.00</span>(<span class="price_s">50折</span>)</p>
+                        <p class="name"><a title=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1024221921&amp;ref=category-5237-3425_3-24983-1">【新品5折限量抢】lee&nbsp;专柜正品&nbsp;时尚迷彩男士长袖T恤8858-5C5F</a></p>
+                        <p class="subtitle">lee&nbsp;专柜正品&nbsp;男士长袖T恤8858-5C5</p>
+                    </div>
+                </li>
+                <li name="lb">
+                    <div class="inner">
+                        <a class="pic" title=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1024221921&amp;ref=category-5237-3425_3-24983-1">
+                            <img alt=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " src="http://img31.ddimg.cn/96/20/1024221921-1_b.jpg" data-original="http://img31.ddimg.cn/96/20/1024221921-1_b.jpg" style="display: block;">
+                        </a>
+                        <p class="price"><span class="price_n">¥245.00</span><span class="price_r">¥490.00</span>(<span class="price_s">50折</span>)</p>
+                        <p class="name"><a title=" 【新品5折限量抢】lee 专柜正品 时尚迷彩男士长袖T恤8858-5C5F " target="_blank" href="http://product.dangdang.com/product.aspx?product_id=1024221921&amp;ref=category-5237-3425_3-24983-1">【新品5折限量抢】lee&nbsp;专柜正品&nbsp;时尚迷彩男士长袖T恤8858-5C5F</a></p>
+                        <p class="subtitle">lee&nbsp;专柜正品&nbsp;男士长袖T恤8858-5C5</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div name="fy" class="paginating">
+            <ul class="paging">
+                <li class="prev none"><a href="javascript:void(0);">上一页</a></li>
+                <li><a class=" current" href="javascript:loadData('1');">1</a></li>
+                <li class="next none"><a href="javascript:void(0);">下一页</a></li>
+                <li class="page_input"><span>共1页 到第</span><input type="text" value="1" class="number" id="t__cp"><span>页</span><input type="button" value="确定" id="click_get_page" class="button"></li>
+            </ul>
+        </div>
+
+    </div>
+</div>

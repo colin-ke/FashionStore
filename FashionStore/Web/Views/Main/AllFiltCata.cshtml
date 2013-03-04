@@ -1,0 +1,102 @@
+﻿@model IQueryable<Domain.NavCatagories>
+
+@using System.Text;
+
+<script type="text/javascript">
+    function showDetail(i) {
+        var detailId = "#side_detail" + i;
+        $(detailId).removeAttr("style");
+    }
+    function hideDetail(i) {
+        var detailId = "#side_detail" + i;
+        $(detailId).attr("style", "display:none");
+    }
+</script>
+
+<div class="sidenav">
+    <h2>服装商城导购</h2>
+    <ul>
+        @{ string detailId = ""; int i = 0; }
+        @foreach (Domain.NavCatagories cata in Model)
+        {
+            switch (@cata.Name)
+            {
+                case "女装": <li onmouseover="showDetail(1)" onmouseout="hideDetail(1)"><a class="nav nav01" href="/list/@cata.FiltCatagoryID">@cata.Name</a></li> detailId = "side_detail1";i=1; break;
+                case "男装": <li onmouseover="showDetail(2)" onmouseout="hideDetail(2)" ><a class="nav nav02" href="/list/@cata.FiltCatagoryID">@cata.Name</a></li> detailId = "side_detail2";i=2; break;
+                case "鞋靴": <li onmouseover="showDetail(3)" onmouseout="hideDetail(3)" ><a class="nav nav03" href="/list/@cata.FiltCatagoryID">@cata.Name</a></li> detailId = "side_detail3"; i=3;break;
+                case "内衣": <li onmouseover="showDetail(4)" onmouseout="hideDetail(4)" ><a class="nav nav04" href="/list/@cata.FiltCatagoryID">@cata.Name</a></li> detailId = "side_detail4"; i=4; break;
+                case "箱包皮具": <li onmouseover="showDetail(5)" onmouseout="hideDetail(5)" ><a class="nav nav05" href="/list/@cata.FiltCatagoryID">@cata.Name</a></li> detailId="side_detail5";i=5; break;
+                default: break;
+
+            }
+            @*<li><a class="nav nav01" href="#">@cata.Name</a></li>*@
+            <div class="sidenav_detail" id=@detailId onmouseover="showDetail(@i)" onmouseout="hideDetail(@i)" style="display: none;">
+                <div class="sidenav_detail_left">
+                    <div class="title">商品分类</div>
+                    @foreach (Domain.NavCatagories subCata in @cata.SubNavCatas)
+                    {
+                        if (@subCata.ParentID == @cata.ID)
+                        {
+                            StringBuilder attr = new StringBuilder();
+                            foreach (var attrContent in subCata.AttrContents)
+                            {
+                                attr.AppendFormat("{0}:{1}-", attrContent.AttrTitles.ID, attrContent.ID);
+                            }
+                            
+                            int filterCataId;
+                            if (subCata.FiltCatagoryID == null)
+                            {
+                                Domain.NavCatagories tem = subCata.ParentNavCata;
+                                while (tem.FiltCatagoryID == null)
+                                {
+                                    tem = tem.ParentNavCata;
+                                }
+                                filterCataId = tem.FiltCatagoryID.Value;
+                            }
+                            else
+                            {
+                                filterCataId = subCata.FiltCatagoryID.Value;
+                            }
+                        <div class="list">
+                            <h3>@Html.ActionLink(subCata.Name, "FiltList", "List", new { catagories = filterCataId, attr = attr.ToString() }, new { name="" })</h3>
+                            <div class="clearfix">
+                                @foreach (Domain.NavCatagories leaf in @subCata.SubNavCatas)
+                                {
+                                    attr = new StringBuilder();
+                                    foreach (var attrContent in leaf.AttrContents)
+                                    {
+                                        attr.AppendFormat("{0}:{1}-", attrContent.AttrTitles.ID, attrContent.ID);
+                                    }
+
+                                    filterCataId = 0;
+                                    if (subCata.FiltCatagoryID == null)
+                                    {
+                                        Domain.NavCatagories tem = subCata.ParentNavCata;
+                                        while (tem.FiltCatagoryID == null)
+                                        {
+                                            tem = tem.ParentNavCata;
+                                        }
+                                        filterCataId = tem.FiltCatagoryID.Value;
+                                    }
+                                    else
+                                    {
+                                        filterCataId = subCata.FiltCatagoryID.Value;
+                                    }
+                                    @Html.ActionLink(leaf.Name, "FiltList", "List", new { catagories = filterCataId, attr = attr.ToString() }, new { name="" })
+                                }
+                            </div>
+                        </div>
+                        }
+                    }
+                </div>
+                <div class="sidenav_detail_right">
+                    <div class="title">品牌导购</div>
+                </div>
+            </div>
+        }
+        <li><a class="nav nav06" href="#"></a></li>
+        <li><a class="nav nav07" href="#"></a></li>
+
+    </ul>
+</div>
+
