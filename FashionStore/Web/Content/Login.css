@@ -52,6 +52,10 @@ a:link {
     top: -40px;
 }
 
+.unlogin_con {
+    padding: 10px 20px 10px;
+}
+
 #content {
     padding: 0 0 100px;
 }
@@ -203,6 +207,122 @@ button, input, select, textarea {
     font-size: 0;
 }
 
+.unlogin_side {
+    margin: 30px 25px 0;
+    padding: 20px 0 20px 75px;
+    width: 220px;
+    border-left: 1px dotted #ccc;
+    position: relative;
+    min-height: 130px;
+}
+
+.fr {
+    float: right;
+}
+
+.f14 {
+    font-size: 14px;
+}
+
+.unlogin_side h3, .unlogin_side h4 {
+    font-weight: normal;
+    margin: 0 0 25px;
+    color: #666;
+}
+
+a {
+    color: #36c;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+    a:link {
+        -webkit-tap-highlight-color: #fe9600;
+    }
+
+h3 {
+    display: block;
+    font-size: 1.17em;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+    h3.tit {
+        font-weight: 400;
+        font-size: 20px;
+        color: #000;
+        height: 38px;
+        border-bottom: #eee 1px dashed;
+        margin-bottom: 10px;
+        position: relative;
+    }
+
+.regForm {
+    padding: 50px 60px 0;
+}
+
+.f_label {
+    width: 120px;
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    text-align: right;
+    color: #333;
+    font-size: 14px;
+}
+
+p {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+.regForm p {
+    margin: 0 0 30px;
+}
+
+    .regForm p .txt_input {
+        width: 250px;
+    }
+
+    .regForm p .hint {
+        color: #999;
+        display: block;
+        font-size: 12px;
+        margin-left: 120px;
+        padding-top: 5px;
+    }
+
+    .regForm p .gender {
+        margin: 0 10px 0 0;
+        color: #666;
+        font-size: 14px;
+        position: relative;
+        top: 6px;
+    }
+
+        .regForm p .gender input {
+            margin-right: 6px;
+            position: relative;
+            top: -2px;
+        }
+
+input[type=radio], input[type=checkbox] {
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+h3.tit span.tit_des {
+    display: block;
+    font-size: 12px;
+    color: #999;
+    padding-top: 6px;
+}
 
 .clearfix, .item {
     zoom: 1;

@@ -47,9 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IAttrs.cs" />
+    <Compile Include="Abstract\ICustomers.cs" />
     <Compile Include="Abstract\IFiltCatagories.cs" />
     <Compile Include="Abstract\INavCatagories.cs" />
+    <Compile Include="Abstract\IOrders.cs" />
+    <Compile Include="Abstract\IPaymentMethods.cs" />
     <Compile Include="Abstract\IProducts.cs" />
+    <Compile Include="Abstract\IShippingMethods.cs" />
     <Compile Include="AttrContents.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
@@ -72,9 +76,13 @@
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Concrete\EFAttrs.cs" />
+    <Compile Include="Concrete\EFCustomers.cs" />
     <Compile Include="Concrete\EFFiltCatagories.cs" />
     <Compile Include="Concrete\EFNavCatagories.cs" />
+    <Compile Include="Concrete\EFOrders.cs" />
+    <Compile Include="Concrete\EFPaymentMethods.cs" />
     <Compile Include="Concrete\EFProducts.cs" />
+    <Compile Include="Concrete\EFShippingMethods.cs" />
     <Compile Include="Customers.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
@@ -93,6 +101,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EFModels.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ExtentedModels\Customers.cs" />
     <Compile Include="FiltCatagories.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>

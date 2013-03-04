@@ -31,6 +31,11 @@ namespace Web.Infrastructure
             ninjectKernel.Bind<INavCatagories>().To<EFNavCatagories>();
             ninjectKernel.Bind<IAttrs>().To<EFAttrs>();
             ninjectKernel.Bind<IProducts>().To<EFProducts>();
+            ninjectKernel.Bind<ICustomers>().To<EFCustomers>();
+            ninjectKernel.Bind<IOrders>().To<EFOrders>();
+            ninjectKernel.Bind<IPaymentMethods>().To<EFPaymentMethods>();
+            ninjectKernel.Bind<IShippingMethods>().To<EFShippingMethods>();
+
         }
     }
 }

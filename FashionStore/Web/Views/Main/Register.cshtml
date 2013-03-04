@@ -1,0 +1,81 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Register</title>
+    <link href="/Content/Login.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="wrapper">
+        <div id="head_wrap">
+            <div id="header" class="clearfix">
+                <h1>
+                    <a rel="home" title="FASHION STORE" href="/">
+                        @*<img src="/content/images/logo.png" />*@FASHION STORE
+                    </a>
+                </h1>
+            </div>
+            <!-- #header -->
+        </div>
+        <div id="body_wrap" class="unlogin member_page">
+            <div id="content" class="clearfix">
+                <div class="section">
+                    <span class="sec_top_dark"></span>
+                    <div class="sec_content clearfix" style="height: 500px;">
+                        <div id="reg_form" class="unlogin_con">
+                            <h3 class="tit">
+                                <div class="tit_text"><span class="fYHei">注册</span><span class="tit_des">请填入以下信息</span></div>
+                            </h3>
+                            <form action="/member/register" method="post" name="form" onsubmit="return checkreg();">
+                                <div class="regForm">
+                                    <p>
+                                        <label class="f_label" for="email_reg">输入常用邮箱：</label>
+                                        <input type="text" id="email_reg" class="noime txt_input r3px" name="email" value="" onblur="checkmail();" spellcheck="false">
+                                        <input type="hidden" name="invite_code" value="">
+                                        <span class="hint" id="email_info">用来登录,建议使用常用Email</span>
+                                    </p>
+                                    <p>
+                                        <label class="f_label" for="password_reg">密码：</label>
+                                        <input type="password" id="password_reg" class="txt_input r3px" maxlength="20" name="password" value="" onblur="checkPasswords();">
+                                        <span class="hint" id="password_info">6-20个字符</span>
+                                    </p>
+                                    <p>
+                                        <label class="f_label" for="nickname_reg">昵称：</label>
+                                        <input name="nickname" type="text" class="txt_input r3px" id="nickname_reg" maxlength="12" onblur="checkname();" value="" spellcheck="false">
+                                        <span class="hint" id="name_info">使用你在网上常用昵称，小于20个字符</span>
+                                    </p>
+                                    <p id="gender" onchange="checkgender();">
+                                        <label class="f_label" for="gender">性别：</label>
+                                        <span class="gender">
+                                            <input type="radio" name="gender" value="M">男</span>
+                                        <span class="gender">
+                                            <input type="radio" name="gender" value="F">女</span>
+                                        <span class="hint warning" id="gender_info" style="display: none;">请选择性别</span>
+                                    </p>
+                                    <p class="acts">
+                                        <input type="hidden" name="submit" value="11">
+                                        <input type="hidden" name="target" value="">
+                                        <input class="text blue_btn blue_btn2 r3px f14" style="margin-left: 200px;" type="submit" value="注 册" id="reg_submit" name="regsubmit">
+                                        <span id="submiting"></span>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <span class="sec_bot_dark"></span>
+                </div>
+            </div>
+            <!-- #content -->
+        </div>
+        <!-- #body_wrap -->
+    </div>
+
+</body>
+</html>
+
+
+

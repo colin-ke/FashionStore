@@ -38,6 +38,10 @@ namespace Web.Controllers
             return View();
         }
 
+        public ActionResult Register()
+        {
+            return View();
+        }
         
 
     }
