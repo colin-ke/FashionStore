@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Domain;
+@using Web.Models;
+@model Login
+@{
     Layout = null;
 }
 
@@ -8,8 +11,35 @@
 <head>
     <title>Login</title>
     <link href="/Content/Login.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.7.1.min.js"></script>
+    <style type="text/css">
+        .input-validation-error {
+            border: 1px solid #ff0000;
+            background-color: #ffeeee;
+        }
+    </style>
 </head>
 <body>
+    @if (null != ViewBag.access)
+    {
+        if (ViewBag.access)
+        {
+            string preUrl = "/";
+            if (null != Request.QueryString["preurl"])
+            {
+                preUrl = Request.QueryString["preurl"];
+            }
+            Response.Redirect(preUrl);
+        }
+        else
+        { 
+            <script type="text/javascript">
+                $(function () {
+                    alert("用户名或密码错误");
+                });
+            </script>
+        }
+    }
     <div id="wrapper">
         <div id="head_wrap">
             <div id="header" class="clearfix">
@@ -28,27 +58,27 @@
                     <div class="sec_content clearfix">
                         <h2 class="text">登录</h2>
                         <div class="unlogin_form fl">
-                            <form action="/member/login" method="post">
-                                <input type="hidden" name="done" value="/radio/play/type/4/oid/2099600?">
-                                <input type="hidden" name="type" value="">
+                            @using (Html.BeginForm())
+                            {
                                 <p>
                                     <label class="f_label" for="email">你的 Email 地址：</label>
-                                    <input type="text" id="email" class="noime txt_input r3px" name="email" value="" spellcheck="false">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "noime txt_input r3px" })
+
                                 </p>
                                 <p>
                                     <label class="f_label" for="password">密 码：</label>
-                                    <input type="password" id="password" class="txt_input r3px" name="password" maxlength="32">
+                                    @Html.TextBoxFor(m => m.Password, new { @class = "txt_input r3px", type = "password" })
                                 </p>
                                 <p class="acts">
                                     <label class="f_check" for="autologin">
-                                        <input name="autologin" type="checkbox" class="" id="autologin" value="1">
+                                        @Html.CheckBoxFor(m => m.IsToRemeber, new { @checked = "true" })
                                         下次自动登录
                                     </label>
                                 </p>
                                 <p class="acts">
                                     <input class="text blue_btn blue_btn2 r3px f14" type="submit" value="登 录" name="submit">
                                 </p>
-                            </form>
+                            }
                         </div>
                         <div class="unlogin_side fr">
                             <h4 class="f14">还没有账号? <a href="/main/register">注册</a></h4>

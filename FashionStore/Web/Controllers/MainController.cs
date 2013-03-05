@@ -4,18 +4,23 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Domain;
+using Domain.Abstract;
+using Web.Infrastructure;
+using Web.Models;
 
 namespace Web.Controllers
 {
     public class MainController : Controller
     {
-        private Domain.Abstract.IFiltCatagories filtCata;
-        private Domain.Abstract.INavCatagories navCata;
+        private IFiltCatagories filtCata;
+        private INavCatagories navCata;
+        private ICustomers customerRepos;
 
-        public MainController(Domain.Abstract.IFiltCatagories filtCata,Domain.Abstract.INavCatagories nav)
+        public MainController(IFiltCatagories filtCata,INavCatagories nav,ICustomers cus)
         {
             this.filtCata = filtCata;
             this.navCata = nav;
+            this.customerRepos = cus;
         }
 
         public ActionResult Index()
@@ -33,16 +38,79 @@ namespace Web.Controllers
             return PartialView(navCata.Catagories);
         }
 
+        public PartialViewResult NavPanelUserInfo(Customers cus)
+        {
+            bool login = false;
+            if (null != cus)
+                login = true;
+            ViewBag.login = login;
+            return PartialView(cus);
+        }
+
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Login(Login model)
+        {
+            if (string.IsNullOrEmpty(model.Email))
+                ModelState.AddModelError("Email", "Please enter your email");
+            if (string.IsNullOrEmpty(model.Password))
+                ModelState.AddModelError("Password", "Please enter your password");
+            if (!ModelState.IsValid)
+                return View();
+            bool access = false;
+            Customers cus = customerRepos.Customers.Where<Customers>(x => x.Email == model.Email).FirstOrDefault<Customers>();
+            if (null != cus)
+                if (cus.Password.Trim() == model.Password.Trim())
+                {
+                    access = true;
+                    Session[Utility.USER_SESSIONKEY] = cus;
+                    if (model.IsToRemeber)
+                        Response.AppendCookie(new HttpCookie(Utility.USER_COOKIEKEY,cus.ID.ToString()));
+                }
+            ViewBag.access = access;
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult Register()
         {
             return View();
         }
-        
 
+        [HttpPost]
+        public ActionResult Register(Customers cus)
+        {
+            if (string.IsNullOrEmpty(cus.Email))
+                ModelState.AddModelError("Email","Please enter your email");
+            if (string.IsNullOrEmpty(cus.Password))
+                ModelState.AddModelError("Password","Please enter a password");
+            if (string.IsNullOrEmpty(cus.Name))
+                ModelState.AddModelError("Name","Please enter your name");
+            if (!ModelState.IsValid)
+                return View();
+            string msg;
+            if (customerRepos.Add(cus, out msg))
+            {
+                msg = "注册成功";
+                cus = customerRepos.Customers.Where<Customers>(x => x.Email == cus.Email).FirstOrDefault<Customers>();
+                Session[Utility.USER_SESSIONKEY] = cus;
+            }
+            else
+                msg = msg == "" ? "注册失败" : msg;
+            ViewBag.msg = msg;
+            return View();
+        }
+
+        public RedirectResult LogOff(string preUrl)
+        {
+            Session[Utility.USER_SESSIONKEY] = null;
+            Response.Cookies[Utility.USER_COOKIEKEY].Expires = DateTime.Now;
+            return Redirect(preUrl);
+        }
     }
 }

@@ -8,6 +8,9 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Web.Models;
 using Web.Binders;
+using Domain;
+using Web.Infrastructure;
+using Domain.Abstract;
 
 namespace Web
 {
@@ -62,8 +65,9 @@ namespace Web
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            ControllerBuilder.Current.SetControllerFactory(new Infrastructure.NinjectControllerFactory());
+            ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
             ModelBinders.Binders.Add(typeof(SessionCart), new CartModelBinder());
+            ModelBinders.Binders.Add(typeof(Customers),new CustomerBinder(new NinjectControllerFactory().GetInstance<ICustomers>()));
         }
     }
 }

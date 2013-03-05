@@ -5,13 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using Domain;
 using Domain.Abstract;
+using Web.Infrastructure;
 
 namespace Web.Binders
 {
     public class CustomerBinder : IModelBinder
     {
-        private const string sessionKey = "user";
-        private const string cookieKey = "uid";
 
         private ICustomers customersRepos;
 
@@ -23,13 +22,22 @@ namespace Web.Binders
 
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
-            Customers ctmr = (Customers)controllerContext.HttpContext.Session[sessionKey];
+            //return null;
+            Customers ctmr = (Customers)controllerContext.HttpContext.Session[Utility.USER_SESSIONKEY];
             if (null == ctmr)
             {
-                Object uid = controllerContext.HttpContext.Request.Cookies[cookieKey];
-                if (null == uid)
+                Object objUid = controllerContext.HttpContext.Request.Cookies[Utility.USER_COOKIEKEY];
+                if (null == objUid)
                     return null;
-                ctmr = customersRepos.Customers.Where<Customers>(x => x.ID.ToString() == uid.ToString()).FirstOrDefault<Customers>();
+                try
+                {
+                    int uid = Convert.ToInt32(((HttpCookie)objUid).Value);
+                    ctmr = customersRepos.Customers.Where<Customers>(x => x.ID == uid).FirstOrDefault<Customers>();
+                }
+                catch
+                {
+                    return null;
+                }
             }
             return ctmr;
         }

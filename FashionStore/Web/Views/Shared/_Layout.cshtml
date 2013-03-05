@@ -15,87 +15,13 @@
         <div class="chl-poster simple" id="header">
             <div id="site-nav">
                 <ul class="quick-menu">
-                    <li class="home"><a href="#">首页</a> </li>
-                    @*<li><a href="#">我的订单</a></li>
-                    <li class="mytaobao menu-item">
-                        <div class="menu">
-                            <a class="menu-hd" href="#" target="_top" rel="nofollow">My Fashion<b></b></a>
-                            <div class="menu-bd">
-                                <div class="menu-bd-panel">
-                                    <div>
-                                        <a href="#" rel="nofollow">已买到的宝贝</a>
-                                        <a href="#" rel="nofollow">已卖出的宝贝</a>
-                                    </div>
-                                </div>
-                                <s class="r"></s><s class="rt"></s><s class="lt"></s><s class="b"></s><s class="b b2"></s><s class="rb"></s><s class="lb"></s>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="search menu-item">
-                        <div class="menu">
-                            <span class="menu-hd">
-                                <s></s>搜索<b></b></span>
-                            <div class="menu-bd">
-                                <div class="menu-bd-panel">
-                                    <form name="topSearch" action="http://s.taobao.com/search?ssid=s0">
-                                        <input
-                                            maxlength="60" name="q">
-                                        <button type="submit">搜 索</button>
-                                        <input type="hidden"
-                                            value="newsearch" name="shopf">
-                                    </form>
-                                </div>
-                                <s class="r"></s><s class="rt"></s><s class="lt"></s><s class="b"></s><s class="b b2"></s><s class="rb"></s><s class="lb"></s>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="services menu-item last">
-                        <div class="menu">
-                            <a class="menu-hd" href="#" target="_top">网站导航<b></b></a>
-                            <div class="menu-bd" style="WIDTH: 210px; HEIGHT: 262px; _width: 202px">
-                                <div class="menu-bd-panel">
-                                    <dl>
-                                        <dt><a href="#">购物</a>
-                                        <dd>
-                                            <a href="#">商城</a>
-                                            <a href="#">电器城</a>
-                                            <a href="#">嗨淘</a>
-                                            <a href="#">全球购</a>
-                                            <a href="#">跳蚤街</a>
-                                            <a href="#">礼物</a>
-                                            <a href="#">促销</a>
-                                            <a href="#">机票</a>
-                                            <a href="#">彩票</a>
-                                            <a href="#">创意</a>
-                                        </dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><a href="#">门户</a>
-                                        <dd><a href="#">服饰</a> <a href="#">女人</a> <a href="#">美容</a> <a href="#">居家</a> <a href="#">男人</a> <a href="#">数码</a> <a href="#">亲子</a> <a href="#">时尚</a> <a href="#">试用</a> <a href="#">心得</a> <a href="#">帮派</a> <a href="#">画报</a> <a href="#">淘女郎</a> <a href="#">社区</a> <a href="#">宝贝传奇</a>
-                                        </dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><a href="#">淘江湖</a> &nbsp;<a href="#">手机淘宝</a> </dt>
-                                    </dl>
-                                    <dl>
-                                        <dt><a href="#">帮助中心</a>
-                                        <dd><a href="#">交易安全</a> <a href="#">维权中心</a> </dd>
-                                    </dl>
-                                    <dl class="last">
-                                        <dd><strong style="FONT-WEIGHT: bold"><a href="#">更多内容</a></strong></dd>
-                                    </dl>
-                                </div>
-                                <s class="r"></s><s class="rt"></s><s class="lt"></s><s class="b" style="WIDTH: 169px"></s><s class="b b2" style="WIDTH: 169px"></s><s class="rb"></s><s class="lb"></s>
-                            </div>
-                        </div>
-                    </li>*@
+                    @{Html.RenderAction("NavPanelUserInfo", "main");}
                     <li class="cart">
-                        <a href="#" rel="nofollow">
-                            <s></s>购物车 </a></li>
-                    @*<li class="favorite">
-                        <a href="#" rel="nofollow">收藏夹</a>
-                    </li>*@
-                    
+                        <a href="/cart" rel="nofollow">
+                            <s></s>购物车 
+                        </a></li>
+                    <li class="home"><a href="/">回到首页</a> </li>
+                    <li >@Html.ActionLink("退出登录","LogOff",new { controller="Main",preUrl=Request.Path})</li>
                 </ul>
             </div>
         </div>
@@ -164,7 +90,7 @@
         </ul>
     </div>*@
 
-    <div style="min-width:500px;">
+    <div style="min-width: 500px;">
         @RenderBody()
     </div>
     <div class="spacer"></div>

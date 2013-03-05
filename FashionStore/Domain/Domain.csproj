@@ -101,7 +101,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EFModels.edmx</DependentUpon>
     </Compile>
-    <Compile Include="ExtentedModels\Customers.cs" />
+    <Compile Include="ModelExtention\Customers.cs" />
     <Compile Include="FiltCatagories.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>

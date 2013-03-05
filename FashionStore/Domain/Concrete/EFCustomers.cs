@@ -17,7 +17,7 @@ namespace Domain.Concrete
 
         public bool Add(Customers customer,out string err)
         {
-            err = "插入失败";
+            err = "";
             if (Customers.Where<Customers>(x => x.Email == customer.Email).Count<Customers>() > 0)
             {
                 err = "已存在该用户名";

@@ -1,0 +1,17 @@
+﻿@using Domain;
+@model Customers
+
+@if (ViewBag.login)
+{
+    <li>您好，&nbsp;<a href="/myhome">@Model.Name</a></li>
+}
+else
+{ 
+    <li>
+        <a href="/main/register?preurl=@Request.Path">注册</a>&nbsp;| &nbsp;
+        <a href="/main/login?preurl=@Request.Path">登录</a>&nbsp;
+    </li>
+}
+
+
+                    

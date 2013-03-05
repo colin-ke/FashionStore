@@ -10,7 +10,7 @@ namespace Domain
         public Genders Gender 
         {
             get { return gender ? Genders.Male : Genders.Female; }
-            set { Gender = value; gender = value == Genders.Male ? true : false; }
+            set { gender = value == Genders.Male ? true : false; }
         }
 
         public bool CheckPassword(string pwd)

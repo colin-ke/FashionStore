@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Domain;
+@model Customers
+@{
     Layout = null;
 }
 
@@ -8,8 +10,45 @@
 <head>
     <title>Register</title>
     <link href="/Content/Login.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.7.1.min.js"></script>
+    <style type="text/css">
+        .input-validation-error {
+            border: 1px solid #ff0000;
+            background-color: #ffeeee;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $("form").submit(function () {
+                var pwd = $("#Password").attr("value");
+                var confirm = $("#confirmPwd").attr("value");
+                if (pwd.toString() != confirm.toString()) {
+                    alert("重复密码输入不一致");
+                    return false;
+                }
+                if (pwd.length < 6 || pwd.length > 20) {
+                    alert("密码长度应在6-20个字符内");
+                    return false;
+                }
+                if ($("#Name").attr("value").length > 20) {
+                    alert("昵称长度应小于20个字符");
+                    return false;
+                }
+            });
+        })
+    </script>
 </head>
 <body>
+    @if (ViewBag.msg != null)
+    { 
+        <script type="text/javascript">
+            $(function () {
+                alert("@ViewBag.msg");
+                if("@ViewBag.msg" == "注册成功")
+                    window.location.href = "/";
+            });
+        </script>
+    }
     <div id="wrapper">
         <div id="head_wrap">
             <div id="header" class="clearfix">
@@ -25,45 +64,49 @@
             <div id="content" class="clearfix">
                 <div class="section">
                     <span class="sec_top_dark"></span>
-                    <div class="sec_content clearfix" style="height: 500px;">
+                    <div class="sec_content clearfix" style="height: 580px;">
                         <div id="reg_form" class="unlogin_con">
                             <h3 class="tit">
                                 <div class="tit_text"><span class="fYHei">注册</span><span class="tit_des">请填入以下信息</span></div>
                             </h3>
-                            <form action="/member/register" method="post" name="form" onsubmit="return checkreg();">
+                            @using(Html.BeginForm())
+                            {
                                 <div class="regForm">
                                     <p>
                                         <label class="f_label" for="email_reg">输入常用邮箱：</label>
-                                        <input type="text" id="email_reg" class="noime txt_input r3px" name="email" value="" onblur="checkmail();" spellcheck="false">
-                                        <input type="hidden" name="invite_code" value="">
+                                        @Html.TextBoxFor(x => x.Email, new { @class = "noime txt_input r3px", })
                                         <span class="hint" id="email_info">用来登录,建议使用常用Email</span>
                                     </p>
                                     <p>
                                         <label class="f_label" for="password_reg">密码：</label>
-                                        <input type="password" id="password_reg" class="txt_input r3px" maxlength="20" name="password" value="" onblur="checkPasswords();">
+                                        @Html.TextBoxFor(x=>x.Password,new {@class="txt_input r3px",type="password"})
+                                        <span class="hint">6-20个字符</span>
+                                    </p>
+                                    <p>
+                                        <label class="f_label" >重复密码：</label>
+                                        <input type="password"class="txt_input r3px" id="confirmPwd"/>
                                         <span class="hint" id="password_info">6-20个字符</span>
                                     </p>
                                     <p>
-                                        <label class="f_label" for="nickname_reg">昵称：</label>
-                                        <input name="nickname" type="text" class="txt_input r3px" id="nickname_reg" maxlength="12" onblur="checkname();" value="" spellcheck="false">
-                                        <span class="hint" id="name_info">使用你在网上常用昵称，小于20个字符</span>
+                                        <label class="f_label" >昵称：</label>
+                                        @Html.TextBoxFor(x => x.Name, new { @class="txt_input r3px" })
+                                        <span class="hint" >使用你在网上常用昵称，小于20个字符</span>
                                     </p>
                                     <p id="gender" onchange="checkgender();">
                                         <label class="f_label" for="gender">性别：</label>
                                         <span class="gender">
-                                            <input type="radio" name="gender" value="M">男</span>
+                                            @*<input type="radio" name="gender" value="M">男</span>*@
+                                            @Html.RadioButtonFor(x => x.Gender, 0, new { @checked="true" })男</span>
                                         <span class="gender">
-                                            <input type="radio" name="gender" value="F">女</span>
-                                        <span class="hint warning" id="gender_info" style="display: none;">请选择性别</span>
+                                           @* <input type="radio" name="gender" value="F">女</span>*@
+                                            @Html.RadioButtonFor(x=>x.Gender,1)女</span>
                                     </p>
                                     <p class="acts">
-                                        <input type="hidden" name="submit" value="11">
-                                        <input type="hidden" name="target" value="">
-                                        <input class="text blue_btn blue_btn2 r3px f14" style="margin-left: 200px;" type="submit" value="注 册" id="reg_submit" name="regsubmit">
+                                        <input class="text blue_btn blue_btn2 r3px f14" style="margin-left: 200px;" id="btnSubmit" type="submit" value="注 册" >
                                         <span id="submiting"></span>
                                     </p>
                                 </div>
-                            </form>
+                            }
                         </div>
                     </div>
                     <span class="sec_bot_dark"></span>

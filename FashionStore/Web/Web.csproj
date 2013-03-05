@@ -109,6 +109,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
+    <Compile Include="Infrastructure\Utility.cs" />
+    <Compile Include="Models\Login.cs" />
     <Compile Include="Models\SessionCart.cs" />
     <Compile Include="Models\JsonCart.cs" />
     <Compile Include="Models\PagingInfo.cs" />
@@ -309,6 +311,7 @@
     <Content Include="Views\Product\ProductDetail.cshtml" />
     <Content Include="Views\Main\Login.cshtml" />
     <Content Include="Views\Main\Register.cshtml" />
+    <Content Include="Views\Main\NavPanelUserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
