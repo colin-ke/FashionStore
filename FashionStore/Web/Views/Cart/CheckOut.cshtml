@@ -1,118 +1,264 @@
-﻿<link href="/Content/Cart.css" rel="stylesheet" />
+﻿@using Domain;
+@using Web.Models;
+@model CheckoutInfo
+<link href="/Content/Cart.css" rel="stylesheet" />
 @{
     ViewBag.Title = "CheckOut";
+    Customers customer = ViewBag.customer;
+    SessionCart cart = ViewBag.cart;
+    List<ShippingMethods> sMethods = ViewBag.sMethods;
+    List<PaymentMethods> pMethods = ViewBag.pMethods;
 }
+
+<script type="text/javascript">
+    var newShipping = false;
+    $(function () {
+
+    });
+
+    function CheckShipInfo() {
+        if (!newShipping)
+            return true;
+        res = true;
+        if ($("#Shipping_Name").attr("value") == "") {
+            $("#ship_name_valid_msg").show();
+            res = false;
+        }
+        else
+            $("#ship_name_valid_msg").hide();
+
+        if ($("#Shipping_Address").attr("value") == "") {
+            $("#ship_address_valid_msg").show();
+            res = false;
+        }
+        else
+            $("#ship_address_valid_msg").hide();
+
+        if ($("#Shipping_Zip").attr("value") == "") {
+            $("#ship_zip_valid_msg").show();
+            res = false;
+        }
+        else
+            $("#ship_zip_valid_msg").hide();
+
+        if ($("#Shipping_Phone").attr("value") == "") {
+            $("#ship_num_valid_msg").show();
+            res = false;
+        }
+        else
+            $("#ship_num_valid_msg").hide();
+        return res;
+    }
+
+    function NewShipRbtn_change() {
+        newShipping = true;
+        $("#consignee_edit_info").show();
+        $("a[name = 'ship_modify']").hide();
+    }
+
+    function ShippingChange() {
+        $('#consignee_edit_info').hide();
+        $("a[name='ship_modify']").hide();$(this).find('~ a').show();
+        newShipping = false;
+    }
+
+    function ShipInfoModify(txt) {
+        var strs = txt.split(",");
+        $("#Shipping_Name").attr("value", strs[0].trim());
+        $("#Shipping_Address").attr("value", strs[1].trim());
+        $("#Shipping_Zip").attr("value", strs[2].trim());
+        $("#Shipping_Phone").attr("value", strs[3].trim());
+        $("#consignee_edit_info").show();
+    }
+
+    function ShippingSave() {
+        if (!CheckShipInfo())
+            return;
+        var str;
+        if (!newShipping) {
+            var rbtn = $("input:checked[name='Shipping']")
+            str = rbtn.find("+ span").text();
+        }
+        else {
+            str = $("#Shipping_Name").attr("value") + ", " + $("#Shipping_Address").attr("value") + ", " + $("#Shipping_Zip").attr("value") + ", " + $("#Shipping_Phone").attr("value");
+        }
+        $("#li_shipview").text(str);
+        $("#detail1").hide();
+        $("#view1").show();
+    }
+
+    function sMethodSave() {
+        var span = $("input:checked[name='ShippingMethod'] + span");
+        var str = span.text();
+        var money = $("#goodsTotal").text();
+        var sid = span.attr("sid");
+        $("#li_sMethodview").text(str);
+        $("#view2").show();
+        $("#detail2").hide();
+        $.post('@Url.Action("GetExtraPay","Cart")', { sid: sid, goodTotal: money }, function (data) {
+            $("#extraPay").text(data);
+            total = parseFloat(money) + parseFloat(data);
+            $("#total").text("￥"+total);
+        });
+    }
+
+    function pMethodSave() {
+        var str = $("input:checked[name='PaymentMethod'] + b").text();
+        $("#li_pMethodview").text(str);
+        $("#view3").show();
+        $("#detail3").hide();
+    }
+</script>
 
 <div class="shoppingcart_wrapper">
     <div class="shoppingcart_nav shoppingcart_nav2">
-        <h1><a href="http://shopping.dangdang.com/shoppingcart/shopping_cart.aspx?ref=checkout-0-E">我的购物车</a></h1>
+        <h1><a href="/cart/">我的购物车</a></h1>
     </div>
     <div class="shoppingcart_footer_experience">请确认以下信息，然后提交订单</div>
+    @Html.BeginForm()
     <div class="clearing_border">
         @*收货人信息*@
         <div id="div_consignee">
-            <div class="consignee" id="consignee_tips">
+
+            @{
+                //bool hasShipping = false;
+                //string shippingInfo = customer
+                //if (customer.Shipping.Count > 0)
+                //{
+                //    hasShipping = true;    
+                //}
+                
+            }
+
+            <div id="view1" class="refer_m" style="display:none;">
+                <h4>收货人信息 <span class="modify"><a onclick='$("#view1").hide();$("#detail1").show();' href="javascript:void(0)">[修改]</a></span></h4>
+                <ul>
+                    <li id="li_shipview"></li>
+                </ul>
+            </div>
+
+            <div id="detail1" class="consignee" id="consignee_tips" >
                 <h3>收货人信息&#12288; <span class="look">
-                    <a id="btn_consignee_close" href="javascript:for_99click();" class="">[关闭]</a></span>
+                    <a onclick='$("#view1").show();$("#detail1").hide();' href="javascript:void(0)" class="">[关闭]</a></span>
                 </h3>
                 <div id="div_myaddress" class="consignee_info">
+
+                    @foreach (var item in customer.Shipping)
+                    {
+                        <p>
+                            @Html.RadioButtonFor(x => x.Shipping, item, new { onchange = "ShippingChange()" })
+                            <span>@item.ToString()</span>&nbsp;&nbsp;
+                            <a onclick="ShipInfoModify($(this).prev().text());" style="display: none;" name="ship_modify" href="javascript:void(0)">修改</a>
+                        </p>
+                    }
+                    @*<p>
+                        <input type="radio" value="0" name="rd_addr_id"><input type="hidden" value="27947825">
+                        <span>柯钦武，中国 广东 广州市 天河区华南农业大学华山10-210，510642，15818818539，</span>&nbsp;&nbsp;
+                        <a onclick="javascript:openConsignee();" href="javascript:for_99click();" class="" id="edit_0">修改</a>
+                    </p>*@
                     <p>
-                        <input type="radio" value="0" name="rd_addr_id"><input type="hidden" value="27947825"><span>柯钦武，中国 广东 广州市 天河区华南农业大学华山10-210，510642，15818818539，</span>&nbsp;&nbsp;<a onclick="javascript:openConsignee();" href="javascript:for_99click();" class="" id="edit_0">修改</a>
-                    </p>
-                    <p>
-                        <input type="radio" id="rd_new_addr" value="-1" name="rd_addr_id"><input type="hidden" value="0"><span>使用新地址</span>
+                        <input type="radio" onchange="NewShipRbtn_change()" id="rd_new_addr" name="Shipping"><input type="hidden" value="0"><span>使用新地址</span>
                     </p>
                 </div>
                 <div id="consignee_edit_info" class="consignee_modify consignee_modify">
                     <div id="div_consignee_edit_info_display">
+                        @Html.HiddenFor(x => x.Shipping.ID)
                         <div class="m_list">
                             <span class="text">收&nbsp;货&nbsp;人：</span>
-                            <input type="text" value="柯钦武" id="txt_ship_name" maxlength="40" class="textbox_4">
-                            <span style="visibility: hidden;" id="ship_name_valid_msg" class="news_red"></span>
+                            @Html.TextBoxFor(x => x.Shipping.Name, new { @class = "textbox_4" })
+                            <span style="display: none;" id="ship_name_valid_msg" class="news_red2">请填写收货人姓名</span>
                         </div>
-                        <div id="div_consignee_addr" class="m_list">
-                            <span class="text">地&nbsp;&nbsp;&nbsp;&nbsp;区：</span>
-                            <span id="spn_province_city" style="display: block;">
-
-                                <select class="select_w" id="sel_city">
-                                    <option value="0">请选择</option>
-                                </select>
-                                <span id="span_town" style="display: block;">
-                                    <select class="select_w" id="sel_town">
-                                        <option value="0">请选择</option>
-                                    </select></span><span class="prompt"></span></span><span id="region_id_msg_valid" class="news_red2"></span><span class="hint"><a target="_blank" href="http://support.dangdang.com/helpcenter/api_cms/helpcenter/question_sort/2240/180088.shtml?ref=checkout-0-A">查看可货到付款地区&gt;&gt;</a></span>
+                        <div class="m_list">
+                            <span class="text">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</span>
+                            @Html.TextBoxFor(x => x.Shipping.Address, new { @class = "textbox_address" })
+                            <span style="display: none;" id="ship_address_valid_msg" class="news_red2">请填写地址</span>
                         </div>
-                        <div class="m_list"><span class="text">街道地址：<span id="div_country_province_city" class="">中国，广东，广州市，天河区，</span></span><input type="text" onblur="javascript:checkAddress(this);" onfocus="javascript:clearAddress(this);" value="华南农业大学华山10-210" id="txt_ship_address" maxlength="100" class="textbox_address"><span style="visibility: hidden" id="ship_address_valid_msg" class="news_red2"></span></div>
-                        <div class="m_list"><span class="text">邮&nbsp;&nbsp;&nbsp;&nbsp;编：</span><input type="text" value="510642" id="txt_ship_zip" maxlength="20" class="textbox_4"><span style="visibility: hidden" class="news_red2" id="ship_zip_valid_msg"></span></div>
-                        <div class="m_list"><span class="text">手&nbsp;&nbsp;&nbsp;&nbsp;机：</span><input type="text" maxlength="20" value="15818818539" id="txt_ship_mb" class="textbox_4"><span class="text"><span class="hint">或者</span>固定电话：</span><input type="text" maxlength="20" value="" id="txt_ship_tel" class="textbox_4"><span style="visibility: hidden" id="ship_mb_valid_msg" class="news_red2"></span></div>
+                        <div class="m_list">
+                            <span class="text">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编：</span>
+                            @Html.TextBoxFor(x => x.Shipping.Zip, new { @class = "textbox_4" })
+                            <span style="display: none;" class="news_red2" id="ship_zip_valid_msg">请填写邮编</span>
+                        </div>
+                        <div class="m_list">
+                            <span class="text">手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：</span>
+                            @Html.TextBoxFor(x => x.Shipping.Phone, new { @class = "textbox_4" })
+                            <span style="display: none;" id="ship_num_valid_msg" class="news_red2">请填写联系方式</span>
+                        </div>
                     </div>
-                    <div class="button_ts">
-                        <input type="button" value="确认收货人信息" id="btn_consignee_save" class="save_button"><div class="clear"></div>
-                    </div>
+                    
                 </div>
+                <div class="button_ts">
+                        <input type="button" value="确认收货人信息" id="btn_consignee_save" onclick="ShippingSave()" class="save_button"><div class="clear"></div>
+                    </div>
             </div>
         </div>
         @*送货方式*@
         <div id="div_shipment">
-            <div class="consignee" id="shipment_tips">
+            <div id="view2" class="refer_m" style="display:none;">
+                <h4>送货方式 <span class="modify"><a onclick='$("#view2").hide();$("#detail2").show();' href="javascript:void(0)">[修改]</a></span></h4>
+                <ul>
+                    <li id="li_sMethodview">普通快递送货上门</li>
+                </ul>
+            </div>
+            <div class="consignee" id="detail2" >
                 <h3 class="change_h3_h"><span id="ship_type_tips">送货方式</span>&#12288;
                     <span class="add_gray2">
-                        <a id="btn_shipment_close" href="javascript:for_99click();" class="">[关闭]</a>
-                    </span></h3>
+                        <a onclick='$("#view2").show();$("#detail2").hide();' href="javascript:void(0)">[关闭]</a>
+                    </span>
+                </h3>
                 <div id="rd_shipinfo">
                     <div class="delivery_title">
                         <ul>
                             <li class="height2"><span class="delivery_text_l1">送货方式</span><span class="delivery_text_l2">运费</span></li>
                         </ul>
                     </div>
-                    <div class="delivery_text">
-                        <ul>
-                            <li>
-                                <input type="radio" value="1" name="rd_ship_type" class="choice_solo"><span class="delivery_text_l2">普通快递送货上门 （支持货到付款）</span><span class="delivery_text_c"> 免运费</span></li>
-                        </ul>
-                    </div>
-                    <div class="delivery_text">
-                        <ul>
-                            <li>
-                                <input type="radio" value="2" name="rd_ship_type" class="choice_solo"><span class="delivery_text_l2">邮政特快专递 EMS （不支持货到付款）</span><span class="delivery_text_c"> 订单总金额的40%,最低20元</span></li>
-                            <div id="ship_type_cod_2" class=""></div>
-                        </ul>
-                    </div>
-                    <div class="delivery_text">
-                        <ul>
-                            <li>
-                                <input type="radio" value="11" name="rd_ship_type" class="choice_solo"><span class="delivery_text_l2">自提 </span><span class="delivery_text_c">5元（自提满29元免运费）</span></li>
-                        </ul>
-                    </div>
+                    @foreach (var sm in sMethods)
+                    { 
+                        <div class="delivery_text">
+                            <ul>
+                                <li>
+                                    @Html.RadioButtonFor(x => x.ShippingMethod, sm, new { @class = "choice_solo" })
+                                    <span class="delivery_text_l2" sid="@sm.ID">@sm.Name</span>
+                                    <span class="delivery_text_c"> @sm.ExtraPayDescription</span>
+                                </li>
+                            </ul>
+                        </div>
+                    }
                 </div>
                 <div class="clear"></div>
                 <div class="button_ts">
-                    <input type="button" value="确认送货方式" id="btn_shipment_save" class="put_in_red"><div class="clear"></div>
+                    <input type="button" value="确认送货方式" onclick="sMethodSave()" class="put_in_red"><div class="clear"></div>
                 </div>
             </div>
         </div>
         @*付款方式*@
         <div id="div_payment">
-            <div class="consignee" id="payment_tips">
+            <div id="view3" class="refer_m" style="display:none;">
+                <h4>付款方式 <span class="modify"><a onclick='$("#view3").hide();$("#detail3").show();' href="javascript:void(0)">[修改]</a></span></h4>
+                <ul>
+                    <li id="li_pMethodview">普通快递送货上门</li>
+                </ul>
+            </div>
+            <div class="consignee" id="detail3">
                 <h3>付款方式&#12288;<span class="add_gray2">
-                    <a id="btn_payment_close" href="javascript:for_99click();" class="">[关闭]</a></span></h3>
+                    <a onclick='$("#view3").show();$("#detail3").hide();' href="javascript:void(0)">[关闭]</a></span></h3>
                 <div id="rd_pay_id">
                     <div class="clearing_payment">
-                        <p class="clearing_payment_nav">
-                            <input type="radio" value="1" name="rd_pay_id"><b>网上支付</b>&nbsp;&nbsp;<span class="hint"><span class="hint">您需要先拥有一张已开通网上支付功能的银行卡。 </span></span>
-                        </p>
-
-                        <p class="clearing_payment_nav">
-                            <input type="radio" value="0" name="rd_pay_id"><b>货到付款</b>&nbsp;&nbsp;<span class="hint">您需要在收货时向送货员支付订单款项。</span>
-                        </p>
-
-                        <p class="clearing_payment_nav">
-                            <input type="radio" value="2" name="rd_pay_id">银行转帐&nbsp;&nbsp;<span class="hint">您需要先去银行转帐，所购商品将在款项到达当当网帐户后发出，到款时间一般为<span class="red">1-3个工作日</span>。</span>
-                        </p>
+                        @foreach (var pm in pMethods)
+                        { 
+                            <p class="clearing_payment_nav">
+                                @Html.RadioButtonFor(x=>x.PaymentMethod,pm)
+                                <b>@pm.Name</b>&nbsp;&nbsp;&nbsp;
+                                <span class="hint">
+                                    <span class="hint">@pm.Description</span>
+                                </span>
+                            </p>
+                        }
                     </div>
                 </div>
                 <div class="button_ts">
-                    <input type="button" value="确认付款方式" id="btn_payment_save" name="" class="put_in"><span class="news_red2" id="span_payment_save_tips"></span><div class="clear"></div>
+                    <input type="button" value="确认付款方式" onclick="pMethodSave()"  class="put_in">
+                    <span class="news_red2" id="span_payment_save_tips"></span>
+                    <div class="clear"></div>
                 </div>
             </div>
         </div>
@@ -123,7 +269,7 @@
                 <div class="merch_detail">
                     <div class="business_name">
                         <span class="experience">[
-                            <a name="gobackshoppingcart" href="http://shopping.dangdang.com/shoppingcart/shopping_cart.aspx?ref=checkout-0-D">返回修改购物车
+                            <a name="gobackshoppingcart" href="/cart/">返回修改购物车
                             </a>]
 
                         </span>
@@ -139,25 +285,21 @@
                                     <li class="col2_total">小计</li>
                                 </ul>
                                 <div class="shoppingcart_general">
-                                    <ul class="shoppingcart_list">
-                                        <li class="col2_name" title="当当优品 男士棉天丝 柔软水洗 商务休闲牛仔长裤 BM0082 藏蓝 31">当当优品 男士棉天丝 柔软水洗 商务休闲牛仔长裤 BM0082...</li>
-                                        <li class="col2_price">￥199.00</li>
-                                        <li class="col2_count">1</li>
-                                        <li class="col2_total">￥199.00</li>
-                                    </ul>
-                                    <ul class="shoppingcart_list">
-                                        <li class="col2_name" title="当当优品 男士棉天丝 柔软水洗 商务休闲牛仔长裤 BM0082 藏蓝 31">当当优品 男士棉天丝 柔软水洗 商务休闲牛仔长裤 BM0082...</li>
-                                        <li class="col2_price">￥199.00</li>
-                                        <li class="col2_count">1</li>
-                                        <li class="col2_total">￥199.00</li>
-                                    </ul>
+                                    @foreach (var item in cart.Items)
+                                    { 
+                                        <ul class="shoppingcart_list">
+                                            <li class="col2_name" title="@item.Title">@item.Title</li>
+                                            <li class="col2_price">￥@item.Products.Price</li>
+                                            <li class="col2_count">@item.Quantity</li>
+                                            <li class="col2_total">￥@item.ItemTotal</li>
+                                        </ul>
+                                    }
                                     <br class="clear">
                                     <span class="price_charge_border"></span>
                                 </div>
                                 <div class="price_charge">
-                                    <p class="p_charge1">商品金额总计：<span>￥<span id="sp_bargin_total">199.00</span></span></p>
-                                    <p class="p_charge1">运费：<span id="sp_shipping_fee">￥0.00</span></p>
-                                    @*<p class="change_total2">您需支付：<span>￥<span id="sp_payable">199.00</span></span></p>*@
+                                    <p class="p_charge1">商品金额总计：<span>￥<span id="goodsTotal">@cart.ComputeTotalValue()</span></span></p>
+                                    <p class="p_charge1">运费：￥<span id="extraPay">-.--</span></p>
                                     <br class="clear">
                                 </div>
                             </div>
@@ -165,7 +307,7 @@
                     </div>
 
                     <div class="change_total2">
-                        <span id="p_payable_tips" class="price">需支付总金额：<span>￥378.00</span></span><br class="clear">
+                        <span id="p_payable_tips" class="price">需支付总金额：<span id="total">￥-.--</span></span><br class="clear">
                     </div>
                     <div class="order_refer order_refer2">
                     </div>
@@ -186,4 +328,5 @@
         </div>
         <div class="shadow_b add_shadow_b"></div>
     </div>
+    @{Html.EndForm();}
 </div>

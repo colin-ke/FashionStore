@@ -105,6 +105,8 @@
     <Compile Include="FiltCatagories.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelExtention\Shipping.cs" />
+    <Compile Include="ModelExtention\ShippingMethods.cs" />
     <Compile Include="NavCatagories.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>

@@ -56,6 +56,7 @@ namespace Web.Models
         public Colors Color { get; set; }
         public Sizes Size { get; set; }
         public int Quantity { get; set; }
+        public decimal ItemTotal { get { return Products.Price * Quantity; } }
         public string Title
         {
             get

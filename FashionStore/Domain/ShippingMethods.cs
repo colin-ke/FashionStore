@@ -21,8 +21,11 @@ namespace Domain
     
         public int ID { get; set; }
         public string Name { get; set; }
-        public int ExtraPay { get; set; }
-        public string Description { get; set; }
+        public Nullable<decimal> OpNum { get; set; }
+        public string Operation { get; set; }
+        public Nullable<int> MinPay { get; set; }
+        public Nullable<int> MaxFree { get; set; }
+        public string ExtraPayDescription { get; set; }
     
         public virtual ICollection<Orders> Orders { get; set; }
     }

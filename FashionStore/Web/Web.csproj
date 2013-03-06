@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
     <Compile Include="Infrastructure\Utility.cs" />
+    <Compile Include="Models\CheckoutInfo.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\SessionCart.cs" />
     <Compile Include="Models\JsonCart.cs" />

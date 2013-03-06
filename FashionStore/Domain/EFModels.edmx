@@ -195,8 +195,8 @@
           <Property Name="FiltCatagoryID" Type="int" Nullable="false" />
           <Property Name="AttrTitleID" Type="int" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-      警告 6002: 表/视图“FasionStore.dbo.CataProducts”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'FashionDB.dbo.CataProducts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="CataProducts">
           <Key>
@@ -221,9 +221,9 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
           <Property Name="Gender" Type="bit" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="20" />
         </EntityType>
         <EntityType Name="FiltCatagories">
           <Key>
@@ -284,6 +284,7 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Pictures">
           <Key>
@@ -294,8 +295,8 @@
           <Property Name="PicName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="IsShow" Type="bit" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-      警告 6002: 表/视图“FasionStore.dbo.ProductAttrs”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'FashionDB.dbo.ProductAttrs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="ProductAttrs">
           <Key>
@@ -331,8 +332,6 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CustomerID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
-          <Property Name="Province" Type="nvarchar" Nullable="false" MaxLength="20" />
-          <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="20" />
           <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Zip" Type="nvarchar" Nullable="false" MaxLength="20" />
           <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="20" />
@@ -343,8 +342,11 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="ExtraPay" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="OpNum" Type="numeric" Precision="3" Scale="1" />
+          <Property Name="Operation" Type="char" MaxLength="1" />
+          <Property Name="MinPay" Type="int" />
+          <Property Name="MaxFree" Type="int" />
+          <Property Name="ExtraPayDescription" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Sizes">
           <Key>
@@ -354,8 +356,8 @@
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
         </EntityType>
-        <!--生成过程中发现错误:
-      警告 6002: 表/视图“FasionStore.dbo.BrandCata”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'FashionDB.dbo.BrandCata' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="BrandCata">
           <Key>
@@ -872,9 +874,9 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
           <Property Name="gender" Type="Boolean" Nullable="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:GetterAccess="Private" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Shipping" Relationship="FasionStoreModel.FK_Addresses_Customers" FromRole="Customers" ToRole="Shipping" />
         </EntityType>
         <EntityType Name="FiltCatagories">
@@ -946,6 +948,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Orders" Relationship="FasionStoreModel.FK_Orders_PaymentMethods" FromRole="PaymentMethods" ToRole="Orders" />
+          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Pictures">
           <Key>
@@ -995,8 +998,6 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomerID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="Province" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="City" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
           <Property Name="Address" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Zip" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
           <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
@@ -1009,9 +1010,12 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="ExtraPay" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Orders" Relationship="FasionStoreModel.FK_Orders_ShippingMethods" FromRole="ShippingMethods" ToRole="Orders" />
+          <Property Type="Decimal" Name="OpNum" Precision="3" Scale="1" />
+          <Property Type="String" Name="Operation" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="MinPay" />
+          <Property Type="Int32" Name="MaxFree" />
+          <Property Type="String" Name="ExtraPayDescription" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Sizes">
           <Key>
@@ -1398,6 +1402,7 @@
           <EntitySetMapping Name="PaymentMethods">
             <EntityTypeMapping TypeName="FasionStoreModel.PaymentMethods">
               <MappingFragment StoreEntitySet="PaymentMethods">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -1440,8 +1445,6 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Province" ColumnName="Province" />
-                <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Zip" ColumnName="Zip" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
@@ -1451,10 +1454,13 @@
           <EntitySetMapping Name="ShippingMethods">
             <EntityTypeMapping TypeName="FasionStoreModel.ShippingMethods">
               <MappingFragment StoreEntitySet="ShippingMethods">
+                <ScalarProperty Name="ExtraPayDescription" ColumnName="ExtraPayDescription" />
+                <ScalarProperty Name="MaxFree" ColumnName="MaxFree" />
+                <ScalarProperty Name="MinPay" ColumnName="MinPay" />
+                <ScalarProperty Name="Operation" ColumnName="Operation" />
+                <ScalarProperty Name="OpNum" ColumnName="OpNum" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ExtraPay" ColumnName="ExtraPay" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Domain;
 using Web.Models;
+using Domain.Abstract;
 
 namespace Web.Controllers
 {
@@ -13,14 +14,44 @@ namespace Web.Controllers
         //
         // GET: /Cart/
 
+        private IShippingMethods sMethodsRepos;
+        private IPaymentMethods pMethodsRepos;
+
+        public CartController(IShippingMethods sm,IPaymentMethods pm)
+        {
+            sMethodsRepos = sm;
+            pMethodsRepos = pm;
+        }
+
         public ActionResult Index(SessionCart cart)
         {
             return View(cart);
         }
 
-        public ActionResult CheckOut()
+        [HttpGet]
+        public ActionResult CheckOut(SessionCart cart,Customers cus)
         {
+            ViewBag.cart = cart;
+            ViewBag.customer = cus;
+            ViewBag.sMethods = sMethodsRepos.ShippingMethods.ToList<ShippingMethods>();
+            ViewBag.pMethods = pMethodsRepos.PaymentMethods.ToList<PaymentMethods>();
             return View();
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult CheckOut(CheckoutInfo info)
+        {
+            return RedirectToAction("Finish");
+        }
+
+        [HttpPost]
+        public string GetExtraPay(int sid, decimal goodTotal)
+        {
+            ShippingMethods sm = sMethodsRepos.ShippingMethods.Where(x => x.ID == sid).FirstOrDefault();
+            if (null == sm)
+                return "0";
+            else
+                return sm.GetExtraPay(goodTotal).ToString();
         }
 
         public ActionResult Finish(SessionCart cart)
