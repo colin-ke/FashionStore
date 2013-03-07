@@ -51,8 +51,10 @@
     <Compile Include="Abstract\IFiltCatagories.cs" />
     <Compile Include="Abstract\INavCatagories.cs" />
     <Compile Include="Abstract\IOrders.cs" />
+    <Compile Include="Abstract\IOrderStatus.cs" />
     <Compile Include="Abstract\IPaymentMethods.cs" />
     <Compile Include="Abstract\IProducts.cs" />
+    <Compile Include="Abstract\IShipping.cs" />
     <Compile Include="Abstract\IShippingMethods.cs" />
     <Compile Include="AttrContents.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
@@ -80,9 +82,11 @@
     <Compile Include="Concrete\EFFiltCatagories.cs" />
     <Compile Include="Concrete\EFNavCatagories.cs" />
     <Compile Include="Concrete\EFOrders.cs" />
+    <Compile Include="Concrete\EFOrderStatus.cs" />
     <Compile Include="Concrete\EFPaymentMethods.cs" />
     <Compile Include="Concrete\EFProducts.cs" />
     <Compile Include="Concrete\EFShippingMethods.cs" />
+    <Compile Include="Concrete\EFShipping.cs" />
     <Compile Include="Customers.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>

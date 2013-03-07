@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Domain;
 using Web.Models;
 using Domain.Abstract;
+using Web.Infrastructure;
 
 namespace Web.Controllers
 {
@@ -16,11 +17,17 @@ namespace Web.Controllers
 
         private IShippingMethods sMethodsRepos;
         private IPaymentMethods pMethodsRepos;
+        private IOrders orderRepos;
+        private IShipping shippingRepos;
+        private IOrderStatus orderStatus;
 
-        public CartController(IShippingMethods sm,IPaymentMethods pm)
+        public CartController(IShippingMethods sm,IPaymentMethods pm,IOrders order,IShipping shipping,IOrderStatus status)
         {
             sMethodsRepos = sm;
             pMethodsRepos = pm;
+            orderRepos = order;
+            shippingRepos = shipping;
+            orderStatus = status;
         }
 
         public ActionResult Index(SessionCart cart)
@@ -39,8 +46,32 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public RedirectToRouteResult CheckOut(CheckoutInfo info)
+        public RedirectToRouteResult CheckOut(CheckoutInfo info,Customers customer,SessionCart cart)
         {
+            if (info.Shipping.ID == 0)
+            {
+                info.Shipping.CustomerID = customer.ID;
+                info.Shipping.Customers = customer;
+                shippingRepos.Add(info.Shipping);
+                info.Shipping = shippingRepos.Shippings.Where(x => x.ToString() == info.Shipping.ToString()).FirstOrDefault();
+            }
+
+            List<OrderProducts> oPdts = cart.Items.Select<CartItem, OrderProducts>(item => new OrderProducts { ProductID = item.Products.ID,Quantity = item.Quantity }).ToList();
+
+            Orders order = new Orders() 
+            {
+                Date = DateTime.Now,
+                Shipping = info.Shipping.ID,
+                PaymentMethod = info.PaymentMethod.ID,
+                ShippingMethod = info.ShippingMethod.ID,
+                OrderProducts = oPdts
+            };
+
+            //order.Shipping1 = shippingRepos.Shippings.Where(x => x.ID == info.Shipping.ID).FirstOrDefault();
+            //order.ShippingMethods = sMethodsRepos.ShippingMethods.Where(x => x.ID == info.ShippingMethod.ID).First();
+            //order.PaymentMethods = pMethodsRepos.PaymentMethods.Where(x => x.ID == info.PaymentMethod.ID).First();
+            orderRepos.Add(order);
+            cart.Clear();
             return RedirectToAction("Finish");
         }
 

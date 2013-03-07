@@ -35,6 +35,8 @@ namespace Web.Infrastructure
             ninjectKernel.Bind<IOrders>().To<EFOrders>();
             ninjectKernel.Bind<IPaymentMethods>().To<EFPaymentMethods>();
             ninjectKernel.Bind<IShippingMethods>().To<EFShippingMethods>();
+            ninjectKernel.Bind<IShipping>().To<EFShipping>();
+            ninjectKernel.Bind<IOrderStatus>().To<EFOrderStatus>();
         }
 
         public T GetInstance<T>()

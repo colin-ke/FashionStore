@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Domain.Abstract
 {
-    public interface IOrders
+    public interface IShipping
     {
-        IQueryable<Orders> Orders { get; }
+        IQueryable<Shipping> Shippings { get; }
 
-        bool Add(Orders order);
+        bool Add(Shipping shipping);
     }
 }

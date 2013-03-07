@@ -13,5 +13,13 @@ namespace Domain.Concrete
         {
             get { return context.Orders; }
         }
+
+
+        public bool Add(Orders order)
+        {
+            order.OrderStatus = context.OrderStatus.Where(status => status.StatusName.Contains("付款")).FirstOrDefault();
+            context.Orders.Add(order);
+            return context.SaveChanges() > 0 ? true : false;
+        }
     }
 }
