@@ -11,7 +11,7 @@ namespace Web.Binders
     public class CartModelBinder : IModelBinder
     {
         SessionCart cart = new SessionCart();
-        private const string sessionKey = Utility.CART_SESSIONKEY;
+        private string sessionKey = Utility.CART_SESSIONKEY;
 
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {

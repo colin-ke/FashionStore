@@ -9,6 +9,6 @@ namespace Domain.Abstract
     {
         IQueryable<Shipping> Shippings { get; }
 
-        bool Add(Shipping shipping);
+        bool SaveProduct(Shipping shipping);
     }
 }

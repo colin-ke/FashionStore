@@ -25,6 +25,7 @@ namespace Domain
         public int Shipping { get; set; }
         public int ShippingMethod { get; set; }
         public Nullable<int> PaymentMethod { get; set; }
+        public Nullable<decimal> TotalPay { get; set; }
     
         public virtual ICollection<OrderProducts> OrderProducts { get; set; }
         public virtual OrderStatus OrderStatus { get; set; }

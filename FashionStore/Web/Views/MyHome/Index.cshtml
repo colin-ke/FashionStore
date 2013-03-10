@@ -1,4 +1,12 @@
-﻿<link href=" /Content/MyHome.css" rel="stylesheet" />
+﻿@using Domain;
+@using Web.Models;
+
+@model List<Orders>
+
+
+
+
+<link href=" /Content/MyHome.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Index";
 }
@@ -24,7 +32,28 @@
                 <span class="list_time">下单时间</span>
                 <span class="list_operation">操作</span>
             </li>
-            <li onmouseover="this.style.background='#f4f4f4'" onmouseout="this.style.background='none'" id="" style="background: none repeat scroll 0% 0% transparent;">
+
+            @foreach (var order in Model)
+            { 
+                <li onmouseover="this.style.background='#f4f4f4'" onmouseout="this.style.background='none'" style="background: none repeat scroll 0% 0% transparent;">
+                <div class="list_other" id="span_4986800668_normal">
+                    <span class="list_order">
+                        <a name="orderid" target="_blank" href="orderdetails.aspx?orderid=4986800668">@order.ID.ToString("D10")</a>
+                    </span>
+                    
+                    <span title="@order.Shipping1.Customers.Name" class="list_name">@order.Shipping1.Name</span>
+                    <span titlt="@order.PaymentMethods.Name" class="list_way">@order.PaymentMethods.Name</span>
+                    <span id="list_total4986800668" class="list_total">￥@order.TotalPay</span>
+                    <span class="list_status">@order.OrderStatus.StatusName</span>
+                    <span class="list_time">@order.Date.ToString("yyyy-MM-dd")</span>
+                    <span id="list_operation_4986800668" class="list_operation">
+                        <a onclick="javascript:return onlinePayCheck('4986800668mobLink','4986800668','./TipPage/payment.aspx?od=4986800668&amp;pd=4986800668&amp;ref=order-0-A&amp;is_package=0&amp;payid=-1&amp;paytype=1&amp;dangdangpay=5757&amp;ebooksymbol=0',1);" target="_blank" href="./TipPage/payment.aspx?od=4986800668&amp;pd=4986800668&amp;ref=order-0-A&amp;is_package=0&amp;payid=-1&amp;paytype=1&amp;dangdangpay=5757&amp;ebooksymbol=0" name="4986800668mobLink" id="4986800668mobLink">网上支付</a> |<a name="chgorder" onmouseout="hidden_modifydiv()" class="modify" id="order4986800668" onmouseover="modify_order('order4986800668','1');">修改</a>| <a href="javascript:orderswin('4986800668CLink','4986800668','4986800668','0','3|1|0','0','0');" name="4986800668CLink" id="4986800668CLink">取消</a>
+                    </span>
+                </div>
+            </li>
+            }
+
+            @*<li onmouseover="this.style.background='#f4f4f4'" onmouseout="this.style.background='none'" id="" style="background: none repeat scroll 0% 0% transparent;">
                 <div class="list_other" id="span_4986800668_normal">
                     <span class="list_order">
                         <a name="orderid" target="_blank" href="orderdetails.aspx?orderid=4986800668">4986800668</a>
@@ -39,21 +68,7 @@
                         <a onclick="javascript:return onlinePayCheck('4986800668mobLink','4986800668','./TipPage/payment.aspx?od=4986800668&amp;pd=4986800668&amp;ref=order-0-A&amp;is_package=0&amp;payid=-1&amp;paytype=1&amp;dangdangpay=5757&amp;ebooksymbol=0',1);" target="_blank" href="./TipPage/payment.aspx?od=4986800668&amp;pd=4986800668&amp;ref=order-0-A&amp;is_package=0&amp;payid=-1&amp;paytype=1&amp;dangdangpay=5757&amp;ebooksymbol=0" name="4986800668mobLink" id="4986800668mobLink">网上支付</a> |<a name="chgorder" onmouseout="hidden_modifydiv()" class="modify" id="order4986800668" onmouseover="modify_order('order4986800668','1');">修改</a>| <a href="javascript:orderswin('4986800668CLink','4986800668','4986800668','0','3|1|0','0','0');" name="4986800668CLink" id="4986800668CLink">取消</a>
                     </span>
                 </div>
-            </li>
-            <li onmouseover="this.style.background='#f4f4f4'" onmouseout="this.style.background='none'" id="" style="background: none repeat scroll 0% 0% transparent;">
-                <div class="list_other" id="">
-                    <a name="orderid" target="_blank" class="list_order" href="orderdetails.aspx?orderid=4986800668">4986800668</a>
-                    <span title="柯钦武" class="list_name">柯钦武</span>
-                    <span titlt="网上支付" class="list_way">网上支付</span>
-                    <span id="" class="list_total">￥63.00</span>
-                    <span class="list_status">等待到款</span>
-                    <span class="list_time">2012-09-24</span>
-                    <span id="" class="list_operation">
-                        <a onclick="javascript:return onlinePayCheck('4986800668mobLink','4986800668','./TipPage/payment.aspx?od=4986800668&amp;pd=4986800668&amp;ref=order-0-A&amp;is_package=0&amp;payid=-1&amp;paytype=1&amp;dangdangpay=5757&amp;ebooksymbol=0',1);" target="_blank" href="./TipPage/payment.aspx?od=4986800668&amp;pd=4986800668&amp;ref=order-0-A&amp;is_package=0&amp;payid=-1&amp;paytype=1&amp;dangdangpay=5757&amp;ebooksymbol=0" name="4986800668mobLink" id="4986800668mobLink">网上支付</a> |<a name="chgorder" onmouseout="hidden_modifydiv()" class="modify" id="order4986800668" onmouseover="modify_order('order4986800668','1');">修改</a>| <a href="javascript:orderswin('4986800668CLink','4986800668','4986800668','0','3|1|0','0','0');" name="4986800668CLink" id="4986800668CLink">取消</a>
-                    </span>
-
-                </div>
-            </li>
+            </li>*@
         </ul>
     </div>
 </div>

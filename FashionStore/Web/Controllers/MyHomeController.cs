@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domain;
+using Domain.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,17 +10,17 @@ namespace Web.Controllers
 {
     public class MyHomeController : Controller
     {
-        //
-        // GET: /MyHome/
+        IOrders orderRepos;
 
-        public ActionResult Index()
+        public MyHomeController(IOrders order)
         {
-            return View();
+            orderRepos = order;
         }
 
-        public ActionResult MyAllOrder()
+        public ActionResult Index(Customers customer)
         {
-            return View();
+            List<Orders> orders = orderRepos.Orders.Where(order => order.Shipping1.CustomerID == customer.ID).ToList();
+            return View(orders);
         }
 
     }

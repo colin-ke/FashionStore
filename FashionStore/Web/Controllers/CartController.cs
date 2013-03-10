@@ -48,13 +48,9 @@ namespace Web.Controllers
         [HttpPost]
         public RedirectToRouteResult CheckOut(CheckoutInfo info,Customers customer,SessionCart cart)
         {
-            if (info.Shipping.ID == 0)
-            {
-                info.Shipping.CustomerID = customer.ID;
-                info.Shipping.Customers = customer;
-                shippingRepos.Add(info.Shipping);
-                info.Shipping = shippingRepos.Shippings.Where(x => x.ToString() == info.Shipping.ToString()).FirstOrDefault();
-            }
+
+            info.Shipping.CustomerID = customer.ID;
+            shippingRepos.SaveProduct(info.Shipping);
 
             List<OrderProducts> oPdts = cart.Items.Select<CartItem, OrderProducts>(item => new OrderProducts { ProductID = item.Products.ID,Quantity = item.Quantity }).ToList();
 
@@ -64,14 +60,12 @@ namespace Web.Controllers
                 Shipping = info.Shipping.ID,
                 PaymentMethod = info.PaymentMethod.ID,
                 ShippingMethod = info.ShippingMethod.ID,
-                OrderProducts = oPdts
+                OrderProducts = oPdts,
+                TotalPay = info.TotalPay
             };
 
-            //order.Shipping1 = shippingRepos.Shippings.Where(x => x.ID == info.Shipping.ID).FirstOrDefault();
-            //order.ShippingMethods = sMethodsRepos.ShippingMethods.Where(x => x.ID == info.ShippingMethod.ID).First();
-            //order.PaymentMethods = pMethodsRepos.PaymentMethods.Where(x => x.ID == info.PaymentMethod.ID).First();
             orderRepos.Add(order);
-            cart.Clear();
+            Session["tem"] = order;
             return RedirectToAction("Finish");
         }
 
@@ -88,8 +82,12 @@ namespace Web.Controllers
         public ActionResult Finish(SessionCart cart)
         {
             string total = cart.ComputeTotalValue().ToString();
+            Orders order = (Orders)Session["tem"];
+            Session["tem"] = null;
+            bool needPay = order.PaymentMethods.NeedtoPayFirst();
             cart.Clear();
             ViewBag.total = total;
+            ViewBag.needPay = needPay;
             return View();
         }
 
@@ -107,6 +105,8 @@ namespace Web.Controllers
         public string RemovePdt(int pdtId, SessionCart cart)
         {
             CartItem pdt = cart.Items.Where<CartItem>(item => item.Products.ID == pdtId).FirstOrDefault<CartItem>();
+            bool needPay;
+
             if (null != pdt)
             {
                 cart.RemoveItem(pdt.Products);

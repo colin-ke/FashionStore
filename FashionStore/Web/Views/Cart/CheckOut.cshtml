@@ -11,7 +11,7 @@
 }
 
 <script type="text/javascript">
-    var newShipping = false;
+    var newShipping = false, shippingSelected = false, pMethodSelected = false, sMethodSelected = false;
     $(function () {
 
     });
@@ -56,9 +56,10 @@
         $("a[name = 'ship_modify']").hide();
     }
 
-    function ShippingChange() {
+    function ShippingChange(rbtn) {
         $('#consignee_edit_info').hide();
-        $("a[name='ship_modify']").hide();$(this).find('~ a').show();
+        $("a[name='ship_modify']").hide();
+        $(rbtn).find('~ a').show();
         newShipping = false;
     }
 
@@ -75,16 +76,18 @@
         if (!CheckShipInfo())
             return;
         var str;
-        if (!newShipping) {
-            var rbtn = $("input:checked[name='Shipping.ID']")
-            str = rbtn.find("+ span").text();
+        //display: none;
+        if ($("#consignee_edit_info").attr("style") != "display: none;") {
+            str = $("#Shipping_Name").attr("value") + ", " + $("#Shipping_Address").attr("value") + ", " + $("#Shipping_Zip").attr("value") + ", " + $("#Shipping_Phone").attr("value");
         }
         else {
-            str = $("#Shipping_Name").attr("value") + ", " + $("#Shipping_Address").attr("value") + ", " + $("#Shipping_Zip").attr("value") + ", " + $("#Shipping_Phone").attr("value");
+            var rbtn = $("input:checked[name='Shipping.ID']")
+            str = rbtn.find("+ span").text();
         }
         $("#li_shipview").text(str);
         $("#detail1").hide();
         $("#view1").show();
+        shippingSelected = true;
     }
 
     function sMethodSave() {
@@ -99,8 +102,10 @@
         $.post('@Url.Action("GetExtraPay","Cart")', { sid: sid, goodTotal: money }, function (data) {
             $("#extraPay").text(data);
             total = parseFloat(money) + parseFloat(data);
-            $("#total").text("￥"+total);
+            $("#total").text("￥" + total);
+            $("#TotalPay").attr("value",total);
         });
+        sMethodSelected = true;
     }
 
     function pMethodSave() {
@@ -108,9 +113,28 @@
         $("#li_pMethodview").text(str);
         $("#view3").show();
         $("#detail3").hide();
+        pMethodSelected = true;
     }
 
     function Submit() {
+        res = "请完善/选择 ";
+        valid = true;
+        if (!shippingSelected) {
+            res = res + "收件人信息,";
+            valid = false;
+        }
+        if (!sMethodSelected) {
+            res = res + "送货方式,";
+            valid = false;
+        }
+        if (!pMethodSelected) {
+            res = res + "付款方式";
+            valid = false;
+        }
+        if (!valid) {
+            alert(res);
+            return;
+        }
         $("form").submit();
     }
 </script>
@@ -141,7 +165,7 @@
                     @foreach (var item in customer.Shipping)
                     {
                         <p>
-                            @Html.RadioButtonFor(x => x.Shipping.ID, item.ID, new { onchange = "ShippingChange()" })
+                            @Html.RadioButtonFor(x => x.Shipping.ID, item.ID, new { onchange = "ShippingChange(this)" })
                             <span>@item.ToString()</span>&nbsp;&nbsp;
                             <a onclick="ShipInfoModify($(this).prev().text());" style="display: none;" name="ship_modify" href="javascript:void(0)">修改</a>
                         </p>
@@ -298,6 +322,7 @@
 
                     <div class="change_total2">
                         <span id="p_payable_tips" class="price">需支付总金额：<span id="total">￥-.--</span></span><br class="clear">
+                        @Html.HiddenFor(x=>x.TotalPay)
                     </div>
                     <div class="order_refer order_refer2">
                     </div>
@@ -312,9 +337,6 @@
 
                 </div>
             </div>
-            <ul id="ul_ipt_yzm"></ul>
-            <a id="confirm_box_id" href="javascript:for_99click();">
-                <input type="hidden" name="package_prod_ids1" id="package_prod_ids1" value="60307706"><input type="hidden" name="package_prod_ids2" id="package_prod_ids2" value="60303485"></a>
         </div>
         <div class="shadow_b add_shadow_b"></div>
     </div>

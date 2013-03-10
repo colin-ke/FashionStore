@@ -15,9 +15,17 @@ namespace Domain.Concrete
             get { return context.Shipping; }
         }
 
-        public bool Add(Domain.Shipping shipping)
+        public bool SaveProduct(Domain.Shipping shipping)
         {
-            context.Shipping.Add(shipping);
+            if (shipping.ID == 0)
+            {
+                context.Shipping.Add(shipping);
+            }
+            else
+            {
+                Shipping old = context.Shipping.Find(shipping.ID);
+                context.Entry(old).CurrentValues.SetValues(shipping);
+            }
             return context.SaveChanges() > 0 ? true : false;
         }
         

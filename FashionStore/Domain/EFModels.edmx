@@ -270,6 +270,7 @@
           <Property Name="Shipping" Type="int" Nullable="false" />
           <Property Name="ShippingMethod" Type="int" Nullable="false" />
           <Property Name="PaymentMethod" Type="int" />
+          <Property Name="TotalPay" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="OrderStatus">
           <Key>
@@ -932,6 +933,7 @@
           <NavigationProperty Name="PaymentMethods" Relationship="FasionStoreModel.FK_Orders_PaymentMethods" FromRole="Orders" ToRole="PaymentMethods" />
           <NavigationProperty Name="Shipping1" Relationship="FasionStoreModel.FK_Orders_Shipping" FromRole="Orders" ToRole="Shipping" />
           <NavigationProperty Name="ShippingMethods" Relationship="FasionStoreModel.FK_Orders_ShippingMethods" FromRole="Orders" ToRole="ShippingMethods" />
+          <Property Type="Decimal" Name="TotalPay" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="OrderStatus">
           <Key>
@@ -1382,6 +1384,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="FasionStoreModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="TotalPay" ColumnName="TotalPay" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Status" ColumnName="Status" />

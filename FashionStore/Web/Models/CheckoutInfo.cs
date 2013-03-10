@@ -11,5 +11,6 @@ namespace Web.Models
         public Shipping Shipping { get; set; }
         public ShippingMethods ShippingMethod { get; set; }
         public PaymentMethods PaymentMethod { get; set; }
+        public decimal TotalPay { get; set; }
     }
 }

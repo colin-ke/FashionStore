@@ -17,7 +17,12 @@ namespace Domain.Concrete
 
         public bool Add(Orders order)
         {
-            order.OrderStatus = context.OrderStatus.Where(status => status.StatusName.Contains("付款")).FirstOrDefault();
+            if (null == order.PaymentMethods)
+                order.PaymentMethods = context.PaymentMethods.Where(x => x.ID == order.PaymentMethod.Value).FirstOrDefault();
+            if(order.PaymentMethods.NeedtoPayFirst())
+                order.OrderStatus = context.OrderStatus.Where(status => status.StatusName.Contains("付款")).FirstOrDefault();
+            else
+                order.OrderStatus = context.OrderStatus.Where(status => status.StatusName.Contains("发货")).FirstOrDefault();
             context.Orders.Add(order);
             return context.SaveChanges() > 0 ? true : false;
         }

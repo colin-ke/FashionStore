@@ -5,6 +5,7 @@
 @{
     ViewBag.Title = "Finish";
     string total = ViewBag.total;
+    bool needPay = ViewBag.needPay;
 }
 
 <div class="shoppingcart_nav">
@@ -15,10 +16,21 @@
 <div class="order_content">
     <div class="border">
         <div class="money_notice e-book">
-            <h4 class="money_notice_name">订单已提交，您需要支付<span class="red_bold">￥@total</span></h4>
-            <div class="success_tipspick02">为了保证及时处理您的订单，请您于下单后<span class="red">24小时内</span>完成付款</div>
+            @if(needPay)
+            {
+                <h4 class="money_notice_name">订单已提交，您需要支付<span class="red_bold">￥@total</span></h4>
+                <div class="success_tipspick02">为了保证及时处理您的订单，请您于下单后<span class="red">24小时内</span>完成付款</div>
+                <div class="button_auto">
+                    <span id="span_notdangdang">网上支付成功后，我们将立即为您发货。</span>
+                </div>
+            }
+            else
+            {
+                <h4 class="money_notice_name">订单已提交，订单总额为<span class="red_bold">￥@total</span></h4>
+                <div class="success_tipspick02">我们将会尽快处理您的订单，并发货</div>
+            }
             <div class="button_auto">
-                <span id="span_notdangdang">网上支付成功后，我们将立即为您发货。</span>
+                <span id=""><a href="/myHome">点击这里</a>查看您的订单</span>
             </div>
 
         </div>
