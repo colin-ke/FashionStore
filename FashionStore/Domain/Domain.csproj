@@ -105,13 +105,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EFModels.edmx</DependentUpon>
     </Compile>
-    <Compile Include="ModelExtention\Customers.cs" />
     <Compile Include="FiltCatagories.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelExtention\Customers.cs" />
+    <Compile Include="ModelExtention\OrderProducts.cs" />
     <Compile Include="ModelExtention\PaymentMethods.cs" />
     <Compile Include="ModelExtention\Shipping.cs" />
     <Compile Include="ModelExtention\ShippingMethods.cs" />
+    <Compile Include="ModelExtention\PartialPictures.cs" />
     <Compile Include="NavCatagories.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
@@ -124,7 +126,6 @@
     <Compile Include="OrderStatus.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelExtention\PartialPictures.cs" />
     <Compile Include="PaymentMethods.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>

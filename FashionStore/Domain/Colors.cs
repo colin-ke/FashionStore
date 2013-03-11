@@ -14,6 +14,11 @@ namespace Domain
     
     public partial class Colors
     {
+        public Colors()
+        {
+            this.OrderProducts = new HashSet<OrderProducts>();
+        }
+    
         public int ID { get; set; }
         public string Name { get; set; }
         public Nullable<int> PicID { get; set; }
@@ -21,5 +26,6 @@ namespace Domain
     
         public virtual Pictures Pictures { get; set; }
         public virtual Products Products { get; set; }
+        public virtual ICollection<OrderProducts> OrderProducts { get; set; }
     }
 }

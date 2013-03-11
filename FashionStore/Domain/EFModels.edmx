@@ -104,12 +104,20 @@
             <End Role="NavCatagories" EntitySet="NavCatagories" />
             <End Role="NavCatagories1" EntitySet="NavCatagories" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderProducts_Colors" Association="FasionStoreModel.Store.FK_OrderProducts_Colors">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="OrderProducts" EntitySet="OrderProducts" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderProducts_Orders" Association="FasionStoreModel.Store.FK_OrderProducts_Orders">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderProducts" EntitySet="OrderProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderProducts_Products" Association="FasionStoreModel.Store.FK_OrderProducts_Products">
             <End Role="Products" EntitySet="Products" />
+            <End Role="OrderProducts" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProducts_Sizes" Association="FasionStoreModel.Store.FK_OrderProducts_Sizes">
+            <End Role="Sizes" EntitySet="Sizes" />
             <End Role="OrderProducts" EntitySet="OrderProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Orders" Association="FasionStoreModel.Store.FK_Orders_Orders">
@@ -259,6 +267,8 @@
           <Property Name="OrderID" Type="int" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="ColorID" Type="int" />
+          <Property Name="SizeID" Type="int" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -271,6 +281,7 @@
           <Property Name="ShippingMethod" Type="int" Nullable="false" />
           <Property Name="PaymentMethod" Type="int" />
           <Property Name="TotalPay" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Paid" Type="bit" />
         </EntityType>
         <EntityType Name="OrderStatus">
           <Key>
@@ -566,6 +577,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderProducts_Colors">
+          <End Role="Colors" Type="FasionStoreModel.Store.Colors" Multiplicity="0..1" />
+          <End Role="OrderProducts" Type="FasionStoreModel.Store.OrderProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderProducts">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderProducts_Orders">
           <End Role="Orders" Type="FasionStoreModel.Store.Orders" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -589,6 +612,18 @@
             </Principal>
             <Dependent Role="OrderProducts">
               <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProducts_Sizes">
+          <End Role="Sizes" Type="FasionStoreModel.Store.Sizes" Multiplicity="0..1" />
+          <End Role="OrderProducts" Type="FasionStoreModel.Store.OrderProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sizes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderProducts">
+              <PropertyRef Name="SizeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -818,6 +853,14 @@
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <EntitySet Name="BrandCata" EntityType="FasionStoreModel.BrandCata" />
+          <AssociationSet Name="FK_OrderProducts_Colors" Association="FasionStoreModel.FK_OrderProducts_Colors">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="OrderProducts" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProducts_Sizes" Association="FasionStoreModel.FK_OrderProducts_Sizes">
+            <End Role="Sizes" EntitySet="Sizes" />
+            <End Role="OrderProducts" EntitySet="OrderProducts" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AttrContents">
           <Key>
@@ -868,6 +911,7 @@
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Pictures" Relationship="FasionStoreModel.FK_Colors_Pictures" FromRole="Colors" ToRole="Pictures" />
           <NavigationProperty Name="Products" Relationship="FasionStoreModel.FK_Colors_Products" FromRole="Colors" ToRole="Products" />
+          <NavigationProperty Name="OrderProducts" Relationship="FasionStoreModel.FK_OrderProducts_Colors" FromRole="Colors" ToRole="OrderProducts" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -917,6 +961,10 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="FasionStoreModel.FK_OrderProducts_Orders" FromRole="OrderProducts" ToRole="Orders" />
           <NavigationProperty Name="Products" Relationship="FasionStoreModel.FK_OrderProducts_Products" FromRole="OrderProducts" ToRole="Products" />
+          <Property Type="Int32" Name="ColorID" />
+          <Property Type="Int32" Name="SizeID" />
+          <NavigationProperty Name="Colors" Relationship="FasionStoreModel.FK_OrderProducts_Colors" FromRole="OrderProducts" ToRole="Colors" />
+          <NavigationProperty Name="Sizes" Relationship="FasionStoreModel.FK_OrderProducts_Sizes" FromRole="OrderProducts" ToRole="Sizes" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -934,6 +982,7 @@
           <NavigationProperty Name="Shipping1" Relationship="FasionStoreModel.FK_Orders_Shipping" FromRole="Orders" ToRole="Shipping" />
           <NavigationProperty Name="ShippingMethods" Relationship="FasionStoreModel.FK_Orders_ShippingMethods" FromRole="Orders" ToRole="ShippingMethods" />
           <Property Type="Decimal" Name="TotalPay" Precision="10" Scale="2" />
+          <Property Type="Boolean" Name="Paid" />
         </EntityType>
         <EntityType Name="OrderStatus">
           <Key>
@@ -962,7 +1011,7 @@
           <NavigationProperty Name="Colors" Relationship="FasionStoreModel.FK_Colors_Pictures" FromRole="Pictures" ToRole="Colors" />
           <NavigationProperty Name="Products" Relationship="FasionStoreModel.FK_Pictures_Products" FromRole="Pictures" ToRole="Products" />
           <Property Type="Boolean" Name="IsShow" Nullable="false" />
-          
+
         </EntityType>
         <ComplexType Name="sddd">
         </ComplexType>
@@ -1027,6 +1076,7 @@
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Products" Relationship="FasionStoreModel.FK_Sizes_Products" FromRole="Sizes" ToRole="Products" />
+          <NavigationProperty Name="OrderProducts" Relationship="FasionStoreModel.FK_OrderProducts_Sizes" FromRole="Sizes" ToRole="OrderProducts" />
         </EntityType>
         <Association Name="FK_AttrContents_AttrTitles">
           <End Role="AttrTitles" Type="FasionStoreModel.AttrTitles" Multiplicity="1" />
@@ -1290,6 +1340,30 @@
           <Property Type="Int32" Name="BrandId" Nullable="false" />
           <Property Type="Int32" Name="CataID" Nullable="false" />
         </EntityType>
+        <Association Name="FK_OrderProducts_Colors">
+          <End Type="FasionStoreModel.Colors" Role="Colors" Multiplicity="0..1" />
+          <End Type="FasionStoreModel.OrderProducts" Role="OrderProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderProducts">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProducts_Sizes">
+          <End Type="FasionStoreModel.Sizes" Role="Sizes" Multiplicity="0..1" />
+          <End Type="FasionStoreModel.OrderProducts" Role="OrderProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sizes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderProducts">
+              <PropertyRef Name="SizeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1375,6 +1449,8 @@
           <EntitySetMapping Name="OrderProducts">
             <EntityTypeMapping TypeName="FasionStoreModel.OrderProducts">
               <MappingFragment StoreEntitySet="OrderProducts">
+                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
@@ -1384,6 +1460,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="FasionStoreModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Paid" ColumnName="Paid" />
                 <ScalarProperty Name="TotalPay" ColumnName="TotalPay" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -1411,7 +1488,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          
+
           <EntitySetMapping Name="Pictures">
             <EntityTypeMapping TypeName="FasionStoreModel.Pictures">
               <MappingFragment StoreEntitySet="Pictures">

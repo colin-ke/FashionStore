@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="FasionStoreModel.FiltCatagories" Width="1.5" PointX="5.375" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FasionStoreModel.NavCatagories" Width="1.5" PointX="2.75" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FasionStoreModel.OrderProducts" Width="1.5" PointX="12.625" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FasionStoreModel.Orders" Width="1.5" PointX="5.375" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FasionStoreModel.Orders" Width="1.75" PointX="5.375" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FasionStoreModel.OrderStatus" Width="1.5" PointX="9.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FasionStoreModel.PaymentMethods" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FasionStoreModel.Pictures" Width="1.5" PointX="10.375" PointY="12" IsExpanded="true" />
@@ -47,6 +47,8 @@
         <EntityTypeShape EntityType="FasionStoreModel.Brand" Width="1.5" PointX="12.625" PointY="7.625" />
         <AssociationConnector Association="FasionStoreModel.FK_Products_Brand" />
         <EntityTypeShape EntityType="FasionStoreModel.BrandCata" Width="1.5" PointX="3.125" PointY="16.75" />
+        <AssociationConnector Association="FasionStoreModel.FK_OrderProducts_Colors" />
+        <AssociationConnector Association="FasionStoreModel.FK_OrderProducts_Sizes" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

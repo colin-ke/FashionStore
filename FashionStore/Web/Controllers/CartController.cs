@@ -50,9 +50,9 @@ namespace Web.Controllers
         {
 
             info.Shipping.CustomerID = customer.ID;
-            shippingRepos.SaveProduct(info.Shipping);
+            shippingRepos.SaveShipping(info.Shipping);
 
-            List<OrderProducts> oPdts = cart.Items.Select<CartItem, OrderProducts>(item => new OrderProducts { ProductID = item.Products.ID,Quantity = item.Quantity }).ToList();
+            List<OrderProducts> oPdts = cart.Items.Select<CartItem, OrderProducts>(item => new OrderProducts { ProductID = item.Products.ID,Quantity = item.Quantity,ColorID = item.Color.ID,SizeID = item.Size.ID }).ToList();
 
             Orders order = new Orders() 
             {
@@ -64,7 +64,7 @@ namespace Web.Controllers
                 TotalPay = info.TotalPay
             };
 
-            orderRepos.Add(order);
+            orderRepos.SaveOrder(order);
             Session["tem"] = order;
             return RedirectToAction("Finish");
         }
@@ -121,6 +121,7 @@ namespace Web.Controllers
         {
             cart.Clear();
         }
+
 
     }
 }

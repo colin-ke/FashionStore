@@ -15,7 +15,7 @@ namespace Domain.Concrete
             get { return context.Shipping; }
         }
 
-        public bool SaveProduct(Domain.Shipping shipping)
+        public bool SaveShipping(Domain.Shipping shipping)
         {
             if (shipping.ID == 0)
             {

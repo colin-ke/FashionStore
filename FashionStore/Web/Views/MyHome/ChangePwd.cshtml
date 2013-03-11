@@ -1,0 +1,64 @@
+﻿@using Domain;
+@using Web.Models;
+
+<link href="/Content/Cart.css" rel="stylesheet" />
+<link href=" /Content/MyHome.css" rel="stylesheet" />
+<script src="/Scripts/jquery-ui-1.8.20.min.js"></script>
+<link href="/Content/themes/base/jquery.ui.all.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript">
+    var valid = false;
+
+    function Match() {
+        if ($("#new").attr("value") != $("#confirm").attr("value")) {
+            $("#msg").show();
+            valid = false;
+        }
+        else {
+            $("#msg").hide();
+            valid = true;
+        }
+    }
+
+    function Submit() {
+        if (!valid) {
+            alert("请正确填写信息");
+            return false;
+        }
+    }
+
+</script>
+<style type="text/css">
+    .label {
+        min-width:200px;
+        text-align:right;
+    }
+</style>
+<style type="text/css">
+    .pop {
+        display: none;
+    }
+</style>
+<div class="myhome_wrapper">
+    <div class="mydnew_sidel">
+        <h3>个人中心</h3>
+        <div class="box">
+            <ul class="my_content">
+                <li>@Html.ActionLink("我的订单","index")</li>
+                <li><a href="javascript:void(0)" class="current">修改密码</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="rightside">
+        <p><span class="label">旧密码：</span><input type="password" id="old" name="old" /></p>
+        <p><span class="label">新密码：</span><input type="password" id="new" name="new" /></p>
+        <p>
+            <span class="label">重复新密码：</span>
+            <input type="password" id="confirm" onchange="Match()" name="confirm" />
+            <span id="msg" style="display:none;color:red">密码输入不一致</span>
+        </p>
+        <div><input type="submit" value="修改" onclick="Submit()" /></div>
+    </div>
+</div>

@@ -9,6 +9,6 @@ namespace Domain.Abstract
     {
         IQueryable<Orders> Orders { get; }
 
-        bool Add(Orders order);
+        bool SaveOrder(Orders order);
     }
 }

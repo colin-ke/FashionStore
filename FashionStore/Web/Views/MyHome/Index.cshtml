@@ -2,26 +2,40 @@
 @using Web.Models;
 
 @model List<Orders>
-
-
-
-
+<link href="/Content/Cart.css" rel="stylesheet" />
 <link href=" /Content/MyHome.css" rel="stylesheet" />
+<script src="/Scripts/jquery-ui-1.8.20.min.js"></script>
+<link href="/Content/themes/base/jquery.ui.all.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Index";
 }
+<script type="text/javascript">
+    function ShowPop(id) {
+        //$("#" + id).find(".pop").show();
+        $("#" + id).dialog({ modal: true, minWidth: 920, minHeight: 300 }, "open");
+        $()
+    }
 
+</script>
+<style type="text/css">
+    .pop {
+        display: none;
+    }
+</style>
 <div class="myhome_wrapper">
     <div class="mydnew_sidel">
         <h3>个人中心</h3>
         <div class="box">
             <ul class="my_content">
-                <li><a href="#">我的订单</a></li>
-                <li><a href="#">个人的资料</a></li>
+                <li><a href="javascript:void(0)" class="current">我的订单</a></li>
+                <li>@Html.ActionLink("修改密码","ChangePwd")</li>
             </ul>
         </div>
     </div>
     <div class="rightside">
+        <div id="test" style="display: none;">
+            <h1>hello world!!</h1>
+        </div>
         <ul class="myddorder_list myddorder_list2">
             <li class="myddorder_title">
                 <span class="list_order">订单号</span>
@@ -33,24 +47,72 @@
                 <span class="list_operation">操作</span>
             </li>
 
-            @foreach (var order in Model)
+            @foreach (var order in Model.OrderByDescending(x => x.ID))
             { 
                 <li onmouseover="this.style.background='#f4f4f4'" onmouseout="this.style.background='none'" style="background: none repeat scroll 0% 0% transparent;">
-                <div class="list_other" id="span_4986800668_normal">
-                    <span class="list_order">
-                        <a name="orderid" target="_blank" href="orderdetails.aspx?orderid=4986800668">@order.ID.ToString("D10")</a>
-                    </span>
-                    
-                    <span title="@order.Shipping1.Customers.Name" class="list_name">@order.Shipping1.Name</span>
-                    <span titlt="@order.PaymentMethods.Name" class="list_way">@order.PaymentMethods.Name</span>
-                    <span id="list_total4986800668" class="list_total">￥@order.TotalPay</span>
-                    <span class="list_status">@order.OrderStatus.StatusName</span>
-                    <span class="list_time">@order.Date.ToString("yyyy-MM-dd")</span>
-                    <span id="list_operation_4986800668" class="list_operation">
-                        <a onclick="javascript:return onlinePayCheck('4986800668mobLink','4986800668','./TipPage/payment.aspx?od=4986800668&amp;pd=4986800668&amp;ref=order-0-A&amp;is_package=0&amp;payid=-1&amp;paytype=1&amp;dangdangpay=5757&amp;ebooksymbol=0',1);" target="_blank" href="./TipPage/payment.aspx?od=4986800668&amp;pd=4986800668&amp;ref=order-0-A&amp;is_package=0&amp;payid=-1&amp;paytype=1&amp;dangdangpay=5757&amp;ebooksymbol=0" name="4986800668mobLink" id="4986800668mobLink">网上支付</a> |<a name="chgorder" onmouseout="hidden_modifydiv()" class="modify" id="order4986800668" onmouseover="modify_order('order4986800668','1');">修改</a>| <a href="javascript:orderswin('4986800668CLink','4986800668','4986800668','0','3|1|0','0','0');" name="4986800668CLink" id="4986800668CLink">取消</a>
-                    </span>
-                </div>
-            </li>
+                    <div class="list_other" style="position: relative">
+
+                        <div id="@order.ID" class="pop">
+                                <div class="business_box_border">
+                                    <ul class="shoppingcart_subject">
+                                        <li class="col2_name">商品名称</li>
+                                        <li class="col2_price">价格</li>
+                                        <li class="col2_count">数量</li>
+                                        <li class="col2_total">小计</li>
+                                    </ul>
+                                    <div class="shoppingcart_general">
+                                        @{decimal pdtTotal = 0;}
+                                        @foreach (var item in order.OrderProducts)
+                                        {
+                                            pdtTotal = item.ItemTotal + pdtTotal;
+                                            <ul class="shoppingcart_list">
+                                                <li class="col2_name" title="@item.Title"><a href="/product/@item.Products.ID" target="_blank">@item.Title</a></li>
+                                                <li class="col2_price">￥@item.Products.Price</li>
+                                                <li class="col2_count">@item.Quantity</li>
+                                                <li class="col2_total">￥@item.ItemTotal</li>
+                                            </ul>
+                                            
+                                        }
+                                        <br class="clear">
+                                        <span class="price_charge_border"></span>
+                                    </div>
+                                    @{decimal tem = order.TotalPay.Value - pdtTotal;}
+                                    <div class="price_charge">
+                                        <p class="p_charge1">商品总额<span>￥<span id="goodsTotal">@pdtTotal</span></span></p>
+                                        <p class="p_charge1">运费：￥<span id="extraPay">@tem</span></p>
+                                        <p class="p_charge1" style="font-size:medium;font-weight:700;">订单总额<span>￥<span >@order.TotalPay</span></span></p>
+                                    </div>
+                                </div>
+
+                        </div>
+
+
+                        <span class="list_order">
+                            <a href="javascript:ShowPop(@order.ID)">@order.ID.ToString("D10")</a>
+                        </span>
+
+                        <span title="@order.Shipping1.Customers.Name" class="list_name">@order.Shipping1.Name</span>
+                        <span title="@order.PaymentMethods.Name" class="list_way">@order.PaymentMethods.Name</span>
+                        <span id="list_total4986800668" class="list_total">￥@order.TotalPay</span>
+                        <span class="list_status">@order.OrderStatus.StatusName</span>
+                        <span class="list_time">@order.Date.ToString("yyyy-MM-dd")</span>
+                        <span id="list_operation_4986800668" class="list_operation">
+                            @if (!order.Paid.Value)
+                            {
+                                if (!order.OrderStatus.StatusName.Contains("取消"))
+                                {
+                                @Html.ActionLink("付款", "OrderPay", new { id = @order.ID }, new { target = "_blank", onclick = "alert('付款成功后请刷新页面查看订单最新状态');" })
+                                <span>|</span>
+                                @Html.ActionLink("取消订单", "OrderCancel", new { id = @order.ID }, new { onclick = "return confirm('确定要取消订单？取消后将无法恢复！')" })
+                                }
+                            }
+                            else if (order.OrderStatus.StatusName.Contains("发货"))
+                            {
+                                @Html.ActionLink("确认收货", "OrderDone", new { id = @order.ID }, new { onclick = "return confirm('为保障您的利益，请确保货物已经收到！')" })
+                            }
+                        </span>
+                    </div>
+                </li>
             }
 
             @*<li onmouseover="this.style.background='#f4f4f4'" onmouseout="this.style.background='none'" id="" style="background: none repeat scroll 0% 0% transparent;">

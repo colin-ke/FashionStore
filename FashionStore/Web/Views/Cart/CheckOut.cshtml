@@ -57,6 +57,7 @@
     }
 
     function ShippingChange(rbtn) {
+        $(rbtn).find('~ a').click();
         $('#consignee_edit_info').hide();
         $("a[name='ship_modify']").hide();
         $(rbtn).find('~ a').show();
@@ -174,7 +175,7 @@
                         <input type="radio" onchange="NewShipRbtn_change()" id="rd_new_addr" name="Shipping.ID"><input type="hidden" value="0"><span>使用新地址</span>
                     </p>
                 </div>
-                <div id="consignee_edit_info" class="consignee_modify consignee_modify">
+                <div id="consignee_edit_info" class="consignee_modify consignee_modify" style="display:none;">
                     <div id="div_consignee_edit_info_display">
                         @Html.HiddenFor(x => x.Shipping.ID)
                         <div class="m_list">

@@ -14,10 +14,16 @@ namespace Domain
     
     public partial class Sizes
     {
+        public Sizes()
+        {
+            this.OrderProducts = new HashSet<OrderProducts>();
+        }
+    
         public int ID { get; set; }
         public int ProductID { get; set; }
         public string Name { get; set; }
     
         public virtual Products Products { get; set; }
+        public virtual ICollection<OrderProducts> OrderProducts { get; set; }
     }
 }

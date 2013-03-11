@@ -313,6 +313,8 @@
     <Content Include="Views\Main\Login.cshtml" />
     <Content Include="Views\Main\Register.cshtml" />
     <Content Include="Views\Main\NavPanelUserInfo.cshtml" />
+    <Content Include="Views\MyHome\OrderPay.cshtml" />
+    <Content Include="Views\MyHome\ChangePwd.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
