@@ -15,16 +15,25 @@ namespace Domain.Concrete
         }
 
 
-        public bool Add(Customers customer,out string err)
+        public bool SaveCustomer(Customers customer, out string err)
         {
             err = "";
-            if (Customers.Where<Customers>(x => x.Email == customer.Email).Count<Customers>() > 0)
+            if (0 == customer.ID)
             {
-                err = "已存在该用户名";
-                return false;
+                if (Customers.Where<Customers>(x => x.Email == customer.Email).Count<Customers>() > 0)
+                {
+                    err = "已存在该用户名";
+                    return false;
+                }
+                context.Customers.Add(customer);
             }
-            context.Customers.Add(customer);
+            else
+            {
+                Customers old = context.Customers.Find(customer.ID);
+                context.Entry(old).CurrentValues.SetValues(customer);
+            }
             return context.SaveChanges() > 0 ? true : false;
+
         }
 
         public Customers GetCustomerById(int id)

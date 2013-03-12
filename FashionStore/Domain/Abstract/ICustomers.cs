@@ -9,7 +9,7 @@ namespace Domain.Abstract
     {
         IQueryable<Customers> Customers { get; }
 
-        bool Add(Customers customer, out string err);
+        bool SaveCustomer(Customers customer, out string err);
         Customers GetCustomerById(int id);
 
     }

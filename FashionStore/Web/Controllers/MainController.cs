@@ -94,7 +94,7 @@ namespace Web.Controllers
             if (!ModelState.IsValid)
                 return View();
             string msg;
-            if (customerRepos.Add(cus, out msg))
+            if (customerRepos.SaveCustomer(cus, out msg))
             {
                 msg = "注册成功";
                 cus = customerRepos.Customers.Where<Customers>(x => x.Email == cus.Email).FirstOrDefault<Customers>();

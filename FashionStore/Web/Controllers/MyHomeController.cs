@@ -12,11 +12,13 @@ namespace Web.Controllers
     {
         private IOrders orderRepos;
         private IOrderStatus orderStatus;
+        private ICustomers customerRepos;
 
-        public MyHomeController(IOrders order,IOrderStatus status)
+        public MyHomeController(IOrders order,IOrderStatus status,ICustomers cus)
         {
             orderRepos = order;
             orderStatus = status;
+            customerRepos = cus;
         }
 
         public ActionResult Index(Customers customer)
@@ -71,9 +73,28 @@ namespace Web.Controllers
             return RedirectToAction("index");
         }
 
-
+        [HttpGet]
         public ViewResult ChangePwd(Customers customer)
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult ChangePwd(Customers customer,FormCollection collection)
+        {
+            string old, newPwd;
+            string msg;
+            old = collection["old"];
+            newPwd = collection["new"];
+            if (old == customer.Password)
+            {
+                customer.Password = newPwd;
+                if (customerRepos.SaveCustomer(customer, out msg))
+                    msg = "修改成功";
+            }
+            else
+                msg = "原密码错误！";
+            ViewBag.msg = msg;
             return View();
         }
 

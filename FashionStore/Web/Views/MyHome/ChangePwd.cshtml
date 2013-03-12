@@ -8,36 +8,99 @@
 @{
     ViewBag.Title = "Index";
 }
+<style type="text/css">
+    .label
+    {
+        font-size: 14px;
+        line-height: 28px;
+        text-align: right;
+        width: 120px;
+    }
+
+    .panel
+    {
+        margin: 10px 0 0 180px;
+    }
+
+    .txt
+    {
+        padding: 6px 5px;
+        font-size: 13px;
+        border: 1px solid #6DBF6D;
+        border: 1px solid #CCC;
+        width: 250px;
+        -moz-box-shadow: inset 0 1px 1px #dedede;
+        -o-box-shadow: inset 0 2px 2px #dedede;
+        -webkit-box-shadow: inset 0 1px 1px #DEDEDE;
+        background: white;
+        box-shadow: inset 0 2px 2px #DEDEDE;
+        color: #777;
+        cursor: text;
+        font-size: 12px;
+        padding: 4px 5px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        font: 12px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+
+    .btn
+    {
+        font-size: 14px;
+        background: #4070D0;
+        -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow: 0 0 2px rgba(0,0,0,0.5);
+        -o-box-shadow: 0 0 2px rgba(0,0,0,0.5);
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+        border: 1px solid #3282D0;
+        padding: 3px 10px;
+        display: inline-block;
+        color: white;
+        cursor: pointer;
+        text-align: center;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        font: 12px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+</style>
 <script type="text/javascript">
-    var valid = false;
 
     function Match() {
         if ($("#new").attr("value") != $("#confirm").attr("value")) {
             $("#msg").show();
-            valid = false;
         }
         else {
             $("#msg").hide();
-            valid = true;
         }
     }
 
     function Submit() {
-        if (!valid) {
+        if ($("#new").attr("value") != $("#confirm").attr("value")) {
             alert("请正确填写信息");
             return false;
         }
     }
-
+    $(function () {
+        $("form").submit(function () {
+            if ($("#new").attr("value") != $("#confirm").attr("value")) {
+                alert("请正确填写信息");
+                return false;
+            }
+        });
+    });
 </script>
+@if (null != ViewBag.msg)
+{ 
+    <script type="text/javascript">
+        $(function () {
+            alert("@ViewBag.msg");
+        });
+    </script>
+}
 <style type="text/css">
-    .label {
-        min-width:200px;
-        text-align:right;
-    }
-</style>
-<style type="text/css">
-    .pop {
+    .pop
+    {
         display: none;
     }
 </style>
@@ -46,19 +109,31 @@
         <h3>个人中心</h3>
         <div class="box">
             <ul class="my_content">
-                <li>@Html.ActionLink("我的订单","index")</li>
+                <li>@Html.ActionLink("我的订单", "index")</li>
                 <li><a href="javascript:void(0)" class="current">修改密码</a></li>
             </ul>
         </div>
     </div>
-    <div class="rightside">
-        <p><span class="label">旧密码：</span><input type="password" id="old" name="old" /></p>
-        <p><span class="label">新密码：</span><input type="password" id="new" name="new" /></p>
-        <p>
-            <span class="label">重复新密码：</span>
-            <input type="password" id="confirm" onchange="Match()" name="confirm" />
-            <span id="msg" style="display:none;color:red">密码输入不一致</span>
-        </p>
-        <div><input type="submit" value="修改" onclick="Submit()" /></div>
-    </div>
+    @using (Html.BeginForm())
+    {
+        <div class="rightside" style="padding-top: 40px;">
+            <p class="panel">
+                <label class="label" for="old">&nbsp;&nbsp;&nbsp;&nbsp;旧密码：</label>
+                <input class="txt" type="password" id="old" name="old" />
+
+            </p>
+            <p class="panel">
+                <label class="label" for="new">&nbsp;&nbsp;&nbsp;&nbsp;新密码：</label>
+                <input class="txt" type="password" id="new" name="new" />
+            </p>
+            <p class="panel">
+                <label class="label" for="confirm">重复新密码：</label>
+                <input class="txt" type="password" id="confirm" onchange="Match()" name="confirm" />
+                <span id="msg" style="display: none; color: red">密码输入不一致</span>
+            </p>
+            <div style="padding: 15px 0 50px 340px">
+                <input class="btn" type="submit" value="修改" />
+            </div>
+        </div>
+    }
 </div>
