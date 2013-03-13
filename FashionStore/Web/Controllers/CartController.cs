@@ -38,6 +38,8 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult CheckOut(SessionCart cart,Customers cus)
         {
+            if (null == cus)
+                return RedirectToAction("login", "main", new { preurl="/cart/checkout" });
             ViewBag.cart = cart;
             ViewBag.customer = cus;
             ViewBag.sMethods = sMethodsRepos.ShippingMethods.ToList<ShippingMethods>();
@@ -48,7 +50,8 @@ namespace Web.Controllers
         [HttpPost]
         public RedirectToRouteResult CheckOut(CheckoutInfo info,Customers customer,SessionCart cart)
         {
-
+            if (null == customer)
+                return RedirectToAction("login", "main", new { preurl = "/cart/checkout" });
             info.Shipping.CustomerID = customer.ID;
             shippingRepos.SaveShipping(info.Shipping);
 
@@ -81,6 +84,8 @@ namespace Web.Controllers
 
         public ActionResult Finish(SessionCart cart)
         {
+            if (null == Session["tem"])
+                return Redirect("/");
             string total = cart.ComputeTotalValue().ToString();
             Orders order = (Orders)Session["tem"];
             Session["tem"] = null;

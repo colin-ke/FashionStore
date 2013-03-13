@@ -23,6 +23,8 @@ namespace Web.Controllers
 
         public ActionResult Index(Customers customer)
         {
+            if (null == customer)
+                return RedirectToAction("login", "main", new { preurl = "/myhome" });
             List<Orders> orders = orderRepos.Orders.Where(order => order.Shipping1.CustomerID == customer.ID).ToList();
             return View(orders);
         }
@@ -74,14 +76,18 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        public ViewResult ChangePwd(Customers customer)
+        public ActionResult ChangePwd(Customers customer)
         {
+            if (null == customer)
+                return RedirectToAction("login", "main", new { preurl = "/myhome/changepwd" });
             return View();
         }
 
         [HttpPost]
-        public ViewResult ChangePwd(Customers customer,FormCollection collection)
+        public ActionResult ChangePwd(Customers customer,FormCollection collection)
         {
+            if (null == customer)
+                return RedirectToAction("login", "main", new { preurl = "/myhome/changepwd" });
             string old, newPwd;
             string msg;
             old = collection["old"];

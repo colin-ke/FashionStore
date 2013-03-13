@@ -23,8 +23,12 @@
 
 <script>
     $(function () {
-        $("li[name='navCatas']").find("a[name='@parent.ID']").attr("class", "on");
-        });
+        $("li.on").attr("class","");
+        $("li[fid='@parent.ID']").attr("class", "on");
+    });
+    function KeepLiOn() {
+        $("li[fid='@parent.ID']").attr("class", "on");
+    }
 </script>
 <div class="productslist_wrap">
     <div class="list_aside" id="">

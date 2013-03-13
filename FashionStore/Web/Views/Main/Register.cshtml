@@ -2,6 +2,16 @@
 @model Customers
 @{
     Layout = null;
+    string preurl = "";
+    if (null != ViewBag.preurl)
+    {
+        preurl = ViewBag.preurl;
+    }
+    else
+    {
+        preurl = "/";
+    }
+        
 }
 
 <!DOCTYPE html>
@@ -44,8 +54,10 @@
         <script type="text/javascript">
             $(function () {
                 alert("@ViewBag.msg");
-                if("@ViewBag.msg" == "注册成功")
-                    window.location.href = "/";
+                if ("@ViewBag.msg" == "注册成功")
+                {
+                    window.location.href = "@preurl";
+                }
             });
         </script>
     }

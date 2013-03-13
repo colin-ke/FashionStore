@@ -83,16 +83,22 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(Customers cus)
+        public ActionResult Register(FormCollection collection)
         {
-            if (string.IsNullOrEmpty(cus.Email))
+            if (string.IsNullOrEmpty(collection["Email"]))
                 ModelState.AddModelError("Email","Please enter your email");
-            if (string.IsNullOrEmpty(cus.Password))
+            if (string.IsNullOrEmpty(collection["Password"]))
                 ModelState.AddModelError("Password","Please enter a password");
-            if (string.IsNullOrEmpty(cus.Name))
+            if (string.IsNullOrEmpty(collection["Name"]))
                 ModelState.AddModelError("Name","Please enter your name");
             if (!ModelState.IsValid)
                 return View();
+            Customers cus = new Customers() { 
+                Email = collection["Email"],
+                Password = collection["Password"],
+                Name = collection["Name"],
+                Gender = collection["Gender"] == "0" ? Genders.Male : Genders.Female
+            };
             string msg;
             if (customerRepos.SaveCustomer(cus, out msg))
             {
@@ -103,6 +109,8 @@ namespace Web.Controllers
             else
                 msg = msg == "" ? "注册失败" : msg;
             ViewBag.msg = msg;
+            if(null!=Request.QueryString["preurl"])
+                ViewBag.preurl = Request.QueryString["preurl"];
             return View();
         }
 

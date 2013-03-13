@@ -30,7 +30,11 @@
                 $("li.on").removeClass("on");
                 $(this).addClass("on");
                 $("#subPanel").empty().append(ul);
-            }, function () { });
+                KeepLiOn();
+            }, function () {
+                $("li.on").removeClass("on");
+                KeepLiOn();
+            });
 
     });
     function hideCataList() {
@@ -74,8 +78,8 @@
         <li class="on" name="navCatas"><a href="/">首页</a></li>
         @foreach (var cata in Model.Where<Domain.NavCatagories>(x => x.ParentID == null))
         { 
-            <li name="navCatas">
-                @Html.ActionLink(cata.Name, "FiltList", "List", new { catagories = cata.FiltCatagoryID }, new { name = cata.FiltCatagoryID.Value })
+            <li name="navCatas" fid="@cata.FiltCatagoryID">
+                @Html.ActionLink(cata.Name, "FiltList", "List", new { catagories = cata.FiltCatagoryID }, new {  })
 
                 <ul style="display: none;">
                     @foreach (var subCata in Model.Where<Domain.NavCatagories>(x => x.ParentID == cata.ID && x.IsSubnav))
