@@ -75,7 +75,7 @@
         @foreach (var cata in Model.Where<Domain.NavCatagories>(x => x.ParentID == null))
         { 
             <li name="navCatas">
-                @Html.ActionLink(cata.Name, "FiltList", "List", new { catagories = cata.FiltCatagoryID }, new { name = "" })
+                @Html.ActionLink(cata.Name, "FiltList", "List", new { catagories = cata.FiltCatagoryID }, new { name = cata.FiltCatagoryID.Value })
 
                 <ul style="display: none;">
                     @foreach (var subCata in Model.Where<Domain.NavCatagories>(x => x.ParentID == cata.ID && x.IsSubnav))
@@ -105,12 +105,6 @@
                 </ul>
             </li>
         }
-        @*<li><a href="#">女装</a></li>
-            <li><a href="#">男装</a></li>
-            <li><a href="#">鞋靴</a></li>
-            <li><a href="#">箱包</a></li>
-            <li><a href="#">家居</a></li>
-            <li><a href="#">内衣</a></li>*@
     </ul>
 </div>
 <div class="sub">

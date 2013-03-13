@@ -8,7 +8,7 @@
 
 @{
     ViewBag.Title = "FiltList";
-    
+
     Domain.FiltCatagories parent = null;
     if (@Model.ParentFiltCata == null)
     {
@@ -21,7 +21,11 @@
 }
 
 
-
+<script>
+    $(function () {
+        $("li[name='navCatas']").find("a[name='@parent.ID']").attr("class", "on");
+        });
+</script>
 <div class="productslist_wrap">
     <div class="list_aside" id="">
         @*商品分类*@
