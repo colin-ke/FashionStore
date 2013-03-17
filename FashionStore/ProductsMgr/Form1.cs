@@ -25,19 +25,8 @@ namespace ProductsMgr
 
             ImageList images = new ImageList();
             images.ImageSize = new Size(150, 150);
-            images.Images.Add(Image.FromFile(@"C:\Users\cke\Documents\GitHub\FashionStore\FashionStore\Web\Content\pic\pdt\3\1062432721-1_h.jpg"));
-            images.Images.Add(Image.FromFile(@"C:\Users\cke\Documents\GitHub\FashionStore\FashionStore\Web\Content\pic\pdt\3\1062432721-2_h.jpg"));
-            images.Images.Add(Image.FromFile(@"C:\Users\cke\Documents\GitHub\FashionStore\FashionStore\Web\Content\pic\pdt\3\T2Ed2vXfdaXXXXXXXX_!!748172324.jpg"));
-            images.Images.Add(Image.FromFile(@"C:\Users\cke\Documents\GitHub\FashionStore\FashionStore\Web\Content\pic\pdt\3\T2Rz5UXbNbXXXXXXXX_!!748172324.jpg"));
-
-            ListViewItem item1 = new ListViewItem("item1", 0);
-            ListViewItem item2 = new ListViewItem("item2", 1);
-            ListViewItem item3 = new ListViewItem("item3", 2);
-            ListViewItem item4 = new ListViewItem("item4", 3);
-            lview.Items.AddRange(new ListViewItem[] {item1,item2,item3,item4});
             lview.LargeImageList = images;
             lview.View = View.LargeIcon;
-            lview.Alignment = ListViewAlignment.Left;
 
 
         }
@@ -52,6 +41,7 @@ namespace ProductsMgr
         }
 
         List<Products> pdts;
+        Products selectedPdt = null;
         private void cBoxCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = cBoxCategories.SelectedIndex;
@@ -64,6 +54,7 @@ namespace ProductsMgr
                 ListViewItem item = new ListViewItem("", i);
                 lview.LargeImageList.Images.Add(Image.FromFile(webHome + pdts[i].Pictures.First().GetPicFullPath()));
                 lview.Items.Add(item);
+
             }
 
             layoutPanel.Controls.Clear();
@@ -75,6 +66,39 @@ namespace ProductsMgr
 
         }
 
+        
+        private void lview_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lview.SelectedIndices.Count > 0)
+            {
+                int index = lview.SelectedIndices[0];
+                selectedPdt = pdts[index];
+                foreach (Attr attrCtr in layoutPanel.Controls)
+                {
+                    AttrContents content = selectedPdt.AttrContents.Where(x => x.AttrTitles.Title == attrCtr.TitleName).FirstOrDefault();
+                    if (null != content)
+                        attrCtr.AttrContent = content;
+                }
+                listBox1.Items.AddRange(selectedPdt.Pictures.ToArray());
+                listBox1.ValueMember = "PicName";
+            }
+            else
+                selectedPdt = null;
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<AttrContents> newAttrs = new List<AttrContents>();
+            foreach (Attr attrCtr in layoutPanel.Controls)
+            {
+                newAttrs.Add(attrCtr.AttrContent);
+            }
+            selectedPdt.AttrContents = newAttrs;
+
+            if (context.SaveChanges() > 0)
+                MessageBox.Show("更改成功");
+            else
+                MessageBox.Show("没有需要更改的");
+        }
     }
 }

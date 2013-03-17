@@ -18,7 +18,7 @@ namespace ProductsMgr
         public List<AttrContents> AttrContents { get; set; }
 
         private AttrContents _attr;
-        public AttrContents Attr { get { return _attr; } set { _attr = value; if (null != value) SetAttr(value.ID); } }
+        public AttrContents AttrContent { get { return _attr; } set { _attr = value; if (null != value) SetAttr(value.ID); } }
 
         public Attr(string name, List<AttrContents> list)
         {
@@ -46,7 +46,10 @@ namespace ProductsMgr
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Attr = (AttrContents)comboBox1.Items[comboBox1.SelectedIndex];
+            //if (comboBox1.SelectedIndex == 0)
+            //    AttrContent = null;
+            //else
+                AttrContent = (AttrContents)comboBox1.Items[comboBox1.SelectedIndex];
         }
 
     }
