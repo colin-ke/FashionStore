@@ -12,12 +12,7 @@
           <EntitySet Name="Cart" EntityType="FasionStoreModel.Store.Cart" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CartProducts" EntityType="FasionStoreModel.Store.CartProducts" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CatagoryAttr" EntityType="FasionStoreModel.Store.CatagoryAttr" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="CataProducts" EntityType="FasionStoreModel.Store.CataProducts" store:Type="Tables" store:Schema="dbo" store:Name="CataProducts">
-            <DefiningQuery>SELECT 
-      [CataProducts].[CataID] AS [CataID], 
-      [CataProducts].[ProductID] AS [ProductID]
-      FROM [dbo].[CataProducts] AS [CataProducts]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="CataProducts" EntityType="FasionStoreModel.Store.CataProducts" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Colors" EntityType="FasionStoreModel.Store.Colors" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Customers" EntityType="FasionStoreModel.Store.Customers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="FiltCatagories" EntityType="FasionStoreModel.Store.FiltCatagories" store:Type="Tables" Schema="dbo" />
@@ -33,12 +28,6 @@
           <EntitySet Name="Shipping" EntityType="FasionStoreModel.Store.Shipping" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ShippingMethods" EntityType="FasionStoreModel.Store.ShippingMethods" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Sizes" EntityType="FasionStoreModel.Store.Sizes" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="BrandCata" EntityType="FasionStoreModel.Store.BrandCata" store:Type="Views" store:Schema="dbo" store:Name="BrandCata">
-            <DefiningQuery>SELECT 
-      [BrandCata].[BrandId] AS [BrandId], 
-      [BrandCata].[CataID] AS [CataID]
-      FROM [dbo].[BrandCata] AS [BrandCata]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Addresses_Customers" Association="FasionStoreModel.Store.FK_Addresses_Customers">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Shipping" EntitySet="Shipping" />
@@ -198,9 +187,6 @@
           <Property Name="FiltCatagoryID" Type="int" Nullable="false" />
           <Property Name="AttrTitleID" Type="int" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-      警告 6002: 表/视图“FashionDB.dbo.CataProducts”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
-      -->
         <EntityType Name="CataProducts">
           <Key>
             <PropertyRef Name="CataID" />
@@ -318,8 +304,8 @@
           <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="SubTitle" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="BrandId" Type="int" Nullable="false" />
-          <Property Name="Price" Type="int" Nullable="false" />
-          <Property Name="NewPrice" Type="int" />
+          <Property Name="Price" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="NewPrice" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Count" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Description" Type="ntext" />
@@ -359,17 +345,6 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
-        </EntityType>
-        <!--生成过程中发现错误:
-      警告 6002: 表/视图“FashionDB.dbo.BrandCata”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
-      -->
-        <EntityType Name="BrandCata">
-          <Key>
-            <PropertyRef Name="BrandId" />
-            <PropertyRef Name="CataID" />
-          </Key>
-          <Property Name="BrandId" Type="int" Nullable="false" />
-          <Property Name="CataID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Addresses_Customers">
           <End Role="Customers" Type="FasionStoreModel.Store.Customers" Multiplicity="1">
@@ -1012,8 +987,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Price" Type="Int32" Nullable="false" />
-          <Property Name="NewPrice" Type="Int32" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="NewPrice" Type="Double" />
           <Property Name="Count" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
@@ -1582,14 +1557,6 @@
               <MappingFragment StoreEntitySet="Brand">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BrandCata">
-            <EntityTypeMapping TypeName="FasionStoreModel.BrandCata">
-              <MappingFragment StoreEntitySet="BrandCata">
-                <ScalarProperty Name="CataID" ColumnName="CataID" />
-                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

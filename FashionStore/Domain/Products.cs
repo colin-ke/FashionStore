@@ -26,8 +26,8 @@ namespace Domain
         }
     
         public int ID { get; set; }
-        public int Price { get; set; }
-        public Nullable<int> NewPrice { get; set; }
+        public double Price { get; set; }
+        public Nullable<double> NewPrice { get; set; }
         public int Count { get; set; }
         public System.DateTime Date { get; set; }
         public string Description { get; set; }

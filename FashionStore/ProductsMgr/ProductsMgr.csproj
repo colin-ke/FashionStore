@@ -48,6 +48,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Winista.HtmlParser, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Visual Studio 2012\Projects\Win Form\GetDataFromDD\GetDataFromDD\bin\Debug\Winista.HtmlParser.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attr.cs">
@@ -62,6 +66,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="PageAnalyst.cs" />
     <Compile Include="PicEditor.cs">
       <SubType>Form</SubType>
     </Compile>
