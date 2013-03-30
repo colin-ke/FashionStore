@@ -23,7 +23,7 @@ namespace Domain
         public int ProductID { get; set; }
         public string Name { get; set; }
     
-        public virtual Products Products { get; set; }
         public virtual ICollection<OrderProducts> OrderProducts { get; set; }
+        public virtual Products Products { get; set; }
     }
 }

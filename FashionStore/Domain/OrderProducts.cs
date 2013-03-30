@@ -21,8 +21,8 @@ namespace Domain
         public Nullable<int> SizeID { get; set; }
     
         public virtual Orders Orders { get; set; }
-        public virtual Products Products { get; set; }
         public virtual Colors Colors { get; set; }
         public virtual Sizes Sizes { get; set; }
+        public virtual Products Products { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Domain;
@@ -30,8 +31,6 @@ namespace ProductsMgr
             Brand[] brands = context.Brand.ToArray();
             selectBrand.Items.AddRange(brands);
             selectBrand.ValueMember = "Name";
-
-
         }
 
         private void cBoxCatalogue_SelectedIndexChanged(object sender, EventArgs e)
@@ -83,45 +82,50 @@ namespace ProductsMgr
                     lv_selectedIndex = lview.SelectedIndices[0];
                     return;
                 }
-                try
-                {
-                    int index = lview.SelectedIndices[0];
-                    selectedPdt = pdts[index];
+                //try
+                //{
+                int index = lview.SelectedIndices[0];
+                selectedPdt = pdts[index];
+                if (null != selectedPdt.AttrContents)
                     foreach (Attr attrCtr in layoutPanel.Controls)
                     {
-                        AttrContents content = selectedPdt.AttrContents.Where(x => x.AttrTitles.Title == attrCtr.TitleName).FirstOrDefault();
+                        AttrContents content = selectedPdt.AttrContents.Where(x => {
+                            if (null == x || null == x.AttrTitles)
+                                return false;
+                            return x.AttrTitles.Title == attrCtr.TitleName;
+                        }).FirstOrDefault();
                         if (null != content)
                             attrCtr.AttrContent = content;
                     }
-                    //show the list of Pictures
-                    listPic.Items.Clear();
-                    listPic.LargeImageList = new ImageList();
-                    listPic.LargeImageList.ImageSize = new Size(50, 50);
-                    int i = 0;
-                    foreach (Pictures pic in selectedPdt.Pictures)
-                    {
-                        listPic.LargeImageList.Images.Add(Image.FromFile(webHome + pic.GetPicFullPath()));
-                        listPic.Items.Add(new ListViewItem(pic.PicName, i++));
-                    }
-                    //listPic.Items.AddRange(selectedPdt.Pictures.ToArray());
-                    //listPic.ValueMember = "PicName";
-
-                    //show the list of Sizes
-                    listSizes.Items.Clear();
-                    listSizes.Items.AddRange(selectedPdt.Sizes.ToArray());
-                    listSizes.ValueMember = "Name";
-
-                    //show the list of Colors
-                    listColors.Items.Clear();
-                    listColors.Items.AddRange(selectedPdt.Colors.ToArray());
-                    listColors.ValueMember = "Name";
-
-                    labelBrand.Text = selectedPdt.Brand.Name;
-                }
-                catch(Exception ex)
+                //show the list of Pictures
+                listPic.Items.Clear();
+                listPic.LargeImageList = new ImageList();
+                listPic.LargeImageList.ImageSize = new Size(50, 50);
+                int i = 0;
+                foreach (Pictures pic in selectedPdt.Pictures)
                 {
-                    MessageBox.Show("exception:"+ex.Message);
+                    listPic.LargeImageList.Images.Add(Image.FromFile(webHome + pic.GetPicFullPath()));
+                    listPic.Items.Add(new ListViewItem(pic.PicName, i++));
                 }
+                //listPic.Items.AddRange(selectedPdt.Pictures.ToArray());
+                //listPic.ValueMember = "PicName";
+
+                //show the list of Sizes
+                listSizes.Items.Clear();
+                listSizes.Items.AddRange(selectedPdt.Sizes.ToArray());
+                listSizes.ValueMember = "Name";
+
+                //show the list of Colors
+                listColors.Items.Clear();
+                listColors.Items.AddRange(selectedPdt.Colors.ToArray());
+                listColors.ValueMember = "Name";
+
+                labelBrand.Text = selectedPdt.Brand.Name;
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show("exception:" + ex.Message);
+                //}
 
             }
             else
@@ -146,7 +150,7 @@ namespace ProductsMgr
             }
             else
             {
-                
+
                 List<AttrContents> newAttrs = new List<AttrContents>();
                 foreach (Attr attrCtr in layoutPanel.Controls)
                 {
@@ -172,7 +176,7 @@ namespace ProductsMgr
 
         private void btnAddSize_Click(object sender, EventArgs e)
         {
-            if(null == selectedPdt)
+            if (null == selectedPdt)
                 return;
             foreach (string str in rtxt.Text.Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries))
             {
@@ -229,7 +233,7 @@ namespace ProductsMgr
             }
             rtxt.Text = "";
             if ("" != errPic)
-                MessageBox.Show(string.Format("{0}有误",errPic));
+                MessageBox.Show(string.Format("{0}有误", errPic));
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -244,7 +248,7 @@ namespace ProductsMgr
             Colors tem = context.Colors.Where(x => x.ID == clr.ID).First();
             tem.PicID = pic.ID;
             clr.PicID = pic.ID;
-            MessageBox.Show(string.Format("{0} 已绑定图片 {1}",clr.Name,pic.PicName));
+            MessageBox.Show(string.Format("{0} 已绑定图片 {1}", clr.Name, pic.PicName));
             //tem.Pictures = pic;
 
         }
@@ -328,8 +332,55 @@ namespace ProductsMgr
         {
             btnStart.Enabled = false;
             listStatus.Items.Clear();
+            string[] ids = rtxtIds.Text.Split('\n');
+            rtxtIds.Text = "";
+            Thread thread = new Thread(() => { BackGroundWorker(ids); });
+            thread.Start();
 
+        }
 
+        private void BackGroundWorker(string[] ids)
+        {
+            string url = "http://product.dangdang.com/product.aspx?product_id=";
+            string homePath = webHome + "\\Content\\pic\\pdt\\";
+            PageAnalyst analyst = new PageAnalyst(url, homePath);
+            string pdtTitle = "";
+
+            analyst.GettingPageData = ddId => { UpdateStatus(ddId, "正在获取页面数据...", null); };
+            analyst.Analysing = ddId => { UpdateStatus(ddId, "正在分析页面元素...", null); };
+            analyst.Analysed = (ddId, pdt) =>
+            {
+                pdtTitle = pdt.Title;
+                UpdateStatus(ddId, "正在更新数据库...", null);
+                context.Products.Add(pdt);
+                context.SaveChanges();
+                pdt = context.Entry(pdt).Entity;
+                return pdt.ID;
+            };
+            analyst.SavingPictures = ddId => { UpdateStatus(ddId, "正在保存图像文件...", null); };
+            analyst.Finish = ddId => { UpdateStatus(ddId, "完成！", null); };
+
+            for (int i = 0; i < ids.Length; i++)
+            {
+                Action action = () => { listStatus.Items.Add(ids[i]); };
+                this.Invoke(action);
+                analyst.Start(ids[i]);
+            }
+            Action action2 = () => { btnStart.Enabled = true; };
+            this.Invoke(action2);
+            MessageBox.Show("数据搞定！！！！");
+        }
+
+        private void UpdateStatus(string ddId, string status, string pdtTitle)
+        {
+            Action action = () =>
+            {
+                if (string.IsNullOrEmpty(pdtTitle))
+                    listStatus.Items[listStatus.FindString(ddId)] = ddId + " -- " + status;
+                else
+                    listStatus.Items[listStatus.FindString(ddId)] = string.Format("{0}:{1} -- {2}", ddId, pdtTitle, status);
+            };
+            this.Invoke(action);
         }
 
         #endregion

@@ -38,11 +38,10 @@ namespace Domain
         public DbSet<OrderStatus> OrderStatus { get; set; }
         public DbSet<PaymentMethods> PaymentMethods { get; set; }
         public DbSet<Pictures> Pictures { get; set; }
-        public DbSet<Products> Products { get; set; }
         public DbSet<Shipping> Shipping { get; set; }
         public DbSet<ShippingMethods> ShippingMethods { get; set; }
         public DbSet<Sizes> Sizes { get; set; }
         public DbSet<Brand> Brand { get; set; }
-        public DbSet<BrandCata> BrandCata { get; set; }
+        public DbSet<Products> Products { get; set; }
     }
 }

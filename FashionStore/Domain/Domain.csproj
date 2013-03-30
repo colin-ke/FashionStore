@@ -65,9 +65,6 @@
     <Compile Include="Brand.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="BrandCata.cs">
-      <DependentUpon>EFModels.tt</DependentUpon>
-    </Compile>
     <Compile Include="Cart.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>

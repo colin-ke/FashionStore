@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6cc4eb12c95e4225ac37a0bf932c36c6" Name="关系图1" ZoomLevel="73">
+      <Diagram DiagramId="6cc4eb12c95e4225ac37a0bf932c36c6" Name="关系图1" ZoomLevel="55">
         <EntityTypeShape EntityType="FasionStoreModel.AttrContents" Width="1.5" PointX="2.25" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FasionStoreModel.AttrTitles" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FasionStoreModel.Cart" Width="1.5" PointX="12.375" PointY="15" IsExpanded="true" />
@@ -18,38 +18,37 @@
         <EntityTypeShape EntityType="FasionStoreModel.OrderStatus" Width="1.5" PointX="9.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FasionStoreModel.PaymentMethods" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FasionStoreModel.Pictures" Width="1.5" PointX="10.375" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="FasionStoreModel.Products" Width="1.5" PointX="7.25" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FasionStoreModel.Shipping" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FasionStoreModel.ShippingMethods" Width="1.5" PointX="5.625" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FasionStoreModel.Sizes" Width="1.5" PointX="6.625" PointY="17.25" IsExpanded="true" />
         <AssociationConnector Association="FasionStoreModel.FK_AttrContents_AttrTitles" ManuallyRouted="false" />
         <AssociationConnector Association="FasionStoreModel.FK_CartProducts_CartProducts" ManuallyRouted="false" />
-        <AssociationConnector Association="FasionStoreModel.FK_CartProducts_Products" ManuallyRouted="false" />
         <AssociationConnector Association="FasionStoreModel.FK_Colors_Pictures" ManuallyRouted="false" />
-        <AssociationConnector Association="FasionStoreModel.FK_Colors_Products" ManuallyRouted="false" />
         <AssociationConnector Association="FasionStoreModel.FK_Addresses_Customers" ManuallyRouted="false" />
         <AssociationConnector Association="FasionStoreModel.FK_FiltCatagories_FiltCatagories" ManuallyRouted="false" />
         <AssociationConnector Association="FasionStoreModel.FK_NavCatagories_FiltCatagories" ManuallyRouted="false" />
         <AssociationConnector Association="FasionStoreModel.FK_NavCatagories_NavCatagories" ManuallyRouted="false" />
         <AssociationConnector Association="FasionStoreModel.FK_OrderProducts_Orders" ManuallyRouted="false" />
-        <AssociationConnector Association="FasionStoreModel.FK_OrderProducts_Products" ManuallyRouted="false" />
         <AssociationConnector Association="FasionStoreModel.FK_Orders_Orders" ManuallyRouted="false" >
         </AssociationConnector>
         <AssociationConnector Association="FasionStoreModel.FK_Orders_PaymentMethods" ManuallyRouted="false" />
         <AssociationConnector Association="FasionStoreModel.FK_Orders_Shipping" ManuallyRouted="false" />
         <AssociationConnector Association="FasionStoreModel.FK_Orders_ShippingMethods" ManuallyRouted="false" />
-        <AssociationConnector Association="FasionStoreModel.FK_Pictures_Products" ManuallyRouted="false" />
-        <AssociationConnector Association="FasionStoreModel.FK_Sizes_Products" ManuallyRouted="false" />
         <AssociationConnector Association="FasionStoreModel.CatagoryAttr" ManuallyRouted="false" />
         <AssociationConnector Association="FasionStoreModel.NavCataAttrs" ManuallyRouted="false" />
-        <AssociationConnector Association="FasionStoreModel.ProductAttrs" ManuallyRouted="false" />
-        <AssociationConnector Association="FasionStoreModel.CataProducts" />
         <EntityTypeShape EntityType="FasionStoreModel.Brand" Width="1.5" PointX="12.625" PointY="7.625" />
-        <AssociationConnector Association="FasionStoreModel.FK_Products_Brand" />
-        <EntityTypeShape EntityType="FasionStoreModel.BrandCata" Width="1.5" PointX="3.125" PointY="16.75" />
         <AssociationConnector Association="FasionStoreModel.FK_OrderProducts_Colors" />
         <AssociationConnector Association="FasionStoreModel.FK_OrderProducts_Sizes" />
-      </Diagram>
+        <EntityTypeShape EntityType="FasionStoreModel.Products" Width="1.5" PointX="8" PointY="7" />
+        <AssociationConnector Association="FasionStoreModel.FK_Products_Brand" />
+        <AssociationConnector Association="FasionStoreModel.FK_CartProducts_Products" />
+        <AssociationConnector Association="FasionStoreModel.FK_Colors_Products" />
+        <AssociationConnector Association="FasionStoreModel.FK_OrderProducts_Products" />
+        <AssociationConnector Association="FasionStoreModel.FK_Pictures_Products" />
+        <AssociationConnector Association="FasionStoreModel.FK_Sizes_Products" />
+        <AssociationConnector Association="FasionStoreModel.CataProducts" />
+        <AssociationConnector Association="FasionStoreModel.ProductAttrs" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

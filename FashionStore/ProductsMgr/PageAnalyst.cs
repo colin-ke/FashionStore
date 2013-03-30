@@ -16,8 +16,8 @@ namespace ProductsMgr
 {
     public class PageAnalyst
     {
-        public static string URL { get; set; }
-        public static string HOMEPATH { get; set; }
+        private string URL;
+        private string HOMEPATH;
 
         private string dangdangId;
         private string myId;
@@ -26,15 +26,21 @@ namespace ProductsMgr
         private List<string> size = null;
         private Dictionary<string, string> colors = null;
         private string[] titles = null;
-        private float price;
+        private decimal price;
 
         private bool done = false;
 
-        Action<string> GettingPageData;
-        Action<string> Analysing;
-        Func<Products,string> Analysed;
-        Action<string> SavingPictures;
+        public Action<string> GettingPageData;
+        public Action<string> Analysing;
+        public Func<string,Products,int> Analysed;
+        public Action<string> SavingPictures;
+        public Action<string> Finish;
 
+        public PageAnalyst(string url,string homePath)
+        {
+            URL = url;
+            HOMEPATH = homePath;
+        }
 
         public void Start(string ddId)
         {
@@ -51,7 +57,7 @@ namespace ProductsMgr
         private void GetPageData()
         {
             GettingPageData(dangdangId);
-            string theUrl = PageAnalyst.URL + dangdangId;
+            string theUrl = URL + dangdangId;
             WebRequest request = WebRequest.Create(theUrl);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
@@ -127,7 +133,7 @@ namespace ProductsMgr
                             }
                         }
                         strPrice = strPrice.Substring(start, strPrice.Length - start);
-                        float.TryParse(strPrice, out price);
+                        decimal.TryParse(strPrice, out price);
                         break;
                     case "A":
                         string id = tag.GetAttribute("id");
@@ -146,12 +152,36 @@ namespace ProductsMgr
                         break;
                 }
             }
+
+            List<Pictures> picList = new List<Pictures>();
+            List<Sizes> sizeList = new List<Sizes>();
+            List<Colors> clrList = new List<Colors>();
+            
+            picList.AddRange(colors.Values.Select<string, Pictures>(url => new Pictures() { PicName = "clr_" + url.Split('/').Last(), IsShow = false }).ToArray());
+            sizeList.AddRange(size.Select<string,Sizes>(str=>new Sizes(){Name=str}));
+            clrList.AddRange(colors.Keys.Select<string, Colors>(str => new Colors() { Name = str }));
+            for (int i = 0; i < picList.Count; i++)
+                clrList[i].Pictures = picList[i];
+            picList.AddRange(bigImgs.Select<string, Pictures>(url => new Pictures() { PicName = url.Split('/').Last(), IsShow = true }).ToArray());
+
+
             Products pdt = new Products();
             pdt.Title = titles[0];
             pdt.SubTitle = titles[1];
             pdt.Price = price;
+            pdt.BrandId = 1;
+            pdt.Date = DateTime.Now;
+            pdt.Count = 100;
+            pdt.Pictures = picList;
+            pdt.Sizes = sizeList;
+            pdt.Colors = clrList;
+            
 
-            myId = Analysed(pdt);
+            int insertedId = Analysed(dangdangId,pdt);
+            if (insertedId <= 0)
+                myId = dangdangId;
+            else
+                myId = insertedId.ToString();
             //downloadAndSaveFile("c:\\test.jpg", bigImgs[0]);
             //SavePics("410050160");
         }
@@ -159,7 +189,7 @@ namespace ProductsMgr
         private void SavePics(string id)
         {
             SavingPictures(dangdangId);
-            string homePath = PageAnalyst.HOMEPATH;
+            string homePath = HOMEPATH;
             string dirPath = homePath + id + "\\";
             if (!Directory.Exists(homePath + id))
                 Directory.CreateDirectory(homePath + id);
@@ -175,6 +205,7 @@ namespace ProductsMgr
                 string name = tem[tem.Length - 1];
                 Download(dirPath + "clr_" + name, url);
             }
+            Finish(dangdangId);
         }
 
         private void Download(string savingPath, string url)

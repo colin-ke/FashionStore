@@ -21,13 +21,16 @@ namespace Domain
             this.OrderProducts = new HashSet<OrderProducts>();
             this.Pictures = new HashSet<Pictures>();
             this.Sizes = new HashSet<Sizes>();
-            this.AttrContents = new HashSet<AttrContents>();
             this.FiltCatagories = new HashSet<FiltCatagories>();
+            this.AttrContents = new HashSet<AttrContents>();
         }
     
         public int ID { get; set; }
-        public double Price { get; set; }
-        public Nullable<double> NewPrice { get; set; }
+        public string Title { get; set; }
+        public string SubTitle { get; set; }
+        public int BrandId { get; set; }
+        public decimal Price { get; set; }
+        public Nullable<decimal> NewPrice { get; set; }
         public int Count { get; set; }
         public System.DateTime Date { get; set; }
         public string Description { get; set; }
@@ -36,17 +39,14 @@ namespace Domain
         public bool IsDiscout { get; set; }
         public int SaleCount { get; set; }
         public int VisitCount { get; set; }
-        public int BrandId { get; set; }
-        public string Title { get; set; }
-        public string SubTitle { get; set; }
     
+        public virtual Brand Brand { get; set; }
         public virtual ICollection<CartProducts> CartProducts { get; set; }
         public virtual ICollection<Colors> Colors { get; set; }
         public virtual ICollection<OrderProducts> OrderProducts { get; set; }
         public virtual ICollection<Pictures> Pictures { get; set; }
         public virtual ICollection<Sizes> Sizes { get; set; }
-        public virtual ICollection<AttrContents> AttrContents { get; set; }
         public virtual ICollection<FiltCatagories> FiltCatagories { get; set; }
-        public virtual Brand Brand { get; set; }
+        public virtual ICollection<AttrContents> AttrContents { get; set; }
     }
 }
