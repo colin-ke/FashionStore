@@ -18,13 +18,11 @@ namespace Web.Controllers
         private Domain.Abstract.IFiltCatagories filtCata;
         private Domain.Abstract.IAttrs attrs;
         private const int pageSize = 16;
-        //private Domain.Abstract.INavCatagories navCata;
 
         public ListController(IFiltCatagories filtCata,INavCatagories nav,IAttrs attrs)
         {
             this.filtCata = filtCata;
             this.attrs = attrs;
-            //this.navCata = nav;
         }
 
         public ActionResult Index()
@@ -119,7 +117,6 @@ namespace Web.Controllers
         public ActionResult Search(string keyWord)
         {
             int cataId = Convert.ToInt32(Request.QueryString["cata"]);
-            //string keyWord = Request.QueryString["key"];
             List<SearchedCatagories> searchedCata = new List<SearchedCatagories>();
 
             foreach (var cata in filtCata.Catagories.Where<FiltCatagories>(item=>item.ParentID == null))
