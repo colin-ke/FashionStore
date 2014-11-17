@@ -11,6 +11,11 @@
     int cataId = Model.Name == "全部商品" ? -1 : Model.ID;
     Domain.Abstract.IAttrs attrRep = (Domain.Abstract.IAttrs)ViewBag.attrRepository;
     SelectedAttr attrs = (SelectedAttr)ViewBag.attrs;
+    string sType = "";
+    if (null != ViewBag.sortType)
+    {
+        sType = ViewBag.sortType.ToString();
+    }
 }
 
 
@@ -83,8 +88,8 @@
                 <dt>
                     <b>@title.Title</b>
                     @{
-                        string brandId = attrs.BrandId == null ? "" : attrs.BrandId.Value.ToString();
-                        string cls = attrs.AttrDic.Keys.Contains<int>(title.ID) ? "" : "red";
+                string brandId = attrs.BrandId == null ? "" : attrs.BrandId.Value.ToString();
+                string cls = attrs.AttrDic.Keys.Contains<int>(title.ID) ? "" : "red";
                         <a href="?attr=@attrs.ToStringRemoved(title.ID)&brand=@brandId&cata=@cataId" class="@cls">全部</a>
                     }
                 </dt>
@@ -104,19 +109,51 @@
     <div class="filter_relative">
         <div class="switch_btn"></div>
     </div>
-
+    @if (sType != null)
+    {
+        <script type="text/javascript">
+            $(function () {
+                switch("@sType"){
+                    case "SaleCount":
+                        $("li[name='sort']").attr("class","");
+                        $("#sortSaleCount").attr("class","on");
+                        break;
+                    case "Price":
+                        $("li[name='sort']").attr("class", "");
+                        $("#sortPrice").attr("class", "on");
+                        break;
+                    case "Date":
+                        $("li[name='sort']").attr("class", "");
+                        $("#sortDate").attr("class", "on");
+                        break;
+                }
+            });
+        </script>
+    }
     <div name="px" class="toolbox">
         <span class="t">排序:</span>
         <ul>
-            <li class="on"><a title="销量由高到低" href="#">销 量</a></li>
-            <li class="top"><a title="价格由低到高" href="#">价 格</a></li>
-            <li><a title="上架时间由近到远" href="#">最 新</a></li>
+            @{
+                string path = Request.Url.ToString();
+                if (!path.Contains('?'))
+                {
+                    path = path + "?";
+                }
+                if (Request.QueryString["sort"] != null)
+                {
+                    string str = path.Substring(path.IndexOf("sort"));
+                    path = path.Replace(str,"");
+                }
+            }
+            <li name="sort" id="sortSaleCount"><a title="销量由高到低" href="@path&sort=sc">销 量</a></li>
+            <li name="sort" id="sortPrice"><a title="价格由低到高" href="@path&sort=pc">价 格</a></li>
+            <li name="sort" id="sortDate"><a title="上架时间由近到远" href="@path&sort=date">最 新</a></li>
         </ul>
 
         <div class="page"><span>共 @pagingInfo.TotalItems 个商品</span><span class="left"></span><span><b>@page</b>/@pageCount</span><span onclick="javascript:loadData('2');" class="right_on"></span></div>
     </div>
 
-    <div name="px" class="condition_box">
+    @*<div name="px" class="condition_box">
         <span class="t">筛选: </span>
         <label class="label"><input type="checkbox" value="#">促 销</label>
         <span class="t">价格: </span>
@@ -126,13 +163,13 @@
             <input type="button" value="确定" class="button_yes" />
         </div>
 
-    </div>
+    </div>*@
     <div class="shoplist" style="min-height: 300px;">
         <ul class="">
             @foreach (Products pdt in Model.Products)
             {
                 string title = pdt.Title;
-                string picSrc = "/content/pic/pdt/" + pdt.ID + "/" + pdt.Pictures.Where<Pictures>(pic => pic.IsShow = true).First<Pictures>().PicName;
+                string picSrc = "/content/pic/pdt/" + pdt.ID + "/" + pdt.Pictures.Where<Pictures>(pic => pic.IsShow == true).First<Pictures>().PicName;
                 <li name="lb">
                     <div class="inner">
                         <a class="pic" title="@title" target="_blank" href="/product/@pdt.ID">
@@ -163,7 +200,7 @@
 
     <div name="fy" class="paginating">
         <ul class="paging">
-            @Html.PageLinks(pagingInfo, x => string.Format("/{0}?{1}", x, Request.QueryString))
+            @Html.PageLinks(pagingInfo, x => string.Format("/list/{0}/{1}?{2}", Model.ID, x, Request.QueryString))
 
             <li class="page_input">
                 <span>共 @pageCount 页</span>

@@ -66,6 +66,7 @@ namespace Web.Controllers
                         selectedAttr.BrandName = selectedBrand.Name;
                 }
             }
+            
             foreach (int id in selectedAttr.AttrDic.Values)
             {
                 cata.Products = cata.Products.Where<Products>(pdt => pdt.AttrContents.Any<AttrContents>(x => x.ID == id)).ToList<Products>();
@@ -82,6 +83,27 @@ namespace Web.Controllers
             ViewBag.pagingInfo = pagingInfo;
             ViewBag.attrs = selectedAttr;
             ViewBag.attrRepository = attrs;
+
+            SortingTypes? sType = null;
+            if (Request.QueryString["sort"] != null)
+            {
+                switch (Request.QueryString["sort"])
+                {
+                    case "sc":
+                        sType = SortingTypes.SaleCount;
+                        cata.Products = cata.Products.OrderByDescending(pdt => pdt.SaleCount).ToList();
+                        break;
+                    case "pc":
+                        sType = SortingTypes.Price;
+                        cata.Products = cata.Products.OrderBy(pdt => pdt.Price).ToList();
+                        break;
+                    case "date":
+                        sType = SortingTypes.Date;
+                        cata.Products = cata.Products.OrderByDescending(pdt => pdt.Date).ToList();
+                        break;
+                }
+            }
+            ViewBag.sortType = sType;
 
             return PartialView(cata);
         }

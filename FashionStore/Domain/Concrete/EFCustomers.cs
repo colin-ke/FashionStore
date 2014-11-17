@@ -14,7 +14,6 @@ namespace Domain.Concrete
             get { return context.Customers; }
         }
 
-
         public bool SaveCustomer(Customers customer, out string err)
         {
             err = "";
@@ -35,7 +34,6 @@ namespace Domain.Concrete
             return context.SaveChanges() > 0 ? true : false;
 
         }
-
         public Customers GetCustomerById(int id)
         {
             return Customers.Where<Customers>(x => x.ID == id).FirstOrDefault<Customers>();

@@ -51,8 +51,6 @@ namespace Web
                 new { controller = "main", action = "index", id = UrlParameter.Optional } // 参数默认值
             );
 
-
-
         }
 
         protected void Application_Start()

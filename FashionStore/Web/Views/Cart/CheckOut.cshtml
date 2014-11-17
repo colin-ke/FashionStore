@@ -322,7 +322,7 @@
                     </div>
 
                     <div class="change_total2">
-                        <span id="p_payable_tips" class="price">需支付总金额：<span id="total">￥-.--</span></span><br class="clear">
+                        <span id="p_payable_tips" class="price">需支付总金额：<span id="total">￥@cart.ComputeTotalValue()</span></span><br class="clear">
                         @Html.HiddenFor(x=>x.TotalPay)
                     </div>
                     <div class="order_refer order_refer2">

@@ -15,17 +15,19 @@ namespace Web.Controllers
         private IFiltCatagories filtCata;
         private INavCatagories navCata;
         private ICustomers customerRepos;
+        private IProducts pdtsRepos;
 
-        public MainController(IFiltCatagories filtCata,INavCatagories nav,ICustomers cus)
+        public MainController(IFiltCatagories filtCata,INavCatagories nav,ICustomers cus,IProducts pdts)
         {
             this.filtCata = filtCata;
             this.navCata = nav;
             this.customerRepos = cus;
+            this.pdtsRepos = pdts;
         }
 
         public ActionResult Index()
         {
-            return View();
+            return View(pdtsRepos.Products);
         }
 
         public PartialViewResult AllFiltCata()
